@@ -2,20 +2,20 @@
 # Copyright Michael D. Sumner
 #
 
-#' @useDynLib L3bin
+#' @useDynLib roc
 
-#' @name L3bin-package
-#' @aliases L3bin-package, L3bin
+#' @name roc-package
+#' @aliases roc-package, roc
 #' @docType package
-#' @title Read data from Ocean Color Level-3 bin files. 
+#' @title R tools for ocean colour. 
 #' @description
 #' Read data from Ocean Color Level-3 bin files. 
 #' @details
 #' \tabular{ll}{
-#' Package: \tab L3bin\cr
+#' Package: \tab roc\cr
 #' Type: \tab Package\cr
 #' Version: \tab 0.0-1\cr
-#' Date: \tab 2014-07-14\cr
+#' Date: \tab 2014-08-28\cr
 #' License: \tab GPL-3 \cr
 #' }
 #' Access to HDF4 ocean color data sources is accomplished with HDF4 library. 
