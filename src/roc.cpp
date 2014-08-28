@@ -105,6 +105,15 @@ List binlist(CharacterVector filename, CharacterVector vname, LogicalVector bins
       wghts[i] = weights[i];
       
     }   
+    delete[] bin_num;
+    delete[] flags_set;
+    delete[] nobs;
+    delete[] nscenes;
+    delete[] time_rec;
+    delete[] weights;
+    delete[] sel_cat;
+    delete[] blistrec;
+
     
     //  
     z["bin_num"] = bin;
@@ -172,6 +181,9 @@ List binlist(CharacterVector filename, CharacterVector vname, LogicalVector bins
     // this has to come *after* the Rcpp loop just above
     free(param_fields);
     
+    delete[] paramrec;
+    delete[] summ;
+    delete[] sum_sq;
     
     //removal of recursive list, all at one level
     //List z2  = List::create();
