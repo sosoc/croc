@@ -46,8 +46,6 @@ Default behaviour is to read both sum/ssq of *all* variables. You can limit to j
 TODO
 ====
 
-- Read of multiple variables is inefficient, need to set up output vectors dynamically and only loop over bins once. 
-- Generalize bin definition for other sensors, for full-global sensors this is as simple as detecting the right NUMROWS from the BinIndex - but might require other subsets
 - Ability to read sum and/or ssq for individual variables. 
 - Distinction between grid index data and variables without hardcoded names. 
 - Abstract away the need for explicit decompressing of the file. 
