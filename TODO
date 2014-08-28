@@ -1,0 +1,6 @@
+plan
+
+remove old error stuff, put in R-level tests for this
+
+ensure NUMROWS is properly detected and isolated
+

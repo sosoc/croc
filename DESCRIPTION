@@ -1,0 +1,16 @@
+Package: L3bin
+Type: Package
+Title: Read data from Ocean Color Level-3 bin files.
+Version: 0.0-3
+Date: 2014-08-01
+Author: Michael D. Sumner
+Maintainer: Michael D. Sumner<mdsumner@gmail.com>
+Description: Read data from Ocean Color Level-3 bin files stored in HDF4 format.
+License: GPL-3
+LazyLoad: yes
+Imports:
+    Rcpp (>= 0.11.2)
+Depends:
+    testthat
+LinkingTo: Rcpp
+NeedsCompilation: yes

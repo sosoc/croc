@@ -1,0 +1,401 @@
+commit 13061922a67d7d16edb8df2406b5e118e55a16ac
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Aug 17 09:15:40 2014 +1000
+
+    stuff
+
+commit 0566de75b1282e1a24db3abcf91582623c6500cb
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Aug 17 09:15:29 2014 +1000
+
+    test
+
+commit 981c8479686d27dbdf2743daa50de7a31d75ac97
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Aug 17 09:14:43 2014 +1000
+
+    tidy
+
+commit e67831d0359d8d23735e6a49e699ee8216586a38
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Aug 17 09:14:06 2014 +1000
+
+    get files
+
+commit 5a66cf6e5a619491f5302a11eafa4600da45df9a
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Aug 17 09:12:47 2014 +1000
+
+    build ignore
+
+commit 7f543bc7c7c6298c9575c87e54d153e81d082837
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Aug 17 09:12:28 2014 +1000
+
+    cleanup
+
+commit b9eeec5b9faaa680f001586044a2dc7689e391b6
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Aug 12 12:51:04 2014 +1000
+
+    bulk read appears working, 10x speed up from before
+
+commit ca1b3101fb7b6f55020961fdd2215412370b28dc
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Aug 12 11:38:18 2014 +1000
+
+    bulk-read: minimal working
+
+commit b4b18505120d2142d73d257e97e318859dc78e03
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Aug 12 11:37:15 2014 +1000
+
+    working script to convert to RData (may not be necessary with bulk-read)
+
+commit a0e4c42bdadd92017d294d66a927ac3b10335148
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Aug 12 11:36:45 2014 +1000
+
+    bulk-read: minimal working version
+
+commit c50bc57593845695b00f61eaacf71f0426e6c36e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Aug 11 18:05:41 2014 +1000
+
+    tidy
+
+commit 3f150f7f9a29578929e8d3b547bdbbea7c87028f
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Aug 7 11:19:38 2014 +1000
+
+    unfinished expt with reading all records
+
+commit 186c902df09c77ec37ade6d10955eb0ef183169e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 04:51:27 2014 +0000
+
+    bins options
+
+commit 3a73bce64a018d48fdff5938a9ad52a0d3764108
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 04:26:30 2014 +0000
+
+    drop hierarchy structure, just a flat list now
+
+commit c592d4f1b588e58f5384abec3445472385af5f79
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 04:26:12 2014 +0000
+
+    bumped version for dev
+
+commit bf51982002933902b5c7de28264387de44d26d98
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 03:51:00 2014 +0000
+
+    external data example
+
+commit 29d761c7947c1c45201100c658ce5adb44092eb9
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 03:50:40 2014 +0000
+
+    start of convert to R
+
+commit 5c5a6ed81282ffa35f8dc1286c9c463c8bf5e8bc
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 03:50:30 2014 +0000
+
+    this is stalled
+
+commit a88e228d800d661b0bda77c9a889f11d389fb89c
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 03:50:19 2014 +0000
+
+    constant work
+
+commit b3b37593cd831a46cbf8e5300ac217204963b088
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Aug 6 03:50:11 2014 +0000
+
+    minor tests
+
+commit 7b2e47d65cc3f3bf10c433f15f02e6a0bc692354
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sat Aug 2 00:03:08 2014 +0000
+
+    rework of bin2lonlat
+
+commit 8468e91f1505fc38b53e27cc716cc85c5bdffcb6
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sat Aug 2 00:02:57 2014 +0000
+
+    test on installed file
+
+commit 926a283900deb038907215e8978a1ff610dfe338
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 22:30:14 2014 +0000
+
+    tests
+
+commit 1b61e053b2b402ef8fbad8570a21cd34188f6783
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 07:20:21 2014 +0000
+
+    removed all bin-init and error catching from "main"
+
+commit aaa0360e7ce3772fa1adaba4dad7626de5f5a0b3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 07:03:06 2014 +0000
+
+    remove expt
+
+commit ce99ed603b95c0d6721c545366dee9ea3a04589b
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 07:00:36 2014 +0000
+
+    scratch workspace
+
+commit 201bc99edce3c4e5905340133531deea57b75b78
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 06:59:45 2014 +0000
+
+    in gore
+
+commit b70885e83f87342dc8860320428bbe650de7b84a
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 06:59:33 2014 +0000
+
+    forget this
+
+commit dce37406000e8294e1ce92fbbe2827cc1eea6e1d
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 06:57:35 2014 +0000
+
+    ignore
+
+commit 5fc98228099ef1a7d78e84c185ae0f143e396364
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 06:55:33 2014 +0000
+
+    commit extract NUMROWS test
+
+commit 533526266a218f8b272d0cf5c0787229cf107fed
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 02:51:22 2014 +0000
+
+    summary for assessment
+
+commit 0ef284b50eeca2156f2ee64524d36086f9dd9c8e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 02:51:08 2014 +0000
+
+    recalc algorithms
+
+commit db2ef7840d0fe63788cb957ec55cb0c19403a1d0
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Aug 1 02:50:45 2014 +0000
+
+    working on yearly summary
+
+commit 87d52f9afe86ba9d32aaa754942ec32253f09c26
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Jul 31 03:26:00 2014 +0000
+
+    problem with algo
+
+commit c88cc3150a918a0d7cef0d32a4be53b88bb5d93f
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Jul 31 03:25:49 2014 +0000
+
+    vignette beginnings
+
+commit 187824ef3f5db0ef578075667f7a58a97090f983
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Jul 31 03:25:28 2014 +0000
+
+    timing
+
+commit 6d3f570eb45cdec4e31e524d90a35f8f7237ab94
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 07:35:50 2014 +1000
+
+    Update README.md
+
+commit 6c264040731ef7aa5edf3a444123e42529b53cad
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 07:34:23 2014 +1000
+
+    Update README.md
+
+commit a7879f9fb08a95aa71f0569d085e2aee9efc2be0
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 06:47:47 2014 +1000
+
+    Update README.md
+
+commit 32ed055cadd916d65c8ee1e0af12a0e9e1647fa6
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 06:42:44 2014 +1000
+
+    Update L3bin.cpp
+
+commit 854a75e145432492cf485ef5ebee85c3aebd5159
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 06:39:20 2014 +1000
+
+    Update README.md
+
+commit 47f13ddc1555ded08c48df522155adadf7c5be75
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 06:29:19 2014 +1000
+
+    Update README.md
+
+commit c65c141fb657e53f08154fc262a780d7db5abb22
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 06:28:03 2014 +1000
+
+    Update README.md
+
+commit 0fbac51ac317dca263ab95ff6be4a33b7761af5b
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Jul 29 06:25:59 2014 +1000
+
+    Create README.md
+
+commit f4741293f35955b4be3733cdc5e112f79de43b8e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 28 19:59:35 2014 +0000
+
+    tidy up
+
+commit 87687e6893a26e5890ff61cf395c64d1756c11f9
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 28 19:58:59 2014 +0000
+
+    tidy
+
+commit df09a53e9f75c60839c6b1db748dbf21fb487667
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 28 19:57:58 2014 +0000
+
+    workings
+
+commit b29e10049bf6db2e6d6845f3fbd93c4276ededfa
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 28 06:36:52 2014 +0000
+
+    now reads all variables by default, without duplicating reading the binlist
+
+commit 9c75b369292d4e85d1e0b5627f9bd2c020da0c52
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 28 05:14:56 2014 +0000
+
+    correct functions for applying seawifs and johnson algorith
+
+commit 2c7f2c4adca56311ad75b8f5559ba3b5016378b0
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 28 05:13:59 2014 +0000
+
+    prototype.R now has matching reconstruction of the oceancolor and johnson rect grids
+
+commit 1d0eb1cebfbb9170993a1634f01362343f03a997
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Jul 25 05:06:32 2014 +0000
+
+    vdatainfo
+
+commit cd4908e4a407f5926817e3de0a7cb824902b327f
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Jul 25 05:06:17 2014 +0000
+
+    expt timing with RDSI (solution was to not interleave calls to different pointers to the file when file on RDSI)
+
+commit 648ef47cac6f0966506f83da1ef190d37bffd1a2
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Jul 25 05:05:32 2014 +0000
+
+    fully working path now
+
+commit acd061b021d01f5de9809afe76f4b7a8245fd505
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Jul 25 05:03:59 2014 +0000
+
+    ignore
+
+commit 8e0d94ec7f2a8ab3a7ba61123f23b83e568c16ef
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Jul 24 12:44:10 2014 +0000
+
+    examples and working
+
+commit 50d73c52d55e3041e14fef4fe786b24059466ec4
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Jul 24 12:43:43 2014 +0000
+
+    R funs for bin handling, and high-level read
+
+commit 6c5dd0027e5710efdc743b4ec04b9b7b708178c1
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Jul 24 12:43:14 2014 +0000
+
+    generalized
+
+commit d7d93d23e8eecad111f0f9304b9307039778013b
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Jul 24 12:42:49 2014 +0000
+
+    vdatainfo
+
+commit 02c6e7473e81b9b85ec738c0d3f6c4bb20aa70fb
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Jul 22 13:44:51 2014 +0000
+
+    vdatainfo to retrieve vdata and field names
+
+commit e664277c4647874c132db8d4b774e45bf2b6b17c
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Jul 22 01:10:46 2014 +0000
+
+    separate loops for the vdata and pvd records (now stupidly faster for network access)
+
+commit e875e0a4d9cba35718e2874c5b876beb311436f6
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 21 06:24:31 2014 +0000
+
+    better bin poly tools
+
+commit c09dbd803e578dd68791ee22571aaa0ff11f41a9
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Jul 16 04:35:13 2014 +0000
+
+    updates
+
+commit 3a57fa4f698c0cdc7b12a8dab4e54c65a7dc901d
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Jul 15 05:23:57 2014 +0000
+
+    ignore objects
+
+commit 851de78a8d01acddd74935d196f697b439307c17
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Jul 15 05:23:09 2014 +0000
+
+    now reads all interesting values
+
+commit 58b877bf97d5f64747e27d27ef3a264b756f1588
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Jul 15 05:21:53 2014 +0000
+
+    ignore
+
+commit 29497e8b650e2900249088d48a934f75459823ad
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Jul 15 05:20:27 2014 +0000
+
+    background testing
+
+commit ca155549a70f26320dee4b331ae2480a509ffae3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Jul 14 06:12:03 2014 +0000
+
+    basics all working, with Rcpp attributes and roxygen2

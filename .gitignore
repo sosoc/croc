@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+NAMESPACE
+src/RcppExports.cpp
+R/RcppExports.R
+src/*.o
+src/*.so
+man/*

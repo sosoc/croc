@@ -1,0 +1,67 @@
+Files
+==========
+
+
+o S2008001.L3b_DAY_CHL.main 
+
+The authors thank the Ocean Biology Processing Group (Code 614.2)  at the GSFC, Greenbelt, MD 20771, 
+for the production and distribution of the ocean color data.
+
+
+This is the smallest found L3bin file from the ocean colour archive (2014-08-01): 
+http://oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/2008/001
+
+The file can be requested directly with 
+
+f <- "http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/S2008001.L3b_DAY_CHL.main.bz2"
+download.file(f, basename(f), mode = "wb")
+system(sprintf("bunzip2 %s", f))
+
+Metadata:
+  Data Bins=1
+  Data Center=NASA/GSFC SeaWiFS Data Processing Center
+  Easternmost Longitude=165.3178101
+  End Day=1
+  End Millisec=64153985
+  End Orbit=55475
+  End Time=2008001174913985
+  End Year=2008
+  Input Files=/data1/sdpsoper/vdc/vpu0/workbuf/S2007365180135.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2007365180901.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2007365194235.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2007365212117.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2007365225958.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001003832.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001021713.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001035555.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001053447.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001071318.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001085200.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001103041.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001120923.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001134804.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001152646.L2_GAC_OC,/data1/sdpsoper/vdc/vpu0/workbuf/S2008001170527.L2_GAC_OC
+  Input Parameters=INFILE = /data1/sdpsoper/vdc/vpu0/workbuf/l2inlist.dat|OFILE = S2008001.L3b_DAY_CHL.main|FILEUSE = S2008001.L3b_DAY_CHL.contrib|SDAY = 2008001|EDAY = 2008001|RESOLVE = 9|ROWGROUP = 2700|FLAGUSE = ATMFAIL,LAND,HILT,HISATZEN,STRAYLIGHT,CLDICE,COCCOLITH,LOWLW,CHLWARN,CHLFAIL,NAVWARN,MAXAERITER,ATMWARN,HISOLZEN,NAVFAIL,FILTER,HIGLINT|L3BPROD = chlor_a|PRODTYPE = O|PVERSION = 2010.0|SUITE = CHL|AVERAGE = standard|NIGHT = 0|VERBOSE = 0|MINOBS = 0|QUALPROD = NONE|QUAL MAX = N/A|
+  L2 Flag Names=ATMFAIL,LAND,HILT,HISATZEN,STRAYLIGHT,CLDICE,COCCOLITH,LOWLW,CHLWARN,CHLFAIL,NAVWARN,MAXAERITER,ATMWARN,HISOLZEN,NAVFAIL,FILTER,HIGLINT
+  Latitude Units=degrees North
+  Longitude Units=degrees East
+  Mission Characteristics=Nominal orbit: inclination = 98.2 (Sun-synchronous); node = 12 noon local (descending); eccentricity = <0.002; altitude = 705 km; ground speed = 6.75 km/sec
+  Mission=SeaStar SeaWiFS
+  Northernmost Latitude=-77.29166412
+  Orbit=55475
+  Percent Data Bins=1.683382106e-05
+  Period End Day=1
+  Period End Year=2008
+  Period Start Day=1
+  Period Start Year=2008
+  Processing Control=l2bin par=S2008001.L3b_DAY_CHL.param
+  Processing Time=2010271022141000
+  Processing Version=2010.0
+  Product Name=S2008001.L3b_DAY_CHL.main
+  Product Type=O
+  Sensor Characteristics=Number of bands = 8; number of active bands = 8; wavelengths per band (nm) = 412, 443, 490, 510, 555, 670, 765, 865; bits per pixel = 10; instantaneous field-of-view = 1.5835 mrad; pixels per scan = 1285; scan rate = 6/sec; sample rate = 7710/sec
+  Sensor Name=SeaWiFS
+  Sensor=Sea-viewing Wide Field-of-view Sensor (SeaWiFS)
+  Software Name=l2bin
+  Software Version=2.4.3
+  Southernmost Latitude=-77.29166412
+  Start Day=365
+  Start Millisec=64894589
+  Start Orbit=55461
+  Start Time=2007365180134589
+  Start Year=2007
+  Station Latitude=38.99580002
+  Station Longitude=-76.85109711
+  Station Name=GSFC HRPT, NASA, MD
+  Title=SeaWiFS Level-3 Binned Data
+  Units=chlor_a:mg m^-3
+  Westernmost Longitude=165.3178101
+
+
+

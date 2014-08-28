@@ -1,0 +1,10 @@
+
+# set by configure
+HDF_CFLAGS = @HDF_CFLAGS@
+HDF_LIBS   = @HDF_LIBS@
+# RCPP_LDFLAGS = @RCPP_LDFLAGS@
+
+# combine with standard arguments for R
+PKG_CPPFLAGS = $(HDF_CFLAGS) -I../inst/include
+PKG_LIBS += $(HDF_LIBS) $(RCPP_LDFLAGS)
+

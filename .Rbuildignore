@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+L3work/
+^.*main
+^.*bz2
