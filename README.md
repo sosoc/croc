@@ -15,7 +15,7 @@ Package is built using roxygen2 and Rcpp. Only tested on Linux for now - help we
 
 Limitations
 ====
-The SeaWiFS and MODIS bins of 2160 rows are assumed, extracting lonlat from CZCS does not yet work. This should be as simple as detecting the value of NUMROWS from the Bin Index. 
+When the x00, x01, etc files are required they *must* be present next to the main file. This package does no checks for this (yet). 
 
 Basic usage
 ====
