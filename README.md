@@ -78,6 +78,8 @@ Build notes for HDF4
 I originally used these notes as a guide, building a chain of tools ultimate for use in R - but for roc
 you only need HDF4 in your system. 
 
+i.e. hdf4-tools and libhdf4g-dev and CPATH=/usr/include/hdf (or similar)
+
 http://scigeo.org/articles/howto-install-latest-geospatial-software-on-linux.html
 
 ```{bash}
