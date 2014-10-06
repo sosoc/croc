@@ -94,12 +94,12 @@ chla <- function(x,
     if (algo == "oceancolor") {
       ocr <-  log10(pmax(
         (x$Rrs_443_sum / x$Rrs_547_sum), 
-        (x$Rrs_490_sum / x$Rrs_547)
+        (x$Rrs_490_sum / x$Rrs_547_sum)
       ))
     } else {
       ocr <-  log10(pmax(
         (x$Rrs_443_sum / x$Rrs_555_sum), 
-        (x$Rrs_490_sum / x$Rrs_555)
+        (x$Rrs_490_sum / x$Rrs_555_sum)
       )) 
     }
     if (algo == "johnson") {
