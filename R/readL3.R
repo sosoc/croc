@@ -93,13 +93,13 @@ chla <- function(x,
   if (sensor == "MODISA") {
     if (algo == "oceancolor") {
       ocr <-  log10(pmax(
-        (x$Rrs_443$sum / x$Rrs_547$sum), 
-        (x$Rrs_490$sum / x$Rrs_547)
+        (x$Rrs_443_sum / x$Rrs_547_sum), 
+        (x$Rrs_490_sum / x$Rrs_547)
       ))
     } else {
       ocr <-  log10(pmax(
-        (x$Rrs_443$sum / x$Rrs_555$sum), 
-        (x$Rrs_490$sum / x$Rrs_555)
+        (x$Rrs_443_sum / x$Rrs_555_sum), 
+        (x$Rrs_490_sum / x$Rrs_555)
       )) 
     }
     if (algo == "johnson") {
@@ -111,9 +111,9 @@ chla <- function(x,
   }
   if (sensor == "SeaWiFS") {
    ocr <- log10(pmax(
-      (x$Rrs_443$sum / x$Rrs_555$sum), 
-      (x$Rrs_490$sum / x$Rrs_555$sum), 
-      (x$Rrs_510$sum / x$Rrs_555$sum)))
+      (x$Rrs_443_sum / x$Rrs_555_sum), 
+      (x$Rrs_490_sum / x$Rrs_555_sum), 
+      (x$Rrs_510_sum / x$Rrs_555_sum)))
    if (algo == "johnson") {
      val <- (10 ^ (0.6736 - 2.0714 * ocr - 0.4939* ocr^2 + 0.4756 * ocr^3))
    }
