@@ -16,7 +16,8 @@ using namespace Rcpp;
 //' \dontrun{
 //' f <- "A2014202.L3b_DAY_PIC.main"
 //' if (!file.exists(f)) {
-//'   download.file(sprintf("http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/%s.bz2", f), sprintf("%s.bz2", f), mode = "wb")
+//'   srcf <- sprintf("http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/%s.bz2", f)
+//'   download.file(srcf, sprintf("%s.bz2", f), mode = "wb")
 //'   system(sprintf("bunzip2 %s.bz2", f))
 //' } 
 //'   vdatainfo(f)
