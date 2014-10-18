@@ -13,13 +13,7 @@ using namespace Rcpp;
 
 
 
-//' Basic L3 bin files 
-//'
-//' Read from L3 bin. 
-//' @param filename path to L3 bin OC file (HDF4)
-//' @param vname names of VData parameters to read (will read both _sum and _ssq)
-//' @param bins read out the bin number and other metadata (default TRUE)
-//' @export
+
 // [[Rcpp::export]]
 List binlist(CharacterVector filename, CharacterVector vname, LogicalVector bins) {
   // file name
@@ -213,6 +207,8 @@ List binlist(CharacterVector filename, CharacterVector vname, LogicalVector bins
 //' Longitude and latitude from bin number.  
 //'
 //' Generate longitude and latitude coordinates from bin number. 
+//' @param bins bin number
+//' @param number of rows in this grid
 //' @export
 // [[Rcpp::export]]
 List bin2lonlat(IntegerVector bins, IntegerVector nrows){
@@ -257,6 +253,37 @@ List bin2lonlat(IntegerVector bins, IntegerVector nrows){
   lonlat["y"] = clat;
   return lonlat;
 }
+
+//int16 lat2row(double lat){
+//  int16 row;
+//  
+//  row = (int16)((90 + lat)*NUMROWS/180.0);
+//  if(row >= NUMROWS) row = NUMROWS - 1;
+//  return(row);
+//}
+//
+//int32 rowlon2bin(int16 row, double lon){
+//  int16 col;
+//  int32 bin;
+//  
+//  lon = constrain_lon(lon);
+//  col = (int16)((lon + 180.0)*numbin[row]/360.0);
+//  if(col >= numbin[row]) col = numbin[row] - 1;
+//  bin = basebin[row] + col;
+//  return(bin);
+//}
+
+//double constrain_lat(double lat){
+//   if(lat >  90) lat =  90;
+//   if(lat < -90) lat = -90;
+//   return(lat);
+// }
+// 
+// double constrain_lon(double lon){
+//   while(lon < -180) lon += 360;
+//   while(lon >  180) lon -= 360;
+// return(lon);
+// }
 
 //
 //
