@@ -10,7 +10,7 @@ License: GPL-3
 LazyLoad: yes
 Imports:
     Rcpp (>= 0.11.2)
-Depends:
+Suggests:
     testthat
 LinkingTo: Rcpp
 NeedsCompilation: yes
