@@ -1,4 +1,9 @@
-## readL3.R
+#' Basic L3 bin files 
+#'
+#' Read from L3 bin. 
+#' @param x filename path to L3 bin OC file (HDF4)
+#' @param vname names of VData parameters to read (will read both _sum and _ssq)
+#' @param bins read out the bin number and other metadata (default TRUE)
 #' @export
 readL3 <- function(x, vname, bins = TRUE) {
   if (length(x) > 1L) warning("only first file considered")
@@ -53,6 +58,39 @@ iz2 <- function(x) {
   nms <- names(x)
 }
 
+# int16 lat2row(double lat){
+#   int16 row;
+#   
+#   row = (int16)((90 + lat)*NUMROWS/180.0);
+#   if(row >= NUMROWS) row = NUMROWS - 1;
+#   return(row);
+# }
+# 
+# int32 rowlon2bin(int16 row, double lon){
+#   int16 col;
+#   int32 bin;
+#   
+#   lon = constrain_lon(lon);
+#   col = (int16)((lon + 180.0)*numbin[row]/360.0);
+#   if(col >= numbin[row]) col = numbin[row] - 1;
+#   bin = basebin[row] + col;
+#   return(bin);
+# }
+.lat2row <- function(lat, NUMROWS){
+  row = as.integer(((90 + lat)*NUMROWS/180.0))
+  row[row >= NUMROWS] <-  NUMROWS - 1
+  row
+}
+
+lonlat2bin <- function(lon, lat, NUMROWS){
+  row <- .lat2row(lat, NUMROWS)
+  ##lon = constrain_lon(lon);
+  init <- initbin(NUMROWS)
+  col <- as.integer(((lon + 180.0) * init$numbin[row + 1]/360.0));
+  ## hmm col[col >= numbin[row]) col = numbin[row] - 1;
+  bin = init$basebin[row + 1] + col;
+  bin
+}
 
 #' Estimate chlorophyll-a from NASA ocean colour. 
 #' 
@@ -82,7 +120,7 @@ iz2 <- function(x) {
 #' }
 #' @param x list object with Remote Sensing Reflectance wavelengths (see Details)
 #' @param sensor which satellite sensor
-#' @param johnson use the Johnson et al. (2013) algorithm (FALSE by default)
+#' @param algo algorithm to use, oceancolor or Johnson et al. (2013) 
 #' @export
 ##http://onlinelibrary.wiley.com/doi/10.1002/jgrc.20270/abstract
 chla <- function(x, 
@@ -94,12 +132,12 @@ chla <- function(x,
     if (algo == "oceancolor") {
       ocr <-  log10(pmax(
         (x$Rrs_443_sum / x$Rrs_547_sum), 
-        (x$Rrs_490_sum / x$Rrs_547_sum)
+        (x$Rrs_488_sum / x$Rrs_547_sum)
       ))
     } else {
       ocr <-  log10(pmax(
         (x$Rrs_443_sum / x$Rrs_555_sum), 
-        (x$Rrs_490_sum / x$Rrs_555_sum)
+        (x$Rrs_488_sum / x$Rrs_555_sum)
       )) 
     }
     if (algo == "johnson") {
@@ -112,7 +150,7 @@ chla <- function(x,
   if (sensor == "SeaWiFS") {
    ocr <- log10(pmax(
       (x$Rrs_443_sum / x$Rrs_555_sum), 
-      (x$Rrs_490_sum / x$Rrs_555_sum), 
+      (x$Rrs_488_sum / x$Rrs_555_sum), 
       (x$Rrs_510_sum / x$Rrs_555_sum)))
    if (algo == "johnson") {
      val <- (10 ^ (0.6736 - 2.0714 * ocr - 0.4939* ocr^2 + 0.4756 * ocr^3))
@@ -140,6 +178,9 @@ chla <- function(x,
 #' Bin map
 #' 
 #' mapping between bins and a given raster
+#' @param bin bin number
+#' @param ras RasterLayer
+#' @param init optional initial values for bin structure 
 #' @export
 binmap <- function(bin, ras, init = NULL) {
   if (is.null(init)) init <- initbin()
@@ -153,6 +194,7 @@ binmap <- function(bin, ras, init = NULL) {
 #' Initialize values for a particular binning
 #' 
 #' Set up the basic values for the bin scheme for given number of rows. 
+#' @param NUMROWS relevant number of L3 bin rows
 #' @export 
 initbin <- function(NUMROWS = 2160) {
 ## TODO options for lon-lat sub-sets
@@ -162,14 +204,12 @@ initbin <- function(NUMROWS = 2160) {
   totbins = basebin[NUMROWS] + numbin[NUMROWS] - 1
   list(latbin = latbin, numbin = numbin, basebin = basebin, totbins = totbins)
 }
-# 
-# bin2lonlat <- function(bin) {
-#   row = NUMROWS - 1;
-#   fint <- findInterval(bin, basebin)
-#   clat = latbin[fint];
-#   clon = 360.0*(bin - basebin[fint] + 0.5)/numbin[fint] - 180.0;
-#   cbind(clon, clat)
-# }
+
+#' Calculate bin boundaries from bin number
+#' 
+#' Calculate bin boundaries from bin number
+#' @param bin bin number
+#' @param NUMROWS relevant number of L3 bin rows
 #' @export
 bin2bounds <- function(bin, NUMROWS = 2160) {
   row = NUMROWS - 1;
