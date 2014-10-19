@@ -5,7 +5,7 @@ R package to work with ocean colour data. Read all variables from any Level-3 bi
 MODISA extensively tested). 
 
 There are helper functions to generate longitude / latitude coordinates for the bins (centre or corners). These bins
-are a sparse grid on Sinusoidal projection, see 
+are a sparse, non-rectangular, grid on a Sinusoidal projection, see 
 
 http://oceandata.sci.gsfc.nasa.gov/
 
@@ -15,7 +15,7 @@ Package is built using roxygen2 and Rcpp. Only tested on Linux for now - help we
 
 Limitations
 ====
-When the x00, x01, etc files are required they *must* be present next to the main file. This package does no checks for this (yet). 
+When the x00, x01, etc files are required they *must* be present next to the main file. This package does no checks for this (yet). If they are not present, the relevant variables will be populated with zero values but this otherwise does not affect functionality. 
 
 Basic usage
 ====
@@ -57,72 +57,60 @@ TODO
 Dependencies
 ====
 
-Bindings to the HDF4 library are built with Rcpp: 
-
-You'll need at least 
-
-- command line access, e.g. 
-
-```{r} 
-system(" hdp dumpvd")
-```
-
-- access to the HDF4 source, e.g. 
-```{bash}
-#include "hdf.h"
-```
-
-
-Build notes for HDF4
-=====
-I originally used these notes as a guide, building a chain of tools ultimate for use in R - but for roc
-you only need HDF4 in your system. 
-
-i.e. hdf4-tools and libhdf4g-dev and CPATH=/usr/include/hdf (or similar)
-
-http://scigeo.org/articles/howto-install-latest-geospatial-software-on-linux.html
+These are the complete steps to install from a basic Ubuntu system.  
 
 ```{bash}
-## dependencies (on CentOS)
-## sudo yum install libjpeg-devel bison flex ## ~3Mb
+## 1) Update and install R
 
-## HDF4
-# download latest release
-# check here: http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/
-wget http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/[hdf4].tar.gz
-tar xvfz [hdf4].tar.gz
+## using Nectar image "NeCTAR Ubuntu 14.04 (Trusty) amd64"
+## key for apt-get update, see http://cran.r-project.org/bin/linux/ubuntu/README
+sudo chown ubuntu /etc/apt/sources.list
+sudo echo 'deb http://cran.csiro.au/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y r-base r-base-dev 
 
-## I edited the hlimits.h before compiling, see 
-## https://trac.osgeo.org/gdal/wiki/HDF
-##cd [hdf4]
-## grep MAXFILE hdf/src/hlimits.h
+## 2) Install R package dependencies
+## brew, digest, Rcpp stringr, and testthat packages
+## lib = "/usr/lib/R/site-library"
+sudo Rscript -e 'x <- .libPaths();install.packages(c("roxygen2", "testthat", "Rcpp"), lib = x[length(x)-1], repos = "http://cran.csiro.au")'
+
+## 3) Install 3rd party HDF dependency
+sudo apt-get install -y libhdf4g-dev
+sudo apt-get install git -y
+
+## 4) Get the package source and install
+git clone https://github.com/mdsumner/roc.git
+
+### 4a) roxygenize
+### Rscript -e 'roxygen2::roxygenize("roc")'
+### not sure if this is a bug in roxygen2, but ensure methods is loaded first
+Rscript -e 'library(methods);roxygen2::roxygenize("roc")'
+
+### 4b) Rcpp attributes (wraps the C++ source for R functions and doc)
+Rscript -e 'Rcpp::compileAttributes("roc")'
+
+### 4c) build and install
+## check where your hdf.h is, ensure this corresponds to roc/src/Makevars and
+export CPATH=/usr/include/hdf
+R CMD build roc
+
+echo 'CPATH=/usr/include/hdf' >> .Renviron
+sudo R CMD INSTALL roc_0.0-4.tar.gz --library=/usr/lib/R/site-library
 
 
-# set compile options
-# --disable-netcdf and --disable-fortran are necessary
-# when compiling netcdf with hdf4 support
-./configure \
-  --prefix=/opt/source/$hdf4/build \
-  --with-zlib \
-  --with-jpeg \
-  --enable-shared \
-  --disable-netcdf \
-  --disable-fortran
-
-# compile
-make 
-# check build (should all pass)
-make check
-# install into build dir
-make install
-make install-examples
-# check install
-make installcheck
-
-## I added this script to /etc/profile.d to get access to local/lib
-##cat /etc/profile.d/custom_exports.sh
-export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-sudo ldconfig
-
+## 5) Obtain an example file and test it out
+wget http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/S2004001.L3b_DAY_KD490.main.bz2
+bunzip2 S2004001.L3b_DAY_KD490.main.bz2
+Rscript -e 'library(roc);str(readL3("S2004001.L3b_DAY_KD490.main"))'
+## List of 8
+##  $ NUMROWS   : int 2160
+## $ bin_num   : int [1:358121] 73217 74173 74181 74183 75135 75136 75144 75145 75146 75216 ...
+## $ nobs      : int [1:358121] 1 1 1 1 2 2 1 2 2 1 ...
+## $ nscenes   : int [1:358121] 1 1 1 1 1 1 1 1 1 1 ...
+## $ weights   : num [1:358121] 1 1 1 1 1.41 ...
+## $ Kd_490_sum: num [1:358121] 0.111 0.154 0.169 0.14 0.25 ...
+## $ Kd_490_ssq: num [1:358121] 0.0124 0.0238 0.0284 0.0197 0.0448 ...
+## $ filename  : chr "S2004001.L3b_DAY_KD490.main"
 ```
 
