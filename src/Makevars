@@ -1,7 +1,7 @@
 
 # set by configure
-HDF_CFLAGS = /usr/local/include/
-HDF_LIBS   = -L/usr/local/lib -lmfhdf -ldf -ljpeg -lz
+HDF_CFLAGS = /usr/include/hdf
+HDF_LIBS   = -L/usr/lib -lmfhdf -ldf -ljpeg -lz
 # RCPP_LDFLAGS = @RCPP_LDFLAGS@
 
 # combine with standard arguments for R
