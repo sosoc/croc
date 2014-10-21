@@ -58,39 +58,28 @@ iz2 <- function(x) {
   nms <- names(x)
 }
 
-# int16 lat2row(double lat){
-#   int16 row;
-#   
-#   row = (int16)((90 + lat)*NUMROWS/180.0);
-#   if(row >= NUMROWS) row = NUMROWS - 1;
-#   return(row);
-# }
-# 
-# int32 rowlon2bin(int16 row, double lon){
-#   int16 col;
-#   int32 bin;
-#   
-#   lon = constrain_lon(lon);
-#   col = (int16)((lon + 180.0)*numbin[row]/360.0);
-#   if(col >= numbin[row]) col = numbin[row] - 1;
-#   bin = basebin[row] + col;
-#   return(bin);
-# }
-.lat2row <- function(lat, NUMROWS){
-  row = as.integer(((90 + lat)*NUMROWS/180.0))
-  row[row >= NUMROWS] <-  NUMROWS - 1
-  row
+
+.lat2row <- function(lat) {
+  row <- as.integer((90 + lat) * NUMROWS/180.0)
+  row[row >= NUMROWS] <- NUMROWS - 1;
+  row + 1
 }
 
-lonlat2bin <- function(lon, lat, NUMROWS){
-  row <- .lat2row(lat, NUMROWS)
-  ##lon = constrain_lon(lon);
-  init <- initbin(NUMROWS)
-  col <- as.integer(((lon + 180.0) * init$numbin[row + 1]/360.0));
-  ## hmm col[col >= numbin[row]) col = numbin[row] - 1;
-  bin = init$basebin[row + 1] + col;
-  bin
+##' Generate bin number from longitude latitude. 
+##' 
+##' Bin number from longitude and latitude for a given grid with NUMROWS unique latitudes. 
+##' @param lon longitude
+##' @param lat latitude
+##' @param NUMROWS number of rows
+lonlat2bin <- function(lon, lat, NUMROWS) {
+  ibin <- initbin(NUMROWS)
+  row <- .lat2row(lat)
+  col <- (lon + 180) * ibin$numbin[row] / 360
+  ##col[col >= ibin$numbin[row]] <- ibin$numbin[row] - 1
+  as.integer(ibin$basebin[row] + col)
 }
+
+
 
 #' Estimate chlorophyll-a from NASA ocean colour. 
 #' 
