@@ -71,6 +71,7 @@ iz2 <- function(x) {
 ##' @param lon longitude
 ##' @param lat latitude
 ##' @param NUMROWS number of rows
+##' @export
 lonlat2bin <- function(lon, lat, NUMROWS) {
   ibin <- initbin(NUMROWS)
   row <- .lat2row(lat)
