@@ -20,14 +20,15 @@ readL3 <- function(x, vname, bins = TRUE) {
   bl
 }
 
-
+## this really needs testing
+## now that I've turned off file delete
 iz2 <- function(x) {
   needsdecompress <- grepl(".bz2$", x) 
   if (needsdecompress) {
     f <- gsub(".bz2$", "", x)
     if (file.exists(x)) {
       message(sprintf("Attempting to decompress:\n %s", x))
-      system(sprintf("bunzip2 %s", x))
+      system(sprintf("bunzip2 %s --keep", x))
       ##print("bunzip2")
       return(f)
     } else {
