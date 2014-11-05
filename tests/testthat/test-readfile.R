@@ -1,12 +1,9 @@
 context("Basic read")
 
-##datadir <- getOption("default.datadir")
- 
-##datadir <- "/rdsi/PRIVATE"
-##ftest <- file.path(datadir, "oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/1998/005/S1998005.L3b_DAY_CHL.main")
-ftest <- system.file("extdata", "S2008001.L3b_DAY_CHL.main", package = "roc")
-
- test_that("file read is successful", {
-   expect_that(readL3(ftest),is_a("list"))
+ftest1 <- system.file("extdata", "S2008001.L3b_DAY_CHL.main", package = "roc")
+ftest2 <- system.file("extdata", "S2010006.L3b_DAY_RRS.main", package = "roc")
+test_that("file read is successful", {
+   expect_that(readL3(ftest1),is_a("list"))
+   expect_that(names(readL3(ftest2))[21L], equals("Rrs_670_ssq"))
  })
  
