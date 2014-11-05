@@ -1,30 +1,43 @@
 
+## here we should collect any code for file management and downloading
+## total volume of uncompressed L3b_DAY_RRS is ~1Tba (2014-11-04)
 .filetoc <- function(x) {
   sensortok <- substr(x, 1, 1)
   yeartok <- substr(x, 2, 5)
   jdaytok <- substr(x, 6, 8)
+  ## Note: Aquarius is *versioned* so we need some extra handling here
+  ## or we'll just smash them all together (might be ok since the files have the version name)
+  
   c(sensor = sensortok, year = yeartok, jday = jdaytok)
 }
 
 .fileloc <- function(x){
   x <- .filetoc(x)
-  sensors <- c(C = "CZCS", S = "SeaWiFS", A = "MODISA")  ## etc.
+  ## HICO: L1 only
+  ## MERIS: has x00, etc. auxiliarly files
+  ## MODISA: has x00, etc. 
+  
+  sensors <- c(A = "MODISA", C = "CZCS", O = "OCTS", M = "MERIS", 
+               Q = "Aquarius", 
+               S = "SeaWiFS",  
+               V = "VIIRS")  
+  
   file.path(sensors[x["sensor"]], "L3BIN", x["year"], x["jday"])
 }
 
-
-allfiles <- readLines(file.path(getOption("default.datadir"), "admin", "filelist", "allfiles.txt"))
-logi <- grepl("^S", basename(allfiles)) & grepl("L3b_DAY_RRS", basename(allfiles))
-afiles <- allfiles[logi]
-i <- 1
-
-l <- vector("list", length(afiles))
-for (i in seq_along(afiles)) {
-  l[[i]] <- names(roc:::vdatainfo(afiles[i]))
-}
-
-## um, they are all the same: 
-unique(sapply(l, paste, collapse = ","))
+# 
+# allfiles <- readLines(file.path(getOption("default.datadir"), "admin", "filelist", "allfiles.txt"))
+# logi <- grepl("^S", basename(allfiles)) & grepl("L3b_DAY_RRS", basename(allfiles))
+# afiles <- allfiles[logi]
+# i <- 1
+# 
+# l <- vector("list", length(afiles))
+# for (i in seq_along(afiles)) {
+#   l[[i]] <- names(roc:::vdatainfo(afiles[i]))
+# }
+# 
+# ## um, they are all the same: 
+# unique(sapply(l, paste, collapse = ","))
 ##[1] "SEAGrid,BinList,angstrom,aot_865,Rrs_412,Rrs_443,Rrs_490,Rrs_510,Rrs_555,Rrs_670,BinIndex"
 
 # getroot <- "http://oceandata.sci.gsfc.nasa.gov/cgi/getfile"
