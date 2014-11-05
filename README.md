@@ -75,7 +75,10 @@ sudo apt-get install -y r-base r-base-dev
 ## lib = "/usr/lib/R/site-library"
 sudo Rscript -e 'x <- .libPaths();install.packages(c("roxygen2", "testthat", "Rcpp"), lib = x[length(x)-1], repos = "http://cran.csiro.au")'
 
-## 3) Install 3rd party HDF dependency
+## 3) Install 3rd party HDF 
+
+## not sure if both required?
+sudo apt-get install -y libhdf4-dev
 sudo apt-get install -y libhdf4g-dev
 sudo apt-get install git -y
 
