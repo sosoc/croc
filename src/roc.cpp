@@ -208,7 +208,7 @@ List binlist(CharacterVector filename, CharacterVector vname, LogicalVector bins
 //'
 //' Generate longitude and latitude coordinates from bin number. 
 //' @param bins bin number
-//' @param number of rows in this grid
+//' @param nrows number of rows in this grid
 //' @export
 // [[Rcpp::export]]
 List bin2lonlat(IntegerVector bins, IntegerVector nrows){
