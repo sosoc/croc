@@ -1,17 +1,21 @@
 Files
 ==========
 
+ocfiles/
 
 o S2008001.L3b_DAY_CHL.main 
+
+o S20080012008031.L3b_MO_RRS.main.bz2  
+
+o S2010006.L3b_DAY_RRS.main
 
 The authors thank the Ocean Biology Processing Group (Code 614.2)  at the GSFC, Greenbelt, MD 20771, 
 for the production and distribution of the ocean color data.
 
-
-This is the smallest found L3bin file from the ocean colour archive (2014-08-01): 
+This set includes the smallest found L3bin file from the ocean colour archive (2014-08-01): 
 http://oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/2008/001
 
-The file can be requested directly with 
+The files can be requested directly with a getfile request like: 
 
 f <- "http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/S2008001.L3b_DAY_CHL.main.bz2"
 download.file(f, basename(f), mode = "wb")
