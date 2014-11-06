@@ -60,7 +60,7 @@ iz2 <- function(x) {
 }
 
 
-.lat2row <- function(lat) {
+.lat2row <- function(lat, NUMROWS) {
   row <- as.integer((90 + lat) * NUMROWS/180.0)
   row[row >= NUMROWS] <- NUMROWS - 1;
   row + 1
@@ -173,6 +173,8 @@ chla <- function(x,
 #' @param ras RasterLayer
 #' @param init optional initial values for bin structure 
 #' @export
+#' @importFrom sp SpatialPoints CRS
+#' @importFrom raster extract
 binmap <- function(bin, ras, init = NULL) {
   if (is.null(init)) init <- initbin()
   ## TODO do this smarter

@@ -9,7 +9,9 @@ Description: Read data from Ocean Color Level-3 bin files stored in HDF4 format.
 License: GPL-3
 LazyLoad: yes
 Imports:
-    Rcpp (>= 0.11.2)
+    Rcpp (>= 0.11.2),
+    sp,
+    raster
 Suggests:
     testthat
 LinkingTo: Rcpp
