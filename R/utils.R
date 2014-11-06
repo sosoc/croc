@@ -1,29 +1,45 @@
+# 
+# 
+# 
+# 
+# f <- "http://oceandata.sci.gsfc.nasa.gov/search/file_search.cgi?search=&subID=&sdate=2014-11-01&edate=2014-11-05&dtype=L3b&sensor=all&std_only=1&results_as_file=1&.state=Search&.cgifields=results_as_file&.cgifields=dtype&.cgifields=addurl&.cgifields=std_only&.cgifields=sensor&.cgifields=cksum"
+# 
+# f <- "http://oceandata.sci.gsfc.nasa.gov/search/file_search.cgi?search=&subID=&sdate=2014-11-01&edate=2014-11-05&dtype=L3b&sensor=all&std_only=1&results_as_file=1&.state=Search&.cgifields=results_as_file&.cgifields=dtype&.cgifields=addurl&.cgifields=std_only&.cgifields=sensor&.cgifields=cksum"
+# 
+# f <- "http://oceandata.sci.gsfc.nasa.gov/search/file_search.cgi?search=&subID=&sdate=&edate=&dtype=L3b&sensor=czcs&std_only=1&results_as_file=1&.state=Search&.cgifields=results_as_file&.cgifields=dtype&.cgifields=addurl&.cgifields=std_only&.cgifields=sensor&.cgifields=cksum"
 
 ## here we should collect any code for file management and downloading
 ## total volume of uncompressed L3b_DAY_RRS is ~1Tba (2014-11-04)
-.filetoc <- function(x) {
+.filetok <- function(x) {
   sensortok <- substr(x, 1, 1)
   yeartok <- substr(x, 2, 5)
   jdaytok <- substr(x, 6, 8)
   ## Note: Aquarius is *versioned* so we need some extra handling here
   ## or we'll just smash them all together (might be ok since the files have the version name)
   
-  c(sensor = sensortok, year = yeartok, jday = jdaytok)
+  list(sensor = sensortok, year = yeartok, jday = jdaytok)
 }
 
 .fileloc <- function(x){
-  x <- .filetoc(x)
+  x <- .filetok(x)
   ## HICO: L1 only
   ## MERIS: has x00, etc. auxiliarly files
   ## MODISA: has x00, etc. 
   
   sensors <- c(A = "MODISA", C = "CZCS", O = "OCTS", M = "MERIS", 
                Q = "Aquarius", 
-               S = "SeaWiFS",  
+               S = "SeaWiFS", 
+               T = "MODIST",
                V = "VIIRS")  
   
-  file.path(sensors[x["sensor"]], "L3BIN", x["year"], x["jday"])
+  file.path(sensors[x[["sensor"]]], "L3BIN", x[["year"]], x[["jday"]])
 }
+
+# 
+# fs <- readLines(f)
+# .fileloc(fs[-c(1, 2)])
+
+
 
 # 
 # allfiles <- readLines(file.path(getOption("default.datadir"), "admin", "filelist", "allfiles.txt"))
