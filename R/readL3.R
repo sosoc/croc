@@ -26,10 +26,10 @@ readL3 <- function(x, vname, bins = TRUE) {
 iz2 <- function(x) {
   needsdecompress <- grepl(".bz2$", x) 
   if (needsdecompress) {
-    f <- gsub(".bz2$", "", x)
-    if (!file.exists(f)) stop("uncompressed file not available:", f)
+    x <- gsub(".bz2$", "", x)
+    if (!file.exists(x)) stop("uncompressed file not available:", x)
   }
-  f
+  x
 }
 
 # ## this really needs testing
@@ -135,12 +135,12 @@ chla <- function(x,
     if (algo == "oceancolor") {
       ocr <-  log10(pmax(
         (x$Rrs_443_sum / x$Rrs_547_sum), 
-        (x$Rrs_490_sum / x$Rrs_547_sum)
+        (x$Rrs_488_sum / x$Rrs_547_sum)
       ))
     } else {
       ocr <-  log10(pmax(
         (x$Rrs_443_sum / x$Rrs_555_sum), 
-        (x$Rrs_490_sum / x$Rrs_555_sum)
+        (x$Rrs_488_sum / x$Rrs_555_sum)
       )) 
     }
     if (algo == "johnson") {
