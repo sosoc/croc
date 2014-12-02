@@ -109,7 +109,7 @@ iz2 <- function(x) {
 ##' @export
 lonlat2bin <- function(lon, lat, NUMROWS) {
   ibin <- initbin(NUMROWS)
-  row <- .lat2row(lat)
+  row <- .lat2row(lat, NUMROWS)
   col <- (lon + 180) * ibin$numbin[row] / 360
   ##col[col >= ibin$numbin[row]] <- ibin$numbin[row] - 1
   as.integer(ibin$basebin[row] + col)
