@@ -2,7 +2,7 @@ g <- roc:::.defaultgrid()
 oc <- ocfiles(product = "MODISA", time.resolution = "daily")
 
 rg <- regridder(g, oc$fullname[220])
-rgs <- g; res(rgs) <- res(g) * c(8, 1.5)
+rgs <- g; res(rgs) <- res(g) * c(8, 1.5) * 4
 
 
 rgs <- setValues(rgs, 0)
@@ -21,7 +21,7 @@ plot(g2, col = pal$cols, breaks = pal$breaks, add = TRUE, legend = FALSE)
 
 plot(g3, col = pal$cols, breaks = pal$breaks, legend = FALSE)
 
-
+plot(focal(g3, w=matrix(1/9,nrow=3,ncol=3), na.rm = TRUE), col = pal$cols, breaks = pal$breaks, legend = FALSE)
 ## 1. weekly
 fname <- "/rdsi/PRIVATE/data/oceandata.sci.gsfc.nasa.gov/MODISA/L3BIN/2012/001/A20120012012008.L3b_8D_RRS.main"
 x <- readL3(fname, check = FALSE)
