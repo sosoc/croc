@@ -1,11 +1,11 @@
 Package: roc
 Type: Package
-Title: R tools for ocean colour.
+Title: Tools for Ocean Colour Data.
 Version: 0.0-4
 Date: 2014-08-28
 Author: Michael D. Sumner
 Maintainer: Michael D. Sumner<mdsumner@gmail.com>
-Description: Read data from Ocean Color Level-3 bin files stored in HDF4 format.
+Description: Read HDF4 format Ocean Colour Level-3 bin files. Future releases will read from the new NASA NetCDF4 format. 
 License: GPL-3
 LazyLoad: yes
 Imports:
