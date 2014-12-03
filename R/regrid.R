@@ -2,30 +2,67 @@
   dims <- c(4320L, 720L)
   sensor <- match.arg(sensor)
   if(sensor == "SeaWiFS") dims <- dims/2L
-  raster(extent(-180, 180, -90, -30), nrows = dims[2L], ncols = dims[1L], crs = "+proj=longlat +datum=WGS84")
+  setValues(raster(extent(-180, 180, -90, -30), nrows = dims[2L], ncols = dims[1L], crs = "+proj=longlat +datum=WGS84"), 
+            rep(0, prod(dims)))
+}
+
+
+##' Extract longitude and latitude of raster cells.
+##'
+##' Extract the longitude and latitude of the center of the requested
+##' cells of a Raster* object, similar to \code{xyFromCell}.
+##' @title Raster cell longitude and latitudes
+##' @param object a raster object
+##' @param cell the cell numbers
+##' @param spatial return locations as SpatialPoints object instead of a matrix.
+##' @return the lon,lat locations for the requested cells.
+##' @details  from SGAT
+.lonlatFromCell <- function(object, cell = NULL, spatial = FALSE) {
+  if (is.null(cell)) cell <- seq(ncell(object))
+  if(is.na(projection(object)) || isLonLat(object)) {
+    xyFromCell(object, cell, spatial = spatial)
+  } else {
+    p <- spTransform(xyFromCell(object, cell, spatial=TRUE),
+                     CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
+    if(spatial) p else coordinates(p)
+  }
 }
 
 ##' Regrid ocean colour. 
 ##' 
-##' Regrid NASA ocean colour RRS values to standard Mapped image. 
+##' Regrid NASA ocean colour RRS values to standard Mapped image with the Johnson chl-a algorithm. 
+##' @param tgrid target grid
 ##' @param file L3 bin file name with raw RRS wavelengths
 ##' @export
-regrid <- function(file) {
+regridder <- function(tgrid, file, agg = FALSE, fun = mean) {
+  xy <- .lonlatFromCell(tgrid, spatial = FALSE)
+  NROWS <- readL3(file, vname = "NUMROWS", bins = FALSE)$NUMROWS
+  binmap <- lonlat2bin(xy[,1], xy[,2], NROWS)
+  function(file) {
     x <- readL3(file)
-    ## raw bin points
-    ##xy <- do.call(cbind, bin2lonlat(x$bin_num, x$NUMROWS))
     sens <- if(x$NUMROWS == 4320) "MODISA" else "SeaWiFS"
-    rtemp <- .defaultgrid(sensor = sens)
-    ## subset to Southern Ocean
-    ##asub <- xy[,2] <= ymax(rtemp)
-    ##xy <- xy[asub, ]
-    
-    ## raw grid points
-    xy <- coordinates(rtemp)
-    ## convert raster to bin 
-    binmap <- lonlat2bin(xy[,1], xy[,2], x$NUMROWS)
-    setValues(rtemp, chla(x, sensor = sens, algo = "johnson")[match(binmap, x$bin_num)])
+    if(x$NUMROWS != NROWS)  stop("file doesn't match this regridder\nfile NUMROWS: ", x$NUMROWS, "\nfunction NUMROWS:", NROWS)
+   
+    if (agg) {
+     vals <-  chla(x, sensor = sens, algo = "johnson")
+     
+     binxy <- do.call(cbind, bin2lonlat(x$bin_num, x$NUMROWS))
+     if (!is.na(projection(tgrid)) & !isLonLat(tgrid)) binxy <- project(binxy, projection(tgrid))
+     gcell <- extract(tgrid, binxy, cellnumbers = TRUE)[,"cells"]
+     tvals <- tapply(vals, gcell, fun)
+     
+     r <- tgrid
+     r[unique(gcell)] <- tvals
+     r[!r>0] <- NA
+    } else {
+      r <- setValues(tgrid, chla(x, sensor = sens, algo = "johnson")[match(binmap, x$bin_num)])
+    }
+    r
+  }
+  
+  
 }
+
 
 # start <- 120
 # n <- 50

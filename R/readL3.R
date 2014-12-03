@@ -4,11 +4,12 @@
 #' @param x filename path to L3 bin OC file (HDF4)
 #' @param vname names of VData parameters to read (will read both _sum and _ssq)
 #' @param bins read out the bin number and other metadata (default TRUE)
+#' @param check test for presence of auxiliary files, TRUE or FALSE
 #' @export
-readL3 <- function(x, vname, bins = TRUE) {
+readL3 <- function(x, vname, bins = TRUE, check = TRUE) {
   if (length(x) > 1L) warning("only first file considered")
   x <- iz2(x[1])
-  tst <- .checkAux(x)
+  if (check) tst <- .checkAux(x)
   vdatalist <- vdatainfo(x)
   if (missing(vname)) {
     vdatalist <- vdatalist[!names(vdatalist) %in% c("SEAGrid", "BinList", "BinIndex")]
@@ -38,6 +39,7 @@ readL3 <- function(x, vname, bins = TRUE) {
   ## CU (only for SST4 in 20020012006181): x00 ?why
   
   ## this is very *&*^ complicated, just check if aux are present and fail if compressed
+  ## ewk, this needs to include the temporal tag . . .
   otherfiles <- unique(gsub(".bz2$", "", list.files(dirname(x), pattern = "\\.x0")))
   if (!all(file.exists(file.path(dirname(x), otherfiles)))) stop("not all auxiliary files uncompressed: ", x)
   NULL
