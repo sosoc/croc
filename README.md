@@ -15,7 +15,7 @@ Package is built using roxygen2 and Rcpp. Only tested on Linux for now - help we
 
 Limitations
 ====
-When the x00, x01, etc files are required they *must* be present next to the main file. This package does no checks for this (yet). If they are not present, the relevant variables will be populated with zero values but this otherwise does not affect functionality. 
+When the x00, x01, etc files are required they *must* be present next to the main file. This package does some simplistic tests for this, but it's not finished. If they are not present, the relevant variables will be populated with zero values but this otherwise does not affect functionality.  
 
 Basic usage
 ====
@@ -48,12 +48,14 @@ TODO
 
 - Ability to read sum and/or ssq for individual variables. 
 - Distinction between grid index data and variables without hardcoded names. 
-- Abstract away the need for explicit decompressing of the file. 
-- Build in a "getfile" feature to populate local repository. 
 - Extend capacity to deal with bins spatially, including
 -- aggregation to larger bins
 -- indexing for arbitrary binning to raster or polygon
 
+- todos now provided by raadsync 
+--~~Abstract away the need for explicit decompressing of the file.~~ 
+--~~Build in a "getfile" feature to populate local repository.~~
+- 
 Dependencies
 ====
 
