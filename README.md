@@ -52,10 +52,13 @@ TODO
 -- aggregation to larger bins
 -- indexing for arbitrary binning to raster or polygon
 
-- todos now provided by raadsync 
---~~Abstract away the need for explicit decompressing of the file.~~ 
---~~Build in a "getfile" feature to populate local repository.~~
-- 
+Todos now provided by raadsync: 
+
+~~Abstract away the need for explicit decompressing of the file.~~ 
+
+~~Build in a "getfile" feature to populate local repository.~~
+
+
 Dependencies
 ====
 
