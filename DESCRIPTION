@@ -5,7 +5,8 @@ Version: 0.0-5
 Date: 2014-12-04
 Author: Michael D. Sumner
 Maintainer: Michael D. Sumner<mdsumner@gmail.com>
-Description: Read HDF4 format Ocean Colour Level-3 bin files. Future releases will read from the new NASA NetCDF4 format. 
+Description: Read HDF4 format Ocean Colour Level-3 bin files. Future releases
+    will read from the new NASA NetCDF4 format.
 License: GPL-3
 LazyLoad: yes
 Imports:
