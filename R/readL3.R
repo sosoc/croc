@@ -240,7 +240,7 @@ initbin <- function(NUMROWS = 2160) {
 #' @param bin bin number
 #' @param NUMROWS relevant number of L3 bin rows
 #' @export
-bin2bounds <- function(bin, NUMROWS = 2160) {
+bin2bounds <- function(bin, NUMROWS) {
   row = NUMROWS - 1;
   latbin <- (((seq(NUMROWS) - 1) + 0.5) * 180 / NUMROWS ) - 90
   numbin <- as.integer(2 * NUMROWS * cos(latbin * pi/180) + 0.5)
