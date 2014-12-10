@@ -56,7 +56,7 @@ chlfiles <- chlfiles1[asub, ]
 
 init0 <- initbin(oc_CHL$NUMROWS)
 ## vectors to store our cumulative values
-rj_chlor_a <- nn <- chlor_a <- weights <- numeric(init0$totbins)
+rjchlor_a <- nn <- chlor_a <- weights <- numeric(init0$totbins)
 
 files <- rrsfiles
 ## save a test for any bad files
