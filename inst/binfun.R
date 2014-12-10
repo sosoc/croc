@@ -2,7 +2,7 @@ library(roc)
 library(raster)
 ibin <- initbin(24)
 
-x <- bin2bounds(seq(ibin$totbins))
+x <- bin2bounds(seq(ibin$totbins), length(ibin$numbin))
 class(x) <- c("sbin", "list")
 
 .extent.sbin <- function(x, ...) extent(range(c(x$west, x$east)), range(c(x$south, x$north)))
