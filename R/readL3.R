@@ -151,43 +151,35 @@ lonlat2bin <- function(lon, lat, NUMROWS) {
 #' @export
 ##http://onlinelibrary.wiley.com/doi/10.1002/jgrc.20270/abstract
 chla <- function(x, 
-                    sensor = c("SeaWiFS", "MODISA"), 
-                    algo = c("oceancolor", "johnson")) {
-  sensor <- match.arg(sensor)
-  algo <- match.arg(algo)
-  if (sensor == "MODISA") {
-    if (algo == "oceancolor") {
-      ocr <-  log10(pmax(
-        (x$Rrs_443_sum / x$Rrs_547_sum), 
-        (x$Rrs_488_sum / x$Rrs_547_sum)
-      ))
-    } else {
-      ocr <-  log10(pmax(
-        (x$Rrs_443_sum / x$Rrs_555_sum), 
-        (x$Rrs_488_sum / x$Rrs_555_sum)
-      )) 
+           sensor, 
+           algo = c("oceancolor", "johnson")) {
+    # http://oceancolor.gsfc.nasa.gov/REPROCESSING/R2009/ocv6/
+    #   * Rrs1 = blue wavelength Rrs (e.g., 443, 490, or 510-nm)
+    #   * Rrs2 = green wavelength Rrs (e.g., 547, 555, or 565-nm)
+    #   * X = log10(Rrs1 / Rrs2)
+    #   * chlor_a = 10^(a0 + a1*X + a2*X^2 + a3*X^3 + a4*X^4
+    #                     
+    ## OC4  SeaWiFS  Y  443>489>510	555	0.3272	-2.9940	2.7218	-1.2259	-0.5683
+    ## OC3M-547  MODIS	Y	443>489	547	0.2424	-2.7423	1.8017	0.0015	-1.2280
+    if (missing(sensor)) sensor <- .filesensor(basename(x$filename))
+    algo <- match.arg(algo)
+    params <- list(johnson = list(MODISA = c(0.6994, -2.0384, -0.4656, 0.4337, 0), 
+                                  SeaWiFS = c(0.6736, -2.0714, -0.4939, 0.4756, 0)),   
+                   oceancolor = list(MODISA = c(0.2424, -2.7423, 1.8017, 0.0015, -1.2280), 
+                                     SeaWiFS = c(0.3272, -2.9940, 2.7218, -1.2259, -0.5683)))
+    p0 <- params[[algo]][[sensor]]
+    form<- function(X, a) {
+      10^(a[1L] + a[2L]*X + a[3L]*X^2 + a[4L]*X^3 + a[5L]*X^4)
     }
-    if (algo == "johnson") {
-      val <- 10 ^ (0.6994 - 2.0384 * ocr - 0.4656 * ocr^2 + 0.4337 * ocr^3)
-    }
-    if (algo == "oceancolor") {
-      val <- 10 ^ (0.2424 - 2.7423 * ocr + 1.8017 * ocr^2 + 0.0015 * ocr^3 - 1.2280 * ocr^4)
-    }
+    
+    ocr <- switch(sensor, 
+                  SeaWiFS = log10(pmax(x$Rrs_443_sum, x$Rrs_490_sum, x$Rrs_510_sum)/x$Rrs_555_sum), 
+                  MODISA = switch(algo, 
+                                  oceancolor = log10(pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_547_sum), 
+                                  johnson = log10(pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_555_sum))
+    )
+    form(ocr, p0)
   }
-  if (sensor == "SeaWiFS") {
-   ocr <- log10(pmax(
-      (x$Rrs_443_sum / x$Rrs_555_sum), 
-      (x$Rrs_490_sum / x$Rrs_555_sum), 
-      (x$Rrs_510_sum / x$Rrs_555_sum)))
-   if (algo == "johnson") {
-     val <- (10 ^ (0.6736 - 2.0714 * ocr - 0.4939* ocr^2 + 0.4756 * ocr^3))
-   }
-   if (algo == "oceancolor") {
-     val <- (10 ^ (0.3272 - 2.9940 * ocr + 2.7218 * ocr^2 - 1.2259 * ocr^3 - 0.5683 * ocr^4))
-   }
-  }
-  val
-}
 
 
 
