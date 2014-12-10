@@ -11,6 +11,7 @@
 ## here we should collect any code for file management and downloading
 ## total volume of uncompressed L3b_DAY_RRS is ~1Tba (2014-11-04)
 .filetok <- function(x) {
+  x <- basename(x)
   sensortok <- substr(x, 1, 1)
   yeartok <- substr(x, 2, 5)
   jdaytok <- substr(x, 6, 8)
@@ -19,20 +20,22 @@
   
   list(sensor = sensortok, year = yeartok, jday = jdaytok)
 }
-
+.filesensor <- function(x) {
+  x1 <- .filetok(x)
+  c(A = "MODISA", C = "CZCS", O = "OCTS", M = "MERIS", 
+                          Q = "Aquarius", 
+                          S = "SeaWiFS", 
+                          T = "MODIST",
+                          V = "VIIRS")[x1[["sensor"]]]  
+}
 .fileloc <- function(x){
-  x <- .filetok(x)
+  x1 <- .filetok(x)
   ## HICO: L1 only
   ## MERIS: has x00, etc. auxiliarly files
   ## MODISA: has x00, etc. 
   
-  sensors <- c(A = "MODISA", C = "CZCS", O = "OCTS", M = "MERIS", 
-               Q = "Aquarius", 
-               S = "SeaWiFS", 
-               T = "MODIST",
-               V = "VIIRS")  
-  
-  file.path(sensors[x[["sensor"]]], "L3BIN", x[["year"]], x[["jday"]])
+ 
+  file.path(.filesensor(x), "L3BIN", x1[["year"]], x1[["jday"]])
 }
 
 # 
