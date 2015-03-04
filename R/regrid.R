@@ -17,7 +17,8 @@
 ##' @param spatial return locations as SpatialPoints object instead of a matrix.
 ##' @return the lon,lat locations for the requested cells.
 ##' @details  from SGAT
-.lonlatFromCell <- function(object, cell = NULL, spatial = FALSE) {
+##' @export
+lonlatFromCell <- function(object, cell = NULL, spatial = FALSE) {
   if (is.null(cell)) cell <- seq(ncell(object))
   if(is.na(projection(object)) || isLonLat(object)) {
     xyFromCell(object, cell, spatial = spatial)
