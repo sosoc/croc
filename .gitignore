@@ -2,7 +2,7 @@
 .Rproj.user
 .Rhistory
 .RData
-NAMESPACE
+##NAMESPACE
 src/RcppExports.cpp
 R/RcppExports.R
 src/*.o
