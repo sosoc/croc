@@ -51,13 +51,23 @@ chla <- function(x,
   form<- function(X, a) {
     10^(a[1L] + a[2L]*X + a[3L]*X^2 + a[4L]*X^3 + a[5L]*X^4)
   }
-  
+  ## rarely, some wavelengths are less than 0 one example is
+  ##   a bin at index 1569 in something like the (15 * 28)th day in the MODISA - 
+  ##   Rrs_555_sum is < 0 so log is bung)
   ocr <- switch(sensor, 
-                SeaWiFS = log10(pmax(x$Rrs_443_sum, x$Rrs_490_sum, x$Rrs_510_sum)/x$Rrs_555_sum), 
+                SeaWiFS = pmax(x$Rrs_443_sum, x$Rrs_490_sum, x$Rrs_510_sum)/x$Rrs_555_sum, 
                 MODISA = switch(algo, 
-                                oceancolor = log10(pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_547_sum), 
-                                johnson = log10(pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_555_sum))
-  )
+                                oceancolor = pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_547_sum, 
+                                johnson = pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_555_sum))
+  ## detect any that are zero or lower
+  bad <- !ocr > 0
+  ocr[!bad] <- log10(ocr[!bad])
+  if (any(bad)) {
+    ocr[bad] <- 0
+    warning(sprintf("detected %i pre-log values less than zero\n please check the wavelength sums for negative values", sum(bad)))
+    warning("bad values have been set to 0")
+  }
+  
   form(ocr, p0)
 }
 
