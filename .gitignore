@@ -7,4 +7,4 @@ src/RcppExports.cpp
 R/RcppExports.R
 src/*.o
 src/*.so
-man/*
+##man/*
