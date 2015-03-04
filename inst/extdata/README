@@ -1,6 +1,12 @@
 Files
 ==========
 
+o A2002218.L3b_DAY_RRS.sub100.Rdata
+
+Created with the following command, since every MODISA RRS file is too big for a package (~11Mb is minimum)
+
+A2002218.L3b_DAY_RRS.sub100 <- lapply(readL3("A2002218.L3b_DAY_RRS.main"), function(x) if (length(x) == 1) x else x[1:100])
+
 ocfiles/
 
 o S2008001.L3b_DAY_CHL.main 
@@ -8,6 +14,8 @@ o S2008001.L3b_DAY_CHL.main
 o S20080012008031.L3b_MO_RRS.main.bz2  
 
 o S2010006.L3b_DAY_RRS.main
+
+
 
 The authors thank the Ocean Biology Processing Group (Code 614.2)  at the GSFC, Greenbelt, MD 20771, 
 for the production and distribution of the ocean color data.
