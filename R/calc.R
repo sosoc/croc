@@ -48,8 +48,13 @@ chla <- function(x,
                  oceancolor = list(MODISA = c(0.2424, -2.7423, 1.8017, 0.0015, -1.2280), 
                                    SeaWiFS = c(0.3272, -2.9940, 2.7218, -1.2259, -0.5683)))
   p0 <- params[[algo]][[sensor]]
-  form<- function(X, a) {
-    10^(a[1L] + a[2L]*X + a[3L]*X^2 + a[4L]*X^3 + a[5L]*X^4)
+#   form<- function(X, a) {
+#     10^(a[1L] + a[2L]*X + a[3L]*X^2 + a[4L]*X^3 + a[5L]*X^4)
+#   }
+#   
+  form <- function(X, a) {
+    10^(a[1] + X*(a[2]+X*(a[3]+ X*(a[4] + X*a[5]))))
+    
   }
   ## rarely, some wavelengths are less than 0 one example is
   ##   a bin at index 1569 in something like the (15 * 28)th day in the MODISA - 
@@ -58,17 +63,17 @@ chla <- function(x,
                 SeaWiFS = pmax(x$Rrs_443_sum, x$Rrs_490_sum, x$Rrs_510_sum)/x$Rrs_555_sum, 
                 MODISA = switch(algo, 
                                 oceancolor = pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_547_sum, 
-                                johnson = pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_555_sum))
-  ## detect any that are zero or lower
-  bad <- !ocr > 0
-  ocr[!bad] <- log10(ocr[!bad])
-  if (any(bad)) {
-    ocr[bad] <- 0
-    warning(sprintf("detected %i pre-log values less than zero\n please check the wavelength sums for negative values", sum(bad)))
-    warning("bad values have been set to 0")
-  }
-  
-  form(ocr, p0)
+                                johnson =    pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_555_sum))
+
+  minmaxrat <- c(0.21, 30)
+  bad2 <- ocr < minmaxrat[1L]
+  if (any(bad2)) warning("some band ratios less than minimum (%f", minmaxrat[1L])
+  bad3 <- ocr > minmaxrat[2L]
+  if (any(bad3)) warning("some band ratios greater than maximum (%f", minmaxrat[2L])
+  ocr[!(bad2 | bad3)] <- log10(ocr[!(bad2 | bad3)])
+  out <- form(ocr, p0)
+  out[bad2 | bad3] <- 0
+  out
 }
 
 
