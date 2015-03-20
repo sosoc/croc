@@ -14,10 +14,11 @@
 #' @param ext raster extent object, or object to create an extent from
 #' @return  integer vector of bins
 #' @examples
-#' init <- initbin(24)
+#' \dontrun{ init <- initbin(24)
 #' crop_init(init, extent(100, 110, -50, -45))
+#' }
 #' @export
-#' @importFrom raster extent
+#' @importMethodsFrom raster extent
 crop_init <- function(x, ext) {
   ext <- extent(ext)
   nrows <- length(x$basebin)
@@ -50,6 +51,12 @@ crop_init <- function(x, ext) {
   lapply(x, function(x) if (length(x) > 1) x[sub] else x)
 }
 
+#' Insert redundant vertices to allow reprojection. 
+#' 
+#' Densify objects. 
+#' @param x 2 row matrix of coordinates to densify
+#' @param maxdist the maximum distance 
+#' @param longlat use longlat on the ellipsoid for distance?
 #' @importFrom geosphere gcIntermediate
 #' @importFrom sp spDistsN1
 #' @export
