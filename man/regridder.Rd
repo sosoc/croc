@@ -9,6 +9,10 @@ regridder(tgrid, file, agg = FALSE, fun = mean)
 \item{tgrid}{target grid}
 
 \item{file}{L3 bin file name with raw RRS wavelengths}
+
+\item{agg}{aggregate values?}
+
+\item{fun}{function to aggregate by if agg is \code{TRUE}}
 }
 \description{
 Regrid NASA ocean colour RRS values to standard Mapped image with the Johnson chl-a algorithm.

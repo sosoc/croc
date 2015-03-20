@@ -7,6 +7,8 @@
 #' @param varname variable to read, defaults to Johnson 2013 chlorophyll-a
 #' @param grid grid specification to rasterize to (optional)
 #' @param platform which satellite source (MODSIA, SeaWiFS, ...)
+#' @param ... unused
+#' @importFrom raadtools timedateFrom ocfiles
 readoc <- function(daterange,  
                    xylim = NULL,  
                    varname = "CHL_RJ", grid = NULL, platform = "MODISA", ...) {

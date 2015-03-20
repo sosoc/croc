@@ -1,3 +1,5 @@
+
+
 .defaultgrid <- function(sensor = c("MODISA", "SeaWiFS")) {
   dims <- c(4320L, 720L)
   sensor <- match.arg(sensor)
@@ -17,10 +19,11 @@
 ##' @param spatial return locations as SpatialPoints object instead of a matrix.
 ##' @return the lon,lat locations for the requested cells.
 ##' @details  from SGAT
+##' @importFrom  raster isLonLat
 ##' @export
 lonlatFromCell <- function(object, cell = NULL, spatial = FALSE) {
   if (is.null(cell)) cell <- seq(ncell(object))
-  if(is.na(projection(object)) || isLonLat(object)) {
+  if(is.na(projection(object)) || raster::isLonLat(object)) {
     xyFromCell(object, cell, spatial = spatial)
   } else {
     p <- spTransform(xyFromCell(object, cell, spatial=TRUE),
@@ -34,9 +37,13 @@ lonlatFromCell <- function(object, cell = NULL, spatial = FALSE) {
 ##' Regrid NASA ocean colour RRS values to standard Mapped image with the Johnson chl-a algorithm. 
 ##' @param tgrid target grid
 ##' @param file L3 bin file name with raw RRS wavelengths
+##' @param agg aggregate values?
+##' @param fun function to aggregate by if agg is \code{TRUE}
+##' @importFrom rgdal project
+##' @importFrom raster setValues
 ##' @export
 regridder <- function(tgrid, file, agg = FALSE, fun = mean) {
-  xy <- .lonlatFromCell(tgrid, spatial = FALSE)
+  xy <- lonlatFromCell(tgrid, spatial = FALSE)
   NROWS <- readL3(file, vname = "NUMROWS", bins = FALSE)$NUMROWS
   binmap <- lonlat2bin(xy[,1], xy[,2], NROWS)
   function(file) {

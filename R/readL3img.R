@@ -1,3 +1,4 @@
+
 .nasadateformat <- function(x, f = "%Y%j") {
   format(x, f)
 }
@@ -11,7 +12,7 @@
 #' @param platform which satellite platform (currently MODISA and SeaWiFS)
 #' @param tres temporal resolution to read
 #' @param varname name of variable (currently chlorophyll-a)
-#' @importFrom raster brick projection
+#' @importFrom raster brick projection "extent<-" "projection<-"
 #' @export
 readL3img <- function(date, platform = c(A = "MODISA", S = "SeaWiFS"), 
                       tres = c("DAY" = "", "8D" = "8 days", "MO" = "1 month", "YR" = "1 year"), 
