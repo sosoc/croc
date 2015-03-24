@@ -23,25 +23,67 @@ readL2 <- function(file, vartype = c("swath", "meta"), data.frame = TRUE) {
                       meta = 35)
   bx <- basename(file)
   sdspaths <- sprintf(.L2template(), .filesensor(bx), file, seq_along(sds) + sdsoffset)
+
   s1 <- stack(sdspaths, quick = TRUE)  
   names(s1) <- sds
-  bad <- values(s1[[3]]) < 0
-  if (data.frame) s1 <- as.data.frame(values(s1)[!bad, ])
+  
+  if (data.frame) {
+   ## s1 <- values(s1)
+  ##  s1 <- lapply(seq(ncol(s1)), function(x) s1[,x])
+  ##  names(s1) <- sds
+    s1 <- lapply(seq(nlayers(s1)), function(x) values(s1[[x]]))
+    names(s1) <- sds
+    s1 <- as_data_frame(s1)
+  }
   s1
 }
 
-x <-  "/rdsi/PRIVATE/data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L2/1998/001/./S1998001013310.L2_GAC_OC"
 
-s2 <- readL2(x)
-head(s2)
-with(subset(s2, chlor_a < 1000 & chlor_a > 0), plot(longitude, latitude, pch = ".", col = chl.pal(chlor_a)))
+system.time({
 
+.filesensor <- roc:::.filesensor
+library(roc)
+library(raster)
+
+# fs <- file.path("/rdsi/PRIVATE/data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L2/1998/001", 
+# c("S1998001013310.L2_GAC_OC", "S1998001013310.L2_MLAC_OC", "S1998001031210.L2_GAC_OC", 
+#   "S1998001031210.L2_MLAC_OC", "S1998001045112.L2_GAC_OC", "S1998001045112.L2_MLAC_OC", 
+#   "S1998001063009.L2_GAC_OC", "S1998001063009.L2_MLAC_OC", "S1998001080908.L2_GAC_OC", 
+#   "S1998001080908.L2_MLAC_OC", "S1998001094808.L2_GAC_OC", "S1998001094808.L2_MLAC_OC", 
+#   "S1998001112707.L2_GAC_OC", "S1998001112707.L2_MLAC_OC", "S1998001130607.L2_GAC_OC", 
+#   "S1998001130607.L2_MLAC_OC", "S1998001144506.L2_GAC_OC", "S1998001144506.L2_MLAC_OC", 
+#   "S1998001162406.L2_GAC_OC", "S1998001162406.L2_MLAC_OC", "S1998001175654.L2_GAC_OC"
+# ))
+
+fs <- list.files("/rdsi/PRIVATE/data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L2/1998/001", full.names = TRUE, pattern = "*OC$")
+library(dplyr)
+library(raadtools)
 d <- data_frame()
 
+## collate up the day's L2 files (there are 34 but this is an early test)
 for (i in seq_along(fs)) {
-  s2 <- readL2(fs[i]); 
-  d <- rbind(d, data_frame(s2))
-  ##with(subset(s2, chlor_a < 1000 & chlor_a > 0), points(longitude, latitude, pch = ".", col = chl.pal(chlor_a)))
-  print(i)
+  s2 <- try(readL2(fs[i]))
+  if (!inherits(s2, "try-error")) {
+    d <- bind_rows(d, s2)
+    print(i)
   }
+}
+## build a map that we will bin 6e7 obs into (very coarse for now)
+r <- raster(extent(-180, 180, -90, 90), nrow = 300, ncol = 600)
+d$cell <- cellFromXY(r, as.matrix(d[, c("longitude", "latitude")]))
+
+ds <- d  %>% filter(chlor_a > 0)  %>% filter(chlor_a < 1000)  %>% group_by(cell)  %>% summarize(chlor_a = mean(chlor_a))
+r[ds$cell] <- ds$chlor_a
+pal <- chl.pal(palette = TRUE)
+plot(r, col = pal$cols, breaks = pal$breaks, legend = FALSE)
+})
+
+
+library(rbenchmark)
+benchmark(tbl = readL2(fs[10], data.frame = TRUE), 
+          st = readL2(fs[1], data.frame = FALSE), replications = 1)
+
+
+
+
 
