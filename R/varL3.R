@@ -35,6 +35,7 @@ varL3 <- function(x, varname = "chlor_a", collapse = FALSE) {
   if (collapse) {
     tmp_var <- (sum(x[[ssqname]])/sum(x$weights)) - (meanL3(x, collapse = TRUE)^2)
     div <- sum(x$weights^2) - sum(x$nscenes)
+    
     v <- tmp_var * sum(x$weights^2) / div
   } else {
     tmp_var <- (x[[ssqname]]/x$weights) - (meanL3(x)^2)
@@ -45,8 +46,38 @@ varL3 <- function(x, varname = "chlor_a", collapse = FALSE) {
   v
 }
 
+mchla <- function(sum, weights) {
+  sum(sum)/sum(weights)
+}
+
+vchla <- function(sum, weights, ssq, nscenes) {
+  tmp_var <- (sum(ssq)/sum(weights)) - (mchla(sum, weights))^2
+  div <- sum(weights^2 - nscenes)
+  tmp_var * sum(weights^2) / div
+}
 
 
+# wfile <- "/rdsi/PRIVATE/data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/1998/001/S19980011998008.L3b_8D_CHL.main"
+# rfiles <- subset(ocfiles(product = "SeaWiFS"), grepl("S199800[1-8]", basename(fullname)))$fullname
+# cfiles <- gsub("_RRS", "_CHL", rfiles)
+# 
+# w <- readL3(wfile)
+# ad <- lapply(rfiles, readL3)
+# ca <- lapply(cfiles, readL3)
+# 
+# allbins <- unlist(lapply(ad, "[[", "bin_num"))
+# tab <- table(allbins)
+# b <- as.numeric(names(tab[tab > 7]))
+# bin <- b[7]
+# 
+# fun <- function(x) as.data.frame(roc:::.subsetL3(x, x$bin_num == b[ind]))
+# ind <- 7
+# d1 <- as.data.frame(roc:::.subsetL3(w, w$bin_num == b[ind]))
+# d2 <- do.call(rbind, lapply(ad, fun))
+# d3 <- do.call(rbind, lapply(ca, fun))
+# 
+
+# 
 # d1 <- structure(list(NUMROWS = 2160L, bin_num = 100335L, nobs = 11L, 
 #                      nscenes = 7L, weights = 8.56047821044922, chlor_a_sum = 4.77596616744995, 
 #                      chlor_a_ssq = 2.98022437095642, filename = structure(1L, .Label = "/rdsi/PRIVATE/data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/1998/001/S19980011998008.L3b_8D_CHL.main", class = "factor")), .Names = c("NUMROWS", 
@@ -68,7 +99,7 @@ varL3 <- function(x, varname = "chlor_a", collapse = FALSE) {
 #                                                                                               )), .Names = c("NUMROWS", "bin_num", "nobs", "nscenes", "weights", 
 #                                                                                                              "chlor_a_sum", "chlor_a_ssq", "filename"), row.names = c(NA, 
 #                                                                                                                                                                       5L), class = "data.frame")
-# 
+
 
 # 
 # 
