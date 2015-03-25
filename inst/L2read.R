@@ -69,7 +69,7 @@ for (i in seq_along(fs)) {
   }
 }
 ## build a map that we will bin 6e7 obs into (very coarse for now)
-r <- raster(extent(-180, 180, -90, 90), nrow = 300, ncol = 600)
+r <- raster(extent(-180, 180, -90, 90), nrow = 4320 * 2, ncol = 4320)
 d$cell <- cellFromXY(r, as.matrix(d[, c("longitude", "latitude")]))
 
 ds <- d  %>% filter(chlor_a > 0)  %>% filter(chlor_a < 1000)  %>% group_by(cell)  %>% summarize(chlor_a = mean(chlor_a))
