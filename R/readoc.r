@@ -9,6 +9,7 @@
 #' @param platform which satellite source (MODSIA, SeaWiFS, ...)
 #' @param ... unused
 #' @importFrom raadtools timedateFrom ocfiles
+#' @export
 readoc <- function(daterange,  
                    xylim = NULL,  
                    varname = "CHL_RJ", grid = NULL, platform = "MODISA", ...) {
