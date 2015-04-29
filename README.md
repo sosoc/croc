@@ -113,7 +113,7 @@ Rscript -e 'library(methods);roxygen2::roxygenize("roc")'
 ## check where your hdf.h is, ensure this corresponds to roc/src/Makevars and
 export CPATH=/usr/include/hdf
 R CMD build roc
-sudo R CMD INSTALL roc_0.0-4.tar.gz --library=/usr/lib/R/site-library
+sudo R CMD INSTALL roc_someversion.tar.gz --library=/usr/lib/R/site-library
 
 ## 5) Obtain an example file and test it out
 wget http://oceandata.sci.gsfc.nasa.gov/cgi/getfile/S2004001.L3b_DAY_KD490.main.bz2
