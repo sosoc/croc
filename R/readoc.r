@@ -9,6 +9,7 @@
 #' @param platform which satellite source (MODSIA, SeaWiFS, ...)
 #' @param ... unused
 #' @importFrom raadtools timedateFrom ocfiles
+#' @importFrom sp CRS spTransform
 #' @export
 readoc <- function(daterange,  
                    xylim = NULL,  
@@ -42,8 +43,20 @@ readoc <- function(daterange,
   
   }
   bins <- which(n0 > 0)
-  return(list(NUMROWS = x$NUMROWS, bin_num = bins, sum = sum0[bins], n = n0[bins]))
+  x <- list(NUMROWS = x$NUMROWS, bin_num = bins, sum = sum0[bins], n = n0[bins])
+  if (is.null(grid)) return(x)
  ## if (is.null(grid))
 ##    list(NUMROWS = x$NUMROWS, bin_num = bins, chlor_a = (sum0/n0)[bins]) else grid
+  ll <- do.call(cbind, bin2lonlat(x$bin_num, nr[platform]))
+  if (!isLonLat(grid)) {
+    ll <- spTransform(SpatialPoints(ll, proj4string = CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")), 
+                    CRS(projection(grid)))
+  }
+  x$cell <- cellFromXY(grid, ll)
   
+  x$NUMROWS <- NULL
+  x <- as_data_frame(x)
+  x <- x %>% filter(!is.na(cell)) %>% group_by(cell) %>% summarize(chl = mean(sum/n, na.rm = TRUE)) 
+  grid[x$cell] <- x$chl
+  grid
 }
