@@ -8,3 +8,7 @@ R/RcppExports.R
 src/*.o
 src/*.so
 ##man/*
+
+## whoops
+inst/bigdat_unfiltered_2001-11-03
+inst/grdsumm.Rdata
