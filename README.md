@@ -87,6 +87,11 @@ sudo apt-get install -y libhdf4-dev
 sudo apt-get install -y libhdf4g-dev
 sudo apt-get install git -y
 
+## check where your hdf.h is, ensure this corresponds to roc/src/Makevars and
+export CPATH=/usr/include/hdf
+## including HDF4 dependency rrshdf4
+devtools::install_github("AustralianAntarcticDivision/rrshdf4")
+
 ## 4) Get the package source and install
 git clone https://github.com/mdsumner/roc.git
 
@@ -99,8 +104,7 @@ Rscript -e 'library(methods);roxygen2::roxygenize("roc")'
 Rscript -e 'Rcpp::compileAttributes("roc")'
 
 ### 4c) build and install
-## check where your hdf.h is, ensure this corresponds to roc/src/Makevars and
-export CPATH=/usr/include/hdf
+
 R CMD build roc
 
 echo 'CPATH=/usr/include/hdf' >> .Renviron
