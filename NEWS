@@ -1,0 +1,5 @@
+ VERSION 0.0.8
+ 
+ o roc is now standalone from the HDF4 library, those read functions are in rrshdf4
+ 
+ 

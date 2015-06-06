@@ -1,0 +1,541 @@
+commit 4ccc95172b736c0294fc24a5bacd63cb1d5f90b2
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Jun 7 08:10:08 2015 +1000
+
+    roc now has no HDF4 support, relies on rrshdf4
+
+commit 00f9ccfad53f6230a157c431293cd43df91f689a
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun May 3 19:20:16 2015 -1000
+
+    update readme for install
+
+commit 9505f972c859620bace257c7d14c2401d3ac0a1d
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun May 3 18:58:23 2015 -1000
+
+    clean up, prepare dependency on rrshdf
+
+commit 537f93d127a52b268d09821aca43b7b43a8cd46b
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 18:44:22 2015 -1000
+
+    clean2
+
+commit e7918b843d5c97741a763891b7afabfabfa5a7a5
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 18:26:20 2015 -1000
+
+    cleanup
+
+commit 22314c8f0ccf8ab2755ba25a9a19fdb3e538bb23
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 05:32:57 2015 -1000
+
+    near complete draft on chla gridding from L3bin
+
+commit d1e104cc7245a0b212ef1b41661e345c66d03e8d
+Merge: 5161e06 fa1d4db
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 04:23:39 2015 -1000
+
+    Merge branch 'master' of https://github.com/mdsumner/roc
+
+commit 5161e06fd89f994b5b723153ece3b297417dbe7c
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 04:23:18 2015 -1000
+
+    export readoc
+
+commit fa1d4dbd6498d73f37c180d628a6ba35bd2ff775
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 23:46:58 2015 +1000
+
+    Update README.md
+
+commit 3da07a2bf905c5d53782df93e8567543a5a203be
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 03:13:41 2015 -1000
+
+    leftovers
+
+commit dbdd40bc767240e323d8f7bcb7cb0823af3b19b3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Apr 29 03:12:18 2015 -1000
+
+    read l2 files
+
+commit 25727631f215a4d59acfacd82802cc90fd4c7833
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 24 18:07:28 2015 -1000
+
+    L2 read example
+
+commit af1e902f82af17084444e0989bac50544b0138e5
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 24 06:52:18 2015 -1000
+
+    all working, need to speed up the tbl creation
+
+commit fb0fdee5f52b5f1418222ae03f1ea43a62a86f26
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 24 05:26:05 2015 -1000
+
+    stub for read L2
+
+commit 152655faf645bd7465d9a0ea24cadcb5801cc297
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 24 05:25:34 2015 -1000
+
+    testing, commented out for now
+
+commit e78727b32d547eb8df0ddd77204099940eae2333
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Mar 22 16:47:12 2015 -1000
+
+    variance and mean for L3 objects
+
+commit 86b74277f55058f5942185062bdf353d6f30e30e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Mar 20 11:10:48 2015 -1000
+
+    imports, doc
+
+commit 34836962aa7db8eea685b2337184959b25f3709c
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Mar 20 11:10:19 2015 -1000
+
+    examples, doc
+
+commit 7586259a016b21e1407b32221edb18a90f32c6f5
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Mar 20 10:43:31 2015 -1000
+
+    readoc - beginnings of a function to build climatologies
+
+commit 8dd9481cd1a1c424142fbc01b06bb6d41613cfde
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Mar 20 10:42:42 2015 -1000
+
+    in progress examples
+
+commit 7e0a4210c08fe09c300d672202a2652ddf2ebb7b
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Mar 20 10:42:12 2015 -1000
+
+    worker functions to crop bins, in progress
+
+commit 6bc74e77d9f0267316fc03748060f7bf4ba9947e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Mar 20 10:41:58 2015 -1000
+
+    rework of calc functions
+
+commit df53aa9ec5ab6cbb353c0c2a29b49bc0c521ce8f
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Mar 20 10:41:37 2015 -1000
+
+    read L3 images from oceancolor site
+
+commit d664cf2864ee99c151402d4846b8633d97dd8233
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Mar 4 01:38:43 2015 -1000
+
+    new tests and a stripped down MODISA RRS data object
+
+commit 32f2ba2d9bd27baa9c91ba8cf308fd1b72bfd0e7
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 3 17:29:45 2015 -1000
+
+    devtools needs the NAMESPACE
+
+commit 1f638ab6dd21fe0a9512b3b656348348e2cefdd3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 3 17:28:45 2015 -1000
+
+    rename to be public
+
+commit 0086e19c6544980bc24e3100068dc9d4f1f9f5e7
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 3 17:28:34 2015 -1000
+
+    chla fix
+
+commit 70da142e6f3f26396c5584c0d101a5d28d03f7a0
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Mar 3 17:28:17 2015 -1000
+
+    commit man/ for devtools
+
+commit 1d244a0ceb1f0e97903307f634e8418bdaf65d1f
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Feb 22 01:15:45 2015 -1000
+
+    take these out for future work
+
+commit 47481feacdddfd7535ac25687154accb12735d77
+Merge: 6b608a7 2bec90e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Dec 10 01:24:41 2014 -1000
+
+    Merge branch 'master' of https://github.com/mdsumner/roc
+
+commit 6b608a73ef6ba692a44c4daa7fb13f53aeb8ede2
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Dec 10 01:24:33 2014 -1000
+
+    l3bindump.c original source
+
+commit 88223b4c9d84c3ba91fb5d053efb565d183bd4da
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Dec 10 01:23:55 2014 -1000
+
+    reorganize
+
+commit 4b96fe02967b14befb0e94cf54711380031fda2f
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Dec 10 01:21:29 2014 -1000
+
+    oc params for future generalization
+
+commit 2bec90ec87b0f66313a7dc1ba468f864b0b0060b
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Wed Dec 10 21:46:32 2014 +1100
+
+    Update scwi.R
+
+commit 7893adf25c22af304a1616947efb230fb46cdd50
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Wed Dec 10 21:44:12 2014 +1100
+
+    Create scwi.R
+
+commit 46ea7408e3666863aed291abab704b25b2ef1793
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 9 21:15:29 2014 -1000
+
+    neater chla()
+
+commit 9161a82731dcb1d1d26492dee459969edb238fee
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 9 21:15:16 2014 -1000
+
+    utils for sensor
+
+commit a9847c7a674b4f866af5c6e96b314dd56d7e0ed4
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 9 20:55:00 2014 -1000
+
+    minor
+
+commit 141579eb279204b95d8c5d3239030b5ca4ebf7e5
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 9 20:54:47 2014 -1000
+
+    examples
+
+commit a1597755f057caf3a5983b1a8e64f9fa57d5f31a
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 9 20:54:33 2014 -1000
+
+    remove default NUMROWS
+
+commit e2da5462c2546b65ce2ead6f8fd13554c3e1dd69
+Merge: 09942d5 eec50f1
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Dec 4 17:02:25 2014 -1000
+
+    Merge branch 'master' of https://github.com/mdsumner/roc
+    updates
+    Conflicts:
+    	DESCRIPTION
+
+commit 09942d5068f40f7bb48d6ef0d1dc2d42c6de36c3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Dec 4 17:00:49 2014 -1000
+
+    bump
+
+commit eec50f1577925925d2f7172ca54f884d7035ad97
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Thu Dec 4 23:49:14 2014 +1100
+
+    Update README.md
+
+commit 7d5335cbc505d1bc14dc5a960e138c7e46a35533
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Thu Dec 4 23:48:20 2014 +1100
+
+    Update README.md
+
+commit 828f811ae88d89328ae5a9265b4029786a61cb44
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Thu Dec 4 07:42:20 2014 +1100
+
+    Update DESCRIPTION
+    
+    Title case and description for CRAN policy.
+
+commit 33e0d67f8d5ea81f43fcd649328aaaaf8c7b04e9
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 2 14:53:08 2014 -1000
+
+    test examples
+
+commit 710d966f945be1b206b023f4f3fea2c6288b4dd0
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 2 14:52:41 2014 -1000
+
+    very basics of regridding working with resizing and reprojection
+
+commit a08a519bd65e78f317a61135f19b2932759a51b8
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Tue Dec 2 04:50:25 2014 -1000
+
+    fix missing numrows, and basic start to (slow) regridding
+
+commit f616bb132531f9668b95ed41e40a6edb9c0a15d1
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Dec 1 16:22:24 2014 -1000
+
+    check for aux files (needs work but most should be done by raadsync)
+
+commit 147bedacc710d1f9d97afc4e049afbe26b8b36f3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Dec 1 15:18:24 2014 -1000
+
+    keep getting this 490 wrong . . .
+
+commit 3487ee6d9257d5c14143447d60eb2122094921b9
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Dec 1 15:01:33 2014 -1000
+
+    don't uncompress the files, fail if the uncompressed one not available
+
+commit 3fd1c7ca42166c7c86c0c50129cb80760e93e352
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Nov 6 18:16:42 2014 -1000
+
+    chla algo fix 488 -> 490
+
+commit 89765a0405a631f08788e91dadce3745ea87ea2b
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 22:14:10 2014 -1000
+
+    nrows was missing, now passing check
+
+commit 7d8e16afe5e2423511ed9cde269d7f6026d389f8
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 22:13:51 2014 -1000
+
+    small changes, still testing
+
+commit 9a8fb9a8113c04d573d2ee53ceae3b107eee4fc8
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 22:13:31 2014 -1000
+
+    import from sp and raster
+
+commit 80fcf09e691fccab4c797257900853dc45100f28
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 22:09:47 2014 -1000
+
+    example files
+
+commit baf79ddecef25b0f5955ee02405e1cf1218506a1
+Merge: 9a8c7b3 4cf501b
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 04:08:32 2014 -1000
+
+    Merge branch 'master' of https://github.com/mdsumner/roc
+
+commit 9a8c7b3593cbdfa19c039fa121ecfad5c5951e20
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 04:08:03 2014 -1000
+
+    vignette stub
+
+commit 7391290c02a7d9916dae050e22bcd7390373d947
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 04:07:47 2014 -1000
+
+    tests
+
+commit 1402a8f6d0af062ca06e4c4a4dcb213ab7ff8efe
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 04:07:35 2014 -1000
+
+    example data
+
+commit 4cf501b7af7039e7beeaec49508a3db1c90ce5d1
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 23:58:38 2014 +1100
+
+    Update README.md
+
+commit a035c9a6110c99347f2224ac1cbacc4be820ddfd
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Wed Nov 5 02:36:06 2014 -1000
+
+    file management
+
+commit 85e95b1ee1e372b467cc354775a7172e85d6b3ee
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Nov 3 23:47:05 2014 -1000
+
+    draft tools to move towards a general file management utility
+
+commit 9c3cfde3024ab0ee41ef9593e4a33bc724feb3b9
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Nov 3 23:46:33 2014 -1000
+
+    default behaviour now is to to --keep the original uncompressed file
+
+commit fff94d1d4766c597ecd6149547cdbd32eb10e035
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Oct 20 17:01:40 2014 -1000
+
+    export
+
+commit aeaf65e2b85208905a9f2af185522081967addec
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Oct 20 17:00:57 2014 -1000
+
+    lonlat2bin
+
+commit ce4c59c0dce8ca5ea1505800a8a726c215d7c045
+Merge: 1d86048 d3d22dc
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Oct 19 17:06:46 2014 +1100
+
+    Merge branch 'master' of https://github.com/mdsumner/roc
+    
+    Conflicts:
+    	README.md
+
+commit 1d8604853376c4aec949b7ab556ee018a71b2ca3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Oct 19 17:03:11 2014 +1100
+
+    Makevars and tidy
+
+commit 4d80abc09cc43cfd2d2077d6ee76d7fc9849e565
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Oct 19 16:48:02 2014 +1100
+
+    installation updated
+
+commit d3d22dcafe050f604d2e3fb30ca44840892e23ca
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Oct 19 16:48:02 2014 +1100
+
+    installation updated
+
+commit 7e75bcae45c6903eb7a136412e96e6e0cf081ead
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Oct 17 14:25:27 2014 -1000
+
+    old log
+
+commit 6d448ac2fd66c4fcaec464a1521a12b60ee8faad
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Oct 17 14:24:58 2014 -1000
+
+    tests
+
+commit 8efd028f2610dde898f069017a13eb451d5d9476
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Oct 17 14:24:44 2014 -1000
+
+    download
+
+commit 144d8f993d75f12c48c52c3c63cac41fea4ae64a
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Oct 17 14:24:21 2014 -1000
+
+    tidy
+
+commit d35fd0cab72eff3bb9ef2a0191dada5077535720
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Oct 17 14:24:06 2014 -1000
+
+    update
+
+commit c6edb348dd88abe3cf2d2c1ecc992f1849f68f15
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Fri Oct 17 14:23:11 2014 -1000
+
+    Suggests for testthat
+
+commit c96c0e94b4bd84b711ceeae428ca37f9ad91d322
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Oct 5 17:54:19 2014 -1000
+
+    all _sum
+
+commit c0ab553b17143a2d306c142b85c4b404602763d3
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Sun Oct 5 17:48:00 2014 -1000
+
+    all _sum
+
+commit 86a452e0d482acd2b3b7147d9729122392722958
+Merge: e1307c3 50b6f20
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Oct 6 09:57:13 2014 +1100
+
+    Merge branch 'master' of https://github.com/mdsumner/roc
+
+commit e1307c32af1eef90a2a4bf01c82397cadf3eb18b
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Mon Oct 6 09:56:45 2014 +1100
+
+    delete minimal
+
+commit 50b6f208b79d329785bafe84a21f2d603e638c07
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Tue Sep 16 01:02:24 2014 +1000
+
+    Update README.md
+
+commit 8fab0a5453a4c3cd2bc82e3bf296dc8fb96d947f
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Sat Sep 13 12:52:36 2014 +1000
+
+    Delete minimal.cpp
+
+commit 6ad4cbafa8e38056e46b32fa15f966311a059bd6
+Author: mdsumner <mdsumner@gmail.com>
+Date:   Thu Sep 4 08:57:55 2014 +1000
+
+    Update README.md
+
+commit aabf5df075be6577c285d6c5c7cc1e39bd7d8d59
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Aug 28 16:01:30 2014 +1000
+
+    update readme
+
+commit 91e81888ed5eb7c89ac98e119d3e320c5ba1cf9e
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Aug 28 14:58:00 2014 +1000
+
+    mem cleanup
+
+commit 6879eeb9136fe4da12dc14d41268692b230d26b2
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Aug 28 12:41:44 2014 +1000
+
+    clean up
+
+commit 4e7f8d96a46d0be947d9cd6dab35275420310c55
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Aug 28 12:37:05 2014 +1000
+
+    rename from L3bin to roc
+
+commit d7da72d172ba39bdbde14e95b56eb216bbb126a1
+Author: Michael Sumner <mdsumner@gmail.com>
+Date:   Thu Aug 28 12:12:42 2014 +1000
+
+    first commit, successor to L3bin test
