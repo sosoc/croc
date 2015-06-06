@@ -1,6 +1,6 @@
 Package: roc
 Type: Package
-Title: R tools for ocean colour.
+Title: Working With Ocean Colour Data
 Version: 0.0.8
 Author: Michael D. Sumner
 Maintainer: Michael D. Sumner<mdsumner@gmail.com>
@@ -17,7 +17,7 @@ Imports:
     raster,
     rgdal
 Suggests:
-    rrshdf, 
+    rrshdf4, 
     testthat
 LinkingTo: Rcpp
 NeedsCompilation: yes

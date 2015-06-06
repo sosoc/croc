@@ -5,17 +5,6 @@
 
 using namespace Rcpp;
 
-// timesTwo
-NumericVector timesTwo(NumericVector x);
-RcppExport SEXP roc_timesTwo(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    __result = Rcpp::wrap(timesTwo(x));
-    return __result;
-END_RCPP
-}
 // bin2lonlat
 List bin2lonlat(IntegerVector bins, IntegerVector nrows);
 RcppExport SEXP roc_bin2lonlat(SEXP binsSEXP, SEXP nrowsSEXP) {
