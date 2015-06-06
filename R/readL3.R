@@ -10,18 +10,22 @@ readL3 <- function(x, vname, bins = TRUE, check = TRUE) {
   if (length(x) > 1L) warning("only first file considered")
   x <- iz2(x[1])
   if (check) tst <- .checkAux(x)
-  vdatalist <- vdatainfo(x)
+  vdatalist <- rrshdf4::vdatainfo(x)
   if (missing(vname)) {
     vdatalist <- vdatalist[!names(vdatalist) %in% c("SEAGrid", "BinList", "BinIndex")]
   } else {
     vdatalist <- vdatalist[names(vdatalist) == vname]
   }
-  
-  bl <- binlist(x, names(vdatalist), bins = bins)
+  if (.isNC(x)) stop("NetCDF format not yet supported")
+  bl <- rrshdf4:::binlist(x, names(vdatalist), bins = bins)
   bl$filename <- x
   bl
 }
 
+.isNC <- function(x) {
+  ## end in .nc or not?
+  grepl("nc$", x)
+}
 .checkAux <- function(x) {
   ## if this needs aux files, we better ensure they are present and decompressed
   ## aux periods

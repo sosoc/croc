@@ -18,6 +18,7 @@ Imports:
     raster,
     rgdal
 Suggests:
+    rrshdf, 
     testthat
 LinkingTo: Rcpp
 NeedsCompilation: yes
