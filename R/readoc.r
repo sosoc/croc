@@ -1,4 +1,7 @@
 
+.crossesdateline <- function(x) {
+  if (xmax(x) > 180) TRUE else FALSE
+}
 #' Read and summarize ocean colour variables from specific dates, or between a date range. 
 #' 
 #' Read and summarize ocean colour variables. 
@@ -61,6 +64,10 @@ readoc <- function(dates,
   if (!isLonLat(grid)) {
     ll <- spTransform(SpatialPoints(ll, proj4string = CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0")), 
                     CRS(projection(grid)))
+  } else {
+  if (.crossesdateline(grid)) {
+    ll[ll[,1] < 0,1] <- ll[ll[,1] < 0,1] + 360
+  }
   }
   x$cell <- cellFromXY(grid, ll)
   
