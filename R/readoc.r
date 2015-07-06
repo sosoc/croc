@@ -1,5 +1,5 @@
 
-#' Read and summarize ocean colour variables between a date range. 
+#' Read and summarize ocean colour variables from specific dates, or between a date range. 
 #' 
 #' Read and summarize ocean colour variables. 
 #' @param daterange two dates, specifying a start and end day
@@ -7,22 +7,29 @@
 #' @param varname variable to read, defaults to Johnson 2013 chlorophyll-a
 #' @param grid grid specification to rasterize to (optional)
 #' @param platform which satellite source (MODSIA, SeaWiFS, ...)
+#' @param daterange if TRUE every day between the min and max dates is used
 #' @param ... unused
 #' @importFrom raadtools timedateFrom ocfiles
 #' @importFrom sp CRS spTransform
 #' @export
-readoc <- function(daterange,  
+readoc <- function(dates,  
                    xylim = NULL,  
-                   varname = "CHL_RJ", grid = NULL, platform = "MODISA", ...) {
+                   varname = "CHL_RJ", grid = NULL, platform = "MODISA", daterange = FALSE, ...) {
   if (varname == "RRS") stop("RRS not allowed, use CHL_RJ for Johnson chlorophyll or CHL for ocean color chlorophyll")
   if (varname == "CHL_RJ") varname0 <- "RRS" else varname0 <- varname
-  daterange <- range(timedateFrom(daterange))
+  ##daterange <- range(timedateFrom(daterange))
+  dates <- as.POSIXct(dates, tz = "GMT")
   files <- ocfiles(varname = varname0, product = platform)
-  start0 <- which.min(abs(files$date - daterange[1]))
-  end0 <- which.min(abs(files$date - daterange[2]))
+  if (daterange) {
+    dates <- range(daterange)
+    start0 <- which.min(abs(files$date - daterange[1]))
+     end0 <- which.min(abs(files$date - daterange[2]))
 
-    ## check daterange, sequence of files
-  files <- files[seq(start0, end0), ]
+      ## check daterange, sequence of files
+      files <- files[seq(start0, end0), ]
+      } else {
+        files <- subset(files, as.Date(date) %in% as.Date(dates))
+      }
   nr <- c(MODISA = 4320, SeaWiFS= 2160)
   init <- initbin(nr[platform])
   sum0 <- n0 <- numeric(init$totbins)
