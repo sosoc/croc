@@ -30,6 +30,9 @@ readoc <- function(dates,
       } else {
         files <- subset(files, as.Date(date) %in% as.Date(dates))
       }
+      if (nrow(files) < 2) warning("only one file found")
+      if (nrow(files) < 1) stop("no files found")
+      
   nr <- c(MODISA = 4320, SeaWiFS= 2160)
   init <- initbin(nr[platform])
   sum0 <- n0 <- numeric(init$totbins)
