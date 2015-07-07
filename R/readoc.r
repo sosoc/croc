@@ -58,6 +58,8 @@ readoc <- function(dates,
   bins <- which(n0 > 0)
   x <- list(NUMROWS = x$NUMROWS, bin_num = bins, sum = sum0[bins], n = n0[bins])
   if (is.null(grid)) return(x)
+  ## zap input grid
+  grid[] <- 0
  ## if (is.null(grid))
 ##    list(NUMROWS = x$NUMROWS, bin_num = bins, chlor_a = (sum0/n0)[bins]) else grid
   ll <- do.call(cbind, bin2lonlat(x$bin_num, nr[platform]))
