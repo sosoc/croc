@@ -2,15 +2,17 @@
 % Please edit documentation in R/readoc.r
 \name{readoc}
 \alias{readoc}
-\title{Read and summarize ocean colour variables between a date range.}
+\title{Read and summarize ocean colour variables from specific dates, or between a date range.}
 \usage{
-readoc(daterange, xylim = NULL, varname = "CHL_RJ", grid = NULL,
-  platform = "MODISA", ...)
+readoc(dates, xylim = NULL, binsum = TRUE, varname = "CHL_RJ",
+  grid = NULL, platform = "MODISA", daterange = FALSE, ...)
 }
 \arguments{
-\item{daterange}{two dates, specifying a start and end day}
+\item{dates}{specific dates to read and summarize}
 
 \item{xylim}{extent specification (in longitude/latitude)}
+
+\item{binsum}{logical, summarize the raw bins (overrides grid)}
 
 \item{varname}{variable to read, defaults to Johnson 2013 chlorophyll-a}
 
@@ -18,7 +20,11 @@ readoc(daterange, xylim = NULL, varname = "CHL_RJ", grid = NULL,
 
 \item{platform}{which satellite source (MODSIA, SeaWiFS, ...)}
 
+\item{daterange}{two dates, specifying a start and end day}
+
 \item{...}{unused}
+
+\item{daterange}{if TRUE every day between the min and max dates is used}
 }
 \description{
 Read and summarize ocean colour variables.

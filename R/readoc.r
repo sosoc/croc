@@ -5,18 +5,22 @@
 #' Read and summarize ocean colour variables from specific dates, or between a date range. 
 #' 
 #' Read and summarize ocean colour variables. 
+#'
 #' @param daterange two dates, specifying a start and end day
 #' @param xylim extent specification (in longitude/latitude)
 #' @param varname variable to read, defaults to Johnson 2013 chlorophyll-a
 #' @param grid grid specification to rasterize to (optional)
 #' @param platform which satellite source (MODSIA, SeaWiFS, ...)
 #' @param daterange if TRUE every day between the min and max dates is used
+#' @param dates specific dates to read and summarize
+#' @param binsum logical, summarize the raw bins (overrides grid)
 #' @param ... unused
+#'
 #' @importFrom raadtools timedateFrom ocfiles
 #' @importFrom sp CRS spTransform
 #' @export
 readoc <- function(dates,  
-                   xylim = NULL,  
+                   xylim = NULL, binsum = TRUE, 
                    varname = "CHL_RJ", grid = NULL, platform = "MODISA", daterange = FALSE, ...) {
   if (varname == "RRS") stop("RRS not allowed, use CHL_RJ for Johnson chlorophyll or CHL for ocean color chlorophyll")
   if (varname == "CHL_RJ") varname0 <- "RRS" else varname0 <- varname
@@ -57,7 +61,20 @@ readoc <- function(dates,
   }
   bins <- which(n0 > 0)
   x <- list(NUMROWS = x$NUMROWS, bin_num = bins, sum = sum0[bins], n = n0[bins])
-  if (is.null(grid)) return(x)
+  if (is.null(grid) & !binsum) return(x)
+  if (binsum & is.null(grid)) {
+   
+    cat("returning summarized table of bin values, using NUMROWS: ", x$NUMROWS, "\n", sep = "")
+ 
+    NROWS <- x$NUMROWS
+    x$NUMROWS <- NULL
+    x <- x %>% as_data_frame() %>% group_by(bin_num) %>% summarize(chl = mean(sum/n, na.rm = TRUE))
+    xy <- bin2lonlat(x$bin_num, NROWS)
+    x$binlon <- xy[[1]]
+    x$binlat <- xy[[2]]
+    
+    return(as.data.frame(x))
+  }
   ## zap input grid
   grid[] <- 0
  ## if (is.null(grid))
