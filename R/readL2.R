@@ -3,7 +3,7 @@
     "Rrs_443", "Rrs_490", "Rrs_510", "Rrs_555", "Rrs_670", "chlor_a", 
     "Kd_490", "pic", "poc", "cdom_index", "par", "l2_flags")
 }
-.filesensor <- roc:::.filesensor
+
 .L2metanames <- function() {
   c( "orb_vec", 
      "sun_ref", "att_ang", "sen_mat", "scan_ell", "nflag", "tilt_ranges"
