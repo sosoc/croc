@@ -46,7 +46,7 @@ readL3img <- function(date, platform = c(A = "MODISA", S = "SeaWiFS"),
   #print("S20090602009090.L3m_MO_CHL_chlor_a_9km.png?sub=img")
   
 
-qurl <- file.path(ubase, sprintf("%s?%s", fname, suffix)
+qurl <- file.path(ubase, sprintf("%s?%s", fname, suffix))
 tfile <- file.path(tempdir(), fname)
 print(qurl)
 print(tfile)
