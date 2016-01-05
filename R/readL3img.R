@@ -33,21 +33,21 @@ readL3img <- function(date, platform = c(A = "MODISA", S = "SeaWiFS"),
 #   print(tres)
 #   print(varname) 
 #   print(sres)       #1#2#3     #4 #5 #6 #7     #8   
-   fname <- sprintf("%s%s%s.L3m_%s_%s_%s_%s.png?%s",
+   fname <- sprintf("%s%s%s.L3m_%s_%s_%s_%s.png",
                    names(platform), #1
                    fdate,   #2
                    edate,   #3
                    names(tres),     #4
                    names(varname),  #5
                    varname,         #6
-                   sres,            #7
-                   suffix)          #8
+                   sres)            #7
+                  # suffix)          #8
   #print(fname)
   #print("S20090602009090.L3m_MO_CHL_chlor_a_9km.png?sub=img")
   
 
-qurl <- file.path(ubase, fname)
-tfile <- file.path(tempdir(), gsub("\\?sub-img", "", fname))
+qurl <- file.path(ubase, sprintf("%s?%s", fname, suffix)
+tfile <- file.path(tempdir(), fname)
 print(qurl)
 print(tfile)
 if (!file.exists(tfile)) download.file(qurl, tfile, mode = "wb")
