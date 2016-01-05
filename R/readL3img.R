@@ -47,7 +47,7 @@ readL3img <- function(date, platform = c(A = "MODISA", S = "SeaWiFS"),
   
 
 qurl <- file.path(ubase, fname)
-tfile <- file.path(tempdir(), gsub("?sub-img", "", fname))
+tfile <- file.path(tempdir(), gsub("\\?sub-img", "", fname))
 print(qurl)
 print(tfile)
 if (!file.exists(tfile)) download.file(qurl, tfile, mode = "wb")
