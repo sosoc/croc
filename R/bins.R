@@ -48,7 +48,9 @@ binmap <- function(bin, ras, init = NULL) {
 initbin <- function(NUMROWS = 2160) {
   ## TODO options for lon-lat sub-sets
   latbin <- (((seq(NUMROWS) - 1) + 0.5) * 180 / NUMROWS ) - 90
-  numbin <- as.integer(2 * NUMROWS * cos(latbin * pi/180) + 0.5)
+  ## this will overflow at 2^31-1
+  #numbin <- as.integer(2 * NUMROWS * cos(latbin * pi/180) + 0.5)
+  numbin <- trunc(2 * NUMROWS * cos(latbin * pi/180) + 0.5)
   basebin <- cumsum(c(1L, numbin[-length(numbin)]))
   totbins = basebin[NUMROWS] + numbin[NUMROWS] - 1
   list(latbin = latbin, numbin = numbin, basebin = basebin, totbins = totbins)
