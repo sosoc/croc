@@ -1,3 +1,15 @@
+#' #' #oc <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", ext = "nc")
+#' #'
+#' #' 
+#' read_l3bin <- function(x)
+#'   x <- file.path(getOption("default.datadir"), "data/oceandata.sci.gsfc.nasa.gov/MODISA/L3BIN/2015/306/A2015306.L3b_DAY_RRS.nc")
+#'   info <- rhdf5::h5ls(x)
+#'   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
+#'   compound <- info$name[info$dim == test]
+#'   compoundpath <- file.path("/level-3_binned_data", compound)
+#'   l <- lapply(compoundpath, function(aname) rhdf5::h5read(x, name = aname))
+#'   for (i in seq_along(l)) if (grepl("sum", names(l[[i]]))) names(l[[i]]) <- paste()
+#'   }
 #' Basic L3 bin files 
 #'
 #' Read from L3 bin. 
