@@ -54,4 +54,15 @@ library(feather)
 write_feather(result, "MODISA_SO_summer_355_080.feather")
 
 
+f <- "https://oceandata.sci.gsfc.nasa.gov/cgi/getfile/V20120022016091.L3m_CU_SNPP_CHL_chlor_a_9km.nc"
+download.file(f, basename(f), mode = "wb")
+mod <- crop(raster(basename(f)), extent(-180, 180, -90,0))
+pmod <- projectRaster(mod, map)
+#extent(mod) <- extent(-180, 180, -90, 90)
+#projection(mod) <- "+proj=longlat +ellps=WGS84"
+par(mar = rep(0, 4))
+plot(setNames(brick(pmod, map), c("NASA", "Johnson")), col =pal$cols, breaks = pal$breaks, 
+     axes = FALSE, legend = FALSE)
+
+
 
