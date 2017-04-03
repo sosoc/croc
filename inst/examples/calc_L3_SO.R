@@ -54,17 +54,4 @@ library(feather)
 write_feather(result, "MODISA_SO_summer_355_080.feather")
 
 
-## now the map
-# 
-# map <- raster(extent(-9e6, 9e6, -9e6, 9e6), crs = "+proj=laea +ellps=WGS84 +lat_0=-90 +no_defs", res = 15e3)
-# bin_to_gridcell <- function(bins, gridmap, nrow = 4320) {
-#   xy <- do.call(cbind, bin2lonlat(bins, nrows = nrow))
-#   cellFromXY(gridmap, rgdal::project(xy, projection(gridmap)))
-# } 
-# 
-# summ <- x %>% mutate(grid_cell = bin_to_gridcell(bin_num, map))  %>% group_by(grid_cell) %>% 
-#   summarize(count = sum(count), chl_sum = sum(sum)) %>% mutate(mean_chl = chl_sum/count) 
-# summ <- summ %>% filter(!is.na(grid_cell))
-# map <- setValues(map, NA_real_)
-# map[summ$grid_cell] <- summ$mean_chl
-# 
+
