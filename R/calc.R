@@ -28,11 +28,13 @@
 #' @param x list object with Remote Sensing Reflectance wavelengths (see Details)
 #' @param sensor which satellite sensor
 #' @param algo algorithm to use, oceancolor or Johnson et al. (2013) 
+#' @param quiet logical to emit warnings or not
+#' @param ... not used
 #' @export
 ##http://onlinelibrary.wiley.com/doi/10.1002/jgrc.20270/abstract
 chla <- function(x, 
                  sensor, 
-                 algo = c("oceancolor", "johnson")) {
+                 algo = c("oceancolor", "johnson"), quiet = TRUE, ...) {
   # http://oceancolor.gsfc.nasa.gov/REPROCESSING/R2009/ocv6/
   #   * Rrs1 = blue wavelength Rrs (e.g., 443, 490, or 510-nm)
   #   * Rrs2 = green wavelength Rrs (e.g., 547, 555, or 565-nm)
@@ -67,9 +69,9 @@ chla <- function(x,
 
   minmaxrat <- c(0.21, 30)
   bad2 <- ocr < minmaxrat[1L]
-  if (any(bad2)) warning("some band ratios less than minimum (%f", minmaxrat[1L])
+  if (any(bad2) & !quiet) warning("some band ratios less than minimum (%f", minmaxrat[1L])
   bad3 <- ocr > minmaxrat[2L]
-  if (any(bad3)) warning("some band ratios greater than maximum (%f", minmaxrat[2L])
+  if (any(bad3) & !quiet) warning("some band ratios greater than maximum (%f", minmaxrat[2L])
   ocr[!(bad2 | bad3)] <- log10(ocr[!(bad2 | bad3)])
   out <- form(ocr, p0)
   out[bad2 | bad3] <- 0

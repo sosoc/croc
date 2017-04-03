@@ -4,7 +4,7 @@
 #' @param date 
 #' @param ... 
 #'
-#' @return
+#' @return tibble
 #' @export
 #' @importFrom tibble as_tibble
 #' @importFrom rhdf5 h5ls
@@ -17,16 +17,7 @@
 #' ), tzone = "GMT")), .Names = c("file", "fullname", "date"
 #' ), row.names = 1L, class = "data.frame")
 #' read_l3(inputfiles = files)
-# A tibble: 6,403 × 21
-#bin_num  nobs nscenes  weights   time_rec        sum  sum_squared        sum  sum_squared        sum
-#<int> <int>   <int>    <dbl>      <dbl>      <dbl>        <dbl>      <dbl>        <dbl>      <dbl>
-#  1  4257988     4       2 2.828427  590176384 0.04603831 0.0007502057 0.03707785 0.0004864429 0.02175909
-#2  4257989     4       2 2.828427  590176384 0.04728847 0.0007907349 0.03733524 0.0004930106 0.02187506
-#3  4261876     2       2 2.000000  295088192 0.03336400 0.0005565782 0.02664000 0.0003548448 0.01550400
-#4  4261877     2       2 2.000000  295088192 0.03256000 0.0005300767 0.02612000 0.0003411272 0.01503200
-# ... with 6,393 more rows, and 11 more variables: sum_squared <dbl>, sum <dbl>, sum_squared <dbl>,
-#   sum <dbl>, sum_squared <dbl>, sum <dbl>, sum_squared <dbl>, sum <dbl>, sum_squared <dbl>, sum <dbl>,
-#   sum_squared <dbl>
+#' 
 read_l3 <- function(date, ..., inputfiles) {
   ## somehow make independent of raadtools?
   #files <- raadtools::ocfiles(product = "SeaWiFS", varname = "RRS", type = "L3b", ext = "nc")
@@ -37,29 +28,28 @@ read_l3 <- function(date, ..., inputfiles) {
   ##if (min(files$date) - date)
   i <- which.min(abs(dt))
   f <- files$fullname[i]
-  info <- rhdf5::h5ls(f)
-  tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
-  compound <- info$name[info$dim == test]
-  compoundpath <- file.path("/level-3_binned_data", compound)
-  l <- lapply(compoundpath, function(aname) tibble::as_tibble(rhdf5::h5read(f, name = aname)))
-  dplyr::bind_cols(l)
+ read_l3_file(f)
 }
 
 
-#' #' #oc <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", ext = "nc")
-#' #'
-#' #' 
-#' read_l3bin <- function(x)
-#'   x <- file.path(getOption("default.datadir"), "data/oceandata.sci.gsfc.nasa.gov/MODISA/L3BIN/2015/306/A2015306.L3b_DAY_RRS.nc")
-#'   info <- rhdf5::h5ls(x)
-#'   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
-#'   compound <- info$name[info$dim == test]
-#'   compoundpath <- file.path("/level-3_binned_data", compound)
-#'   l <- lapply(compoundpath, function(aname) rhdf5::h5read(x, name = aname))
-#'   for (i in seq_along(l)) if (grepl("sum", names(l[[i]]))) names(l[[i]]) <- paste()
-#'   }
-#' Basic L3 bin files 
-#'
+
+# #' #oc <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", ext = "nc")
+# #'
+# #' 
+# read_l3bin <- function(x)
+#   x <- file.path(getOption("default.datadir"), "data/oceandata.sci.gsfc.nasa.gov/MODISA/L3BIN/2015/306/A2015306.L3b_DAY_RRS.nc")
+#   info <- rhdf5::h5ls(x)
+#   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
+#  compound <- info$name[info$dim == test]
+#   compoundpath <- file.path("/level-3_binned_data", compound)
+#   l <- lapply(compoundpath, function(aname) rhdf5::h5read(x, name = aname))
+#   for (i in seq_along(l)) if (grepl("sum", names(l[[i]]))) names(l[[i]]) <- paste()
+#   }
+# Basic L3 bin files 
+#
+#
+
+#' 
 #' Read from L3 bin. 
 #' @param x filename path to L3 bin OC file (HDF4)
 #' @param vname names of VData parameters to read (will read both _sum and _ssq)
