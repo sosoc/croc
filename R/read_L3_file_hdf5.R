@@ -7,10 +7,11 @@
 #' @param file file name
 #' @param compound_vars the variables to read
 #'
-#' @return
+#' @return a tibble of the compound variables and bin details
 #' @export
 #'
 #' @examples
+#' read_L3_file(system.file("extdata/ocfiles/S2008001.L3b_DAY_RRS.nc", package = "roc"))
 read_L3_file <- function(file, compound_vars = NULL) {
   info <- rhdf5::h5ls(file)
   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])

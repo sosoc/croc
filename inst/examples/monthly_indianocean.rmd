@@ -1,0 +1,71 @@
+---
+title: "Monthly chlorophyll-a"
+author: "Michael Sumner"
+date: "`Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Get a map of chlorophyll-a, for January 2017. 
+
+The `chla_compute` function reads the L3 bins and computes a running sum and count per bin for every input date. 
+
+(This is currently in development so is not yet generally available. )
+
+```{r}
+library(roc)
+
+library(raadtools)
+
+dates <- seq(as.Date("2017-01-01"), as.Date("2017-01-31"), by = "1 day")
+bins <- chla_compute(dates)
+
+```
+
+
+```{r}
+#' In-dev function ...
+bin_chl <- function(bins, value, gridmap, platform = "MODISA") {
+  bins <- tibble(bin_num = bins, value = value)
+  if (!platform == "MODISA") stop("only MODISA  platform currently supported")
+  if (missing(gridmap)) { 
+    
+    gridmap <- raster(extent(-180, 180, -90, 0), ncol = 8640, nrow = 2160, crs = "+init=epsg:4326")
+    
+    ll <- coordinates(gridmap)
+    bins <- tibble(bin_num = lonlat2bin(ll[,1], ll[, 2], NUMROWS = 4320), gridcell = seq(ncell(gridmap))) %>% inner_join(bins, "bin_num")
+    gridmap[bins$gridcell] <- bins$value
+  } else {
+    #roc:::regridder
+  }
+  gridmap
+}
+
+## we can choose nasa rather than "rj"
+rjchl <- bin_chl(bins$bin_num, bins$cumul_rj/bins$count_rj)
+
+nasachl <- bin_chl(bins$bin_num, bins$cumul_nasa/bins$count_nasa)
+```
+
+Plot the result!
+
+```{r}
+e <- extent(30, 120, -75, -30)
+pal <- palr::chlPal(palette = TRUE)
+plot(crop(rjchl, e), col = pal$cols, breaks = pal$breaks, legend = FALSE, main = "Johnson algo")
+
+plot(crop(nasachl, e), col = pal$cols, breaks = pal$breaks, legend = FALSE, main = "NASA algo")
+```
+
+Optionally regrid to lower resolution. 
+
+```{r}
+rj <- aggregate(crop(rjchl, e), fact = 8, fun = mean)
+nasa <- aggregate(crop(nasachl, e), fact = 8, fun = mean)
+plot(rj, col = pal$cols, breaks = pal$breaks, legend = FALSE, main = "Johnson algo")
+
+plot(nasa, col = pal$cols, breaks = pal$breaks, legend = FALSE, main = "NASA algo")
+```
