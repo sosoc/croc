@@ -35,6 +35,9 @@
 chla <- function(x, 
                  sensor, 
                  algo = c("oceancolor", "johnson"), quiet = TRUE, ...) {
+  
+  ## table of params is here https://oceancolor.gsfc.nasa.gov/atbd/chlor_a/
+  ## it used to be here: 
   # http://oceancolor.gsfc.nasa.gov/REPROCESSING/R2009/ocv6/
   #   * Rrs1 = blue wavelength Rrs (e.g., 443, 490, or 510-nm)
   #   * Rrs2 = green wavelength Rrs (e.g., 547, 555, or 565-nm)
@@ -62,7 +65,7 @@ chla <- function(x,
   ##   a bin at index 1569 in something like the (15 * 28)th day in the MODISA - 
   ##   Rrs_555_sum is < 0 so log is bung)
   ocr <- switch(sensor, 
-                SeaWiFS = pmax(x$Rrs_443_sum, x$Rrs_490_sum, x$Rrs_510_sum)/x$Rrs_555_sum, 
+                SeaWiFS = pmax(x$Rrs_443_sum, x$Rrs_490_sum)/x$Rrs_555_sum, 
                 MODISA = switch(algo, 
                                 oceancolor = pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_547_sum, 
                                 johnson =    pmax(x$Rrs_443_sum, x$Rrs_488_sum)/x$Rrs_555_sum))
