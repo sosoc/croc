@@ -16,4 +16,3 @@ densify(x, maxdist, longlat = longlat)
 \description{
 Densify objects.
 }
-

@@ -12,6 +12,7 @@ Depends:
     dplyr
 Imports:
     geosphere,
+    progress,
     Rcpp (>= 0.11.2),
     sp,
     raadtools,
@@ -22,4 +23,4 @@ Suggests:
     testthat
 LinkingTo: Rcpp
 NeedsCompilation: yes
-RoxygenNote: 5.0.0
+RoxygenNote: 6.0.1

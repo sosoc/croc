@@ -22,4 +22,3 @@ Crop L3 list, returns bins that fall within the extent.
 crop_init(init, extent(100, 110, -50, -45))
 }
 }
-

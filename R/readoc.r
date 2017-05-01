@@ -26,7 +26,7 @@ readoc <- function(dates,
   if (varname == "CHL_RJ") varname0 <- "RRS" else varname0 <- varname
   ##daterange <- range(timedateFrom(daterange))
   dates <- as.POSIXct(dates, tz = "GMT")
-  files <- ocfiles(varname = varname0, product = platform)
+  files <- ocfiles(varname = varname0, product = platform, ext = "main")
   if (daterange) {
     dates <- range(daterange)
     start0 <- which.min(abs(files$date - daterange[1]))

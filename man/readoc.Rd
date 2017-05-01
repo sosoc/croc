@@ -29,4 +29,3 @@ readoc(dates, xylim = NULL, binsum = TRUE, varname = "CHL_RJ",
 \description{
 Read and summarize ocean colour variables.
 }
-

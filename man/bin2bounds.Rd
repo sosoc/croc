@@ -14,4 +14,3 @@ bin2bounds(bin, NUMROWS)
 \description{
 Calculate bin boundaries from bin number
 }
-

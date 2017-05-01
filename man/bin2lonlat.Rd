@@ -14,4 +14,3 @@ bin2lonlat(bins, nrows)
 \description{
 Generate longitude and latitude coordinates from bin number.
 }
-

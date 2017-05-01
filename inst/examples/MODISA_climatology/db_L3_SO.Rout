@@ -1,0 +1,117 @@
+
+R version 3.3.3 (2017-03-06) -- "Another Canoe"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(raadtools)
+Loading required package: raster
+Loading required package: sp
+> library(roc)
+Loading required package: dplyr
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:raster’:
+
+    intersect, select, union
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> library(tibble)
+> library(dplyr)
+> ## data frame of all L3 RRS files for MODISA
+> 
+> ## BR's filter
+> #files <- files %>% mutate(year=as.integer(format(date,"%Y")),month=as.integer(format(date,"%m")),season=year-(month<=6)) %>%
+> #  group_by(season) %>% mutate(ok=355 %in% doy && 80 %in% doy) %>% ungroup() %>% filter(ok)
+> 
+> files <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", bz2.rm = TRUE, ext = "nc") %>% 
++   as_tibble() %>% transmute(date, file = basename(fullname), fullname)
+> #files %>% slice(c(1, nrow(files)))
+> #fi <- file.info(files$fullname)
+> ## filter to the NASA "summer" definition (I can't find this anymore ...)
+> ##format(as.Date("2002-12-21"), "%j")
+> #files <- files %>% mutate(doy = as.integer(format(date, "%j"))) %>% filter(doy <= 80 | doy >= 355)
+> 
+> ## hacked function to read just the RRS we need
+> read_L3_file <- function(file, compound_vars = NULL) {
++   info <- rhdf5::h5ls(file)
++   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
++   ## get all vars, or just the ones the users wants
++   if (is.null(compound_vars))  {
++     compound <- info$name[info$dim == test]
++   } else {
++     compound <- compound_vars
++   }
++   compoundpath <- file.path("/level-3_binned_data", compound)
++   l <- lapply(compoundpath, function(aname) tibble::as_tibble(rhdf5::h5read(file, name = aname)))
++   ## not very generalized but ok for L3 RRS
++   d <- tibble::as_tibble(rhdf5::h5read(file, name = file.path("/level-3_binned_data", "BinList")))
++   d2 <- dplyr::bind_cols(lapply(seq_along(compound), function(i) setNames(l[[i]], sprintf("%s_%s", compound[i], names(l[[i]])))))
++   dplyr::bind_cols(d, d2)
++ }
+> 
+> ## initialize the bin logic for MODISA
+> init <- initbin(NUMROWS = 4320)
+> ## counts up from the south
+> maxbin <- init$totbin/2
+> 
+> library(dplyr)
+> library(DBI)
+> db <- src_sqlite("/mnt/sql/modisa_rj_so_chl_l3.sqlite3")
+> 
+> #dbcon %>% db_drop_table(table="modisa")
+> #for (ifile in seq(nrow(files))) {
+> for (ifile in 4090:nrow(files)){
++   xx <- try(read_L3_file(files$fullname[ifile], compound_vars = c("Rrs_443", "Rrs_488", "Rrs_555")))
++   if (inherits(xx, "try-error")) next; 
++   d <- xx %>% 
++     filter(bin_num <= maxbin) %>% mutate(chl = chla(., sensor = "MODISA", algo = "johnson")) %>% 
++     dplyr::select(bin_num, chl) %>% filter(chl > 0) %>% mutate(date = as.integer(as.Date(files$date[ifile])))
++     db_insert_into( con = db$con, table = "modisa", values = d)
++   if (ifile %% 100 == 0) print(ifile)
++ }
+[1] 4100
+[1] 4200
+[1] 4300
+[1] 4400
+[1] 4500
+[1] 4600
+[1] 4700
+[1] 4800
+[1] 4900
+[1] 5000
+[1] 5100
+[1] 5200
+[1] 5300
+> 
+> 
+> 
+> 
+> 
+> 
+> proc.time()
+     user    system   elapsed 
+ 9179.260   601.424 10793.500 

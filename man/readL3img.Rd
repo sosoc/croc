@@ -22,4 +22,3 @@ Read ocean colour imagery from the NASA site, files will be downloaded and read 
 \code{brick}. If a file with an identical name is already present in the current working directory the download
 is skipped.
 }
-

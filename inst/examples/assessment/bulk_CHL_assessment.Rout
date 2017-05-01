@@ -1,0 +1,211 @@
+
+R version 3.3.3 (2017-03-06) -- "Another Canoe"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> 
+> 
+> library(raadtools)
+Loading required package: raster
+Loading required package: sp
+> library(roc)
+Loading required package: dplyr
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:raster’:
+
+    intersect, select, union
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> library(tibble)
+> library(dplyr)
+> ## data frame of all L3 RRS files for MODISA
+> modisfiles <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", bz2.rm = TRUE, ext = "nc") %>% 
++   as_tibble() %>% transmute(date, file = basename(fullname), fullname, lab = "modisa")
+> seawifsfiles <- ocfiles(time.resolution = "daily", product = "SeaWiFS", varname = "RRS", type = "L3b", bz2.rm = TRUE, ext = "nc") %>% 
++   as_tibble() %>% transmute(date, file = basename(fullname), fullname, lab = "seawifs")
+> viirsfiles <- ocfiles(time.resolution = "daily", product = "VIIRS", varname = "SNPP_RRS", type = "L3b", bz2.rm = TRUE, ext = "nc") %>% 
++   as_tibble() %>% transmute(date, file = basename(fullname), fullname, lab = "viirs")
+> 
+> allfiles <- bind_rows(modisfiles, seawifsfiles, viirsfiles)
+> 
+> 
+> 
+> ## hacked function to read just the RRS we need
+> read_L3_file <- function(file, compound_vars = NULL) {
++   info <- rhdf5::h5ls(file)
++   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
++   ## get all vars, or just the ones the users wants
++   if (is.null(compound_vars))  {
++     compound <- info$name[info$dim == test]
++   } else {
++     compound <- compound_vars
++   }
++   compoundpath <- file.path("/level-3_binned_data", compound)
++   l <- lapply(compoundpath, function(aname) tibble::as_tibble(rhdf5::h5read(file, name = aname)))
++   ## not very generalized but ok for L3 RRS
++   d <- tibble::as_tibble(rhdf5::h5read(file, name = file.path("/level-3_binned_data", "BinList")))
++   d2 <- dplyr::bind_cols(lapply(seq_along(compound), function(i) setNames(l[[i]], sprintf("%s_%s", compound[i], names(l[[i]])))))
++   dplyr::bind_cols(d, d2)
++ }
+> 
+> sub_l3_seawifs <- function(file) {
++     read_L3_file(file, compound_vars = c("Rrs_443", "Rrs_490", "Rrs_555", "Rrs_510")) %>%
++     filter(bin_num <= maxbin) %>% 
++     mutate(chla_johnson = chla(., sensor = "SeaWiFS", algo = "johnson")) %>% 
++     mutate(chla_nasa = chla(., sensor = "SeaWiFS", algo = "oceancolor")) %>% 
++     dplyr::select(bin_num, chla_johnson, chla_nasa) %>% filter(chla_johnson > 0)
++ }
+> 
+> sub_l3_modis <- function(file) {
++    read_L3_file(file, compound_vars = c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")) %>% 
++    filter(bin_num <= maxbin) %>% 
++      mutate(chla_johnson = chla(., sensor = "MODISA", algo = "johnson")) %>% 
++      mutate(chla_nasa = chla(., sensor = "MODISA", algo = "oceancolor")) %>% 
++      dplyr::select(bin_num, chla_johnson, chla_nasa) %>% filter(chla_johnson > 0)
++ }
+> 
+> read_l3_fileset <- function(files) {
++   bind_rows(lapply(files, sub_l3_seawifs))
++ }
+> 
+> db <- src_sqlite("/mnt/acebulk/chlorophyll_assessment.sqlite3")
+> files <- seawifsfiles
+> label <- "seawifs"
+> ## initialize the bin logic for MODISA
+> init <- initbin(NUMROWS = 2160)
+> ## counts up from the south
+> maxbin <- init$totbin/2
+> files$season <- aceecostats::aes_season(files$date)
+> segs <- unclass(factor(cumsum(c(0, abs(diff(unclass(factor(files$season))))))))
+> usegs <- unique(segs)
+> 
+> for (i in seq_along(usegs)) {
++   asub <- segs == usegs[i]
++   d <- read_l3_fileset(files$fullname[asub][1:2])
++   d <- d %>% group_by(bin_num) %>% mutate(n = n()) %>% 
++     summarize(chla_nasa = mean(chla_nasa), chla_johnson = mean(chla_johnson),
++               n = sum(n))
++   d$date <- as.Date(files$date[asub][1])
++   print(d$date[1])
++   
++   if (i == 1) {
++     copy_to(db, d, label, indexes = list("bin_num", "date"), temporary = FALSE)
++   } else {
++     db_insert_into( con = db$con, table = label, values = d)
++   }
++ }
+[1] "1997-09-04"
+[1] "1997-12-01"
+[1] "1998-03-01"
+[1] "1998-06-01"
+[1] "1998-09-01"
+[1] "1998-12-01"
+[1] "1999-03-01"
+[1] "1999-06-01"
+[1] "1999-09-01"
+[1] "1999-12-01"
+[1] "2000-03-01"
+[1] "2000-06-01"
+[1] "2000-09-01"
+[1] "2000-12-01"
+[1] "2001-03-01"
+[1] "2001-06-01"
+[1] "2001-09-01"
+[1] "2001-12-01"
+[1] "2002-03-01"
+[1] "2002-06-01"
+[1] "2002-09-01"
+[1] "2002-12-01"
+[1] "2003-03-01"
+[1] "2003-06-01"
+[1] "2003-09-01"
+[1] "2003-12-01"
+[1] "2004-03-01"
+[1] "2004-06-01"
+[1] "2004-09-01"
+[1] "2004-12-01"
+[1] "2005-03-01"
+[1] "2005-06-01"
+[1] "2005-09-01"
+[1] "2005-12-01"
+[1] "2006-03-01"
+[1] "2006-06-01"
+[1] "2006-09-01"
+[1] "2006-12-01"
+[1] "2007-03-01"
+[1] "2007-06-01"
+[1] "2007-09-01"
+[1] "2007-12-01"
+[1] "2008-04-04"
+[1] "2008-06-01"
+[1] "2008-09-01"
+[1] "2008-12-01"
+[1] "2009-03-01"
+[1] "2009-06-16"
+[1] "2009-09-03"
+[1] "2009-12-02"
+[1] "2010-03-01"
+[1] "2010-06-01"
+[1] "2010-09-03"
+[1] "2010-12-01"
+> 
+> 
+> 
+> if (FALSE) {
++ files <- modisfiles
++ label <- "modisa"
++ ## initialize the bin logic for MODISA
++ init <- initbin(NUMROWS = 4320)
++ ## counts up from the south
++ maxbin <- init$totbin/2
++ files$season <- aceecostats::aes_season(files$date)
++ segs <- unclass(factor(cumsum(c(0, abs(diff(unclass(factor(files$season))))))))
++ usegs <- unique(segs)
++ 
++ for (i in seq_along(usegs)) {
++   asub <- segs == usegs[i]
++   d <- read_l3_fileset(files$fullname[asub][1:2])
++   d <- d %>% group_by(bin_num) %>% mutate(n = n()) %>% 
++     summarize(chla_nasa = mean(chla_nasa), chla_johnson = mean(chla_johnson),
++               n = sum(n))
++   d$date <- as.Date(files$date[asub][1])
++   print(d$date[1])
++   
++   if (i == 1) {
++     copy_to(db, d, label, indexes = list("bin_num", "date"), temporary = FALSE)
++   } else {
++     db_insert_into( con = db$con, table = label, values = d)
++   }
++ }
++ 
++ 
++ }
+> 
+> proc.time()
+   user  system elapsed 
+397.020 104.423 610.112 

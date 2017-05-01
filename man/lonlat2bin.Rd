@@ -16,4 +16,3 @@ lonlat2bin(lon, lat, NUMROWS)
 \description{
 Bin number from longitude and latitude for a given grid with NUMROWS unique latitudes.
 }
-

@@ -12,4 +12,3 @@ initbin(NUMROWS = 2160)
 \description{
 Set up the basic values for the bin scheme for given number of rows.
 }
-

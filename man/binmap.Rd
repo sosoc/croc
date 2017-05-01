@@ -16,4 +16,3 @@ binmap(bin, ras, init = NULL)
 \description{
 mapping between bins and a given raster
 }
-

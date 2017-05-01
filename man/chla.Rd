@@ -4,7 +4,7 @@
 \alias{chla}
 \title{Estimate chlorophyll-a from NASA ocean colour.}
 \usage{
-chla(x, sensor, algo = c("oceancolor", "johnson"))
+chla(x, sensor, algo = c("oceancolor", "johnson"), quiet = TRUE, ...)
 }
 \arguments{
 \item{x}{list object with Remote Sensing Reflectance wavelengths (see Details)}
@@ -12,6 +12,10 @@ chla(x, sensor, algo = c("oceancolor", "johnson"))
 \item{sensor}{which satellite sensor}
 
 \item{algo}{algorithm to use, oceancolor or Johnson et al. (2013)}
+
+\item{quiet}{logical to emit warnings or not}
+
+\item{...}{not used}
 }
 \description{
 Estimate chlorophyll-a from Remote Sensing Reflectance wavelengths. Use SeaWiFS or MODISA with original or Johnson algorithm
@@ -40,4 +44,3 @@ jr <- rasterize(p, r, field = js, fun = mean)
 plot(brick(sr, jr), col = pal$cols, breaks = pal$breaks, legend = FALSE)
 }
 }
-

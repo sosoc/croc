@@ -18,4 +18,3 @@ regridder(tgrid, file, agg = FALSE, fun = mean)
 \description{
 Regrid NASA ocean colour RRS values to standard Mapped image with the Johnson chl-a algorithm.
 }
-

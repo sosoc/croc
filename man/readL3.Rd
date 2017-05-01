@@ -2,7 +2,7 @@
 % Please edit documentation in R/readL3.R
 \name{readL3}
 \alias{readL3}
-\title{Basic L3 bin files}
+\title{Read from L3 bin.}
 \usage{
 readL3(x, vname, bins = TRUE, check = TRUE)
 }
@@ -18,4 +18,3 @@ readL3(x, vname, bins = TRUE, check = TRUE)
 \description{
 Read from L3 bin.
 }
-

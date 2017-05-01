@@ -1,5 +1,55 @@
-#' Basic L3 bin files 
+#' L3 bin from NetCDF 4 compound types. 
 #'
+#' WIP
+#' @param date 
+#' @param ... 
+#'
+#' @return tibble
+#' @export
+#' @importFrom tibble as_tibble
+#' @importFrom rhdf5 h5ls
+#' @importFrom dplyr bind_cols
+#' @examples
+#' data_dir <- getOption("default.datadir")  ## raadtools 
+#' files <- structure(list(file = "data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/1997/247/S1997247.L3b_DAY_RRS.nc", 
+#' fullname = file.path(data_dir, "data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/1997/247/S1997247.L3b_DAY_RRS.nc"), 
+#' date = structure(873331200, class = c("POSIXct", "POSIXt"
+#' ), tzone = "GMT")), .Names = c("file", "fullname", "date"
+#' ), row.names = 1L, class = "data.frame")
+#' read_l3(inputfiles = files)
+#' 
+read_l3 <- function(date, ..., inputfiles) {
+  ## somehow make independent of raadtools?
+  #files <- raadtools::ocfiles(product = "SeaWiFS", varname = "RRS", type = "L3b", ext = "nc")
+  files <- inputfiles
+  if (missing(date)) date <- min(files$date)
+  date <- raadtools::timedateFrom(date)
+  dt <- files$date - date
+  ##if (min(files$date) - date)
+  i <- which.min(abs(dt))
+  f <- files$fullname[i]
+ read_l3_file(f)
+}
+
+
+
+# #' #oc <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", ext = "nc")
+# #'
+# #' 
+# read_l3bin <- function(x)
+#   x <- file.path(getOption("default.datadir"), "data/oceandata.sci.gsfc.nasa.gov/MODISA/L3BIN/2015/306/A2015306.L3b_DAY_RRS.nc")
+#   info <- rhdf5::h5ls(x)
+#   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
+#  compound <- info$name[info$dim == test]
+#   compoundpath <- file.path("/level-3_binned_data", compound)
+#   l <- lapply(compoundpath, function(aname) rhdf5::h5read(x, name = aname))
+#   for (i in seq_along(l)) if (grepl("sum", names(l[[i]]))) names(l[[i]]) <- paste()
+#   }
+# Basic L3 bin files 
+#
+#
+
+#' 
 #' Read from L3 bin. 
 #' @param x filename path to L3 bin OC file (HDF4)
 #' @param vname names of VData parameters to read (will read both _sum and _ssq)

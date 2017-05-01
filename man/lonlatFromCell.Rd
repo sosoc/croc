@@ -25,4 +25,3 @@ cells of a Raster* object, similar to \code{xyFromCell}.
 
  from SGAT
 }
-
