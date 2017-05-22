@@ -4,6 +4,15 @@
   row + 1
 }
 
+#' Sinusoidal coordinates from bin number
+#' 
+#' bin L3 bin number
+#' NUMROWS grid spec for these bins
+#' @export
+sinu_coords <- function(bin, NUMROWS) {
+    rgdal::project(do.call(cbind, bin2lonlat(bin, NUMROWS)), "+proj=sinu +datum=WGS84 +no_defs")
+}
+
 ##' Generate bin number from longitude latitude. 
 ##' 
 ##' Bin number from longitude and latitude for a given grid with NUMROWS unique latitudes. 
