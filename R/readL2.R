@@ -13,6 +13,8 @@
 .L2template <- function() {
   'HDF4_SDS:%s_L2:"%s":%i'
 }
+
+#' @importFrom raster stack
 readL2 <- function(file, vartype = c("swath", "meta"), data.frame = TRUE) {
   vartype <- match.arg(vartype)
   sds <- switch(vartype, 
@@ -31,9 +33,9 @@ readL2 <- function(file, vartype = c("swath", "meta"), data.frame = TRUE) {
     ## s1 <- values(s1)
     ##  s1 <- lapply(seq(ncol(s1)), function(x) s1[,x])
     ##  names(s1) <- sds
-    s1 <- lapply(seq(nlayers(s1)), function(x) values(s1[[x]]))
+    s1 <- lapply(seq(raster::nlayers(s1)), function(x) raster::values(s1[[x]]))
     names(s1) <- sds
-    s1 <- as_data_frame(s1)
+    s1 <- tibble::as_tibble(s1)
   }
   s1
 }

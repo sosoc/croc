@@ -1,5 +1,5 @@
 
-
+#' @importFrom raster raster extent 
 .defaultgrid <- function(sensor = c("MODISA", "SeaWiFS")) {
   dims <- c(4320L, 720L)
   sensor <- match.arg(sensor)
@@ -22,32 +22,38 @@
 ##' @importFrom  raster isLonLat
 ##' @export
 lonlatFromCell <- function(object, cell = NULL, spatial = FALSE) {
-  if (is.null(cell)) cell <- seq(ncell(object))
+  if (is.null(cell)) cell <- seq(raster::ncell(object))
   if(is.na(projection(object)) || raster::isLonLat(object)) {
-    xyFromCell(object, cell, spatial = spatial)
+    raster::xyFromCell(object, cell, spatial = spatial)
   } else {
-    p <- spTransform(xyFromCell(object, cell, spatial=TRUE),
-                     CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
-    if(spatial) p else coordinates(p)
+    p <- spTransform(raster::xyFromCell(object, cell, spatial=TRUE),
+                     sp::CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
+    if(spatial) p else sp::coordinates(p)
   }
 }
 
 ##' Regrid ocean colour. 
 ##' 
 ##' Regrid NASA ocean colour RRS values to standard Mapped image with the Johnson chl-a algorithm. 
+##'
 ##' @param tgrid target grid
 ##' @param file L3 bin file name with raw RRS wavelengths
 ##' @param agg aggregate values?
+##' @param NROWS number of L3 rows
 ##' @param fun function to aggregate by if agg is \code{TRUE}
+##'
 ##' @importFrom rgdal project
 ##' @importFrom raster setValues
 ##' @export
-regridder <- function(tgrid, file, agg = FALSE, fun = mean) {
+regridder <- function(tgrid, file, agg = FALSE, fun = mean, NROWS) {
   xy <- lonlatFromCell(tgrid, spatial = FALSE)
-  NROWS <- readL3(file, vname = "NUMROWS", bins = FALSE)$NUMROWS
+  
+  stop("need to use read_l3_file somehow")   #MDS 2017-05-25
+  #NROWS <- readL3(file, vname = "NUMROWS", bins = FALSE)$NUMROWS
   binmap <- lonlat2bin(xy[,1], xy[,2], NROWS)
   function(file) {
-    x <- readL3(file)
+    ## stop MDS 2017-05-25
+    #x <- readL3(file)
     sens <- if(x$NUMROWS == 4320) "MODISA" else "SeaWiFS"
     if(x$NUMROWS != NROWS)  stop("file doesn't match this regridder\nfile NUMROWS: ", x$NUMROWS, "\nfunction NUMROWS:", NROWS)
    

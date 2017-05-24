@@ -1,5 +1,6 @@
 
-## function to ensure 1st and last values are 1/min or 
+## function to ensure 1st and last values are 1/min or
+#' @importFrom utils tail
 .snapout1 <- function(x, min, max) {
   if (x[1] > min) x <- c(x[1] - 1, x)
   if (tail(x, 1L) < max) x <- c(x, tail(x, 1) + 1)
@@ -22,15 +23,15 @@
 crop_init <- function(x, ext) {
   ext <- extent(ext)
   nrows <- length(x$basebin)
-  ilat <- which(x$latbin >= ymin(ext) & x$latbin <= ymax(ext) )
+  ilat <- which(x$latbin >= raster::ymin(ext) & x$latbin <= raster::ymax(ext) )
   ilat <- .snapout1(ilat, 1L, nrows)
   
   basebin <- x$basebin[ilat]
   latbin <- x$latbin[ilat]
   listofbins <- vector("list", length(basebin))
   for (i in seq_along(basebin)) {
-    firstbin <- lonlat2bin(xmin(ext), latbin[i], nrows)
-    lastbin <- lonlat2bin(xmax(ext), latbin[i], nrows)
+    firstbin <- lonlat2bin(raster::xmin(ext), latbin[i], nrows)
+    lastbin <- lonlat2bin(raster::xmax(ext), latbin[i], nrows)
     firstlast <- .snapout1(c(firstbin, lastbin), basebin[i], basebin[+1] - 1)
     listofbins[[i]] <- .seqfl(firstlast)
   }
@@ -73,9 +74,10 @@ densify <- function(x, maxdist, longlat = longlat) {
   x
 }
 
+#' @importFrom sp Polygon Polygons
 # create Polygons from a list of rect coordinates
 .bb2poly <- function(x, maxdist = NULL) {
-  x1 <- do.call(cbind, bb)
+  x1 <- do.call(cbind, x)
   l <- vector("list", nrow(x1))
   cnt <- 0
   for (i in seq(1, nrow(x1), by = 1)) {
@@ -104,6 +106,7 @@ densify <- function(x, maxdist, longlat = longlat) {
   
 }
 
+#' @importFrom graphics polygon
 .plotp <- function(x, col = NA , ...) {
   for (i in seq(1, nrow(x), by = 5)) {
     polygon(x[i:(i+4), ], col = col[i], ...)

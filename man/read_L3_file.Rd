@@ -22,5 +22,6 @@ these are used for calculating chlorophyll-a. This function is not very general 
 This function is specific to files in this form, for any of the platforms (MODISA here): https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/L3BIN
 }
 \examples{
+
 read_L3_file(system.file("extdata/ocfiles/S2008001.L3b_DAY_RRS.nc", package = "roc"))
 }

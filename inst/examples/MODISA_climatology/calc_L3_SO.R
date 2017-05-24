@@ -9,7 +9,7 @@ files <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS",
 ## use only complete summer seasons
 files <- files %>% mutate(year=as.integer(format(date,"%Y")),month=as.integer(format(date,"%m")),season=year-(month<=6), doy = as.integer(format(date, "%j"))) %>%
   filter(doy >=355 | doy <=80 ) %>% 
-  group_by(season) %>% mutate(n = n()) %>% ungroup() %>% filter(n >= 90)
+  group_by(season) %>% mutate(n = dplyr::n()) %>% dplyr::ungroup() %>% filter(n >= 90)
 
 
 ## hacked function to read just the RRS we need

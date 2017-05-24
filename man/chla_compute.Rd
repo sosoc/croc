@@ -7,7 +7,7 @@
 chla_compute(days, maxbin = NULL)
 }
 \arguments{
-\item{days}{}
+\item{days}{dates to calculate}
 
 \item{maxbin}{a maximum bin to use, for specialist use only}
 }

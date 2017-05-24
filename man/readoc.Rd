@@ -20,11 +20,9 @@ readoc(dates, xylim = NULL, binsum = TRUE, varname = "CHL_RJ",
 
 \item{platform}{which satellite source (MODSIA, SeaWiFS, ...)}
 
-\item{daterange}{two dates, specifying a start and end day}
+\item{daterange}{if TRUE every day between the min and max dates is used}
 
 \item{...}{unused}
-
-\item{daterange}{if TRUE every day between the min and max dates is used}
 }
 \description{
 Read and summarize ocean colour variables.

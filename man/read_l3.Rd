@@ -7,9 +7,11 @@
 read_l3(date, ..., inputfiles)
 }
 \arguments{
-\item{date}{}
+\item{date}{date to read}
 
-\item{...}{}
+\item{...}{ignored}
+
+\item{inputfiles}{input file dataframe}
 }
 \value{
 tibble
@@ -18,9 +20,10 @@ tibble
 WIP
 }
 \examples{
+root <- "data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN"
 data_dir <- getOption("default.datadir")  ## raadtools 
-files <- structure(list(file = "data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/1997/247/S1997247.L3b_DAY_RRS.nc", 
-fullname = file.path(data_dir, "data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN/1997/247/S1997247.L3b_DAY_RRS.nc"), 
+files <- structure(list(file = file.path(root, "1997/247/S1997247.L3b_DAY_RRS.nc"), 
+fullname = file.path(data_dir, file.path(root, "1997/247/S1997247.L3b_DAY_RRS.nc")), 
 date = structure(873331200, class = c("POSIXct", "POSIXt"
 ), tzone = "GMT")), .Names = c("file", "fullname", "date"
 ), row.names = 1L, class = "data.frame")

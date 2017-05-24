@@ -4,14 +4,14 @@
 #' 
 #' Use `raadtools::ocfiles(product = "MODISA", varname = "RRS", type = "L3b")` to get all daily MODISA L3 bin RRS files, and
 #' explore the `date` column to generate a set of `days` for this function. 
-#' @param days 
+#' @param days dates to calculate
 #' @param maxbin a maximum bin to use, for specialist use only
 #' @return tibble of bins and chlorophyll-a values
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom progress progress_bar
 #' @importFrom dplyr mutate filter select transmute
-#' @examples
+#' @importFrom rlang .data
 chla_compute <- function(days,  maxbin = NULL) {
   ## data frame of all L3 RRS files for MODISA
   files <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", bz2.rm = TRUE, ext = "nc") 
@@ -32,10 +32,11 @@ chla_compute <- function(days,  maxbin = NULL) {
   pb <- progress_bar$new(total = nrow(files))
   for (ifile in seq(nrow(files))) {
     d <- read_L3_file(files$fullname[ifile], compound_vars = c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")) %>% 
-      filter(bin_num <= maxbin) %>% 
-      mutate(chla_johnson = chla(., sensor = "MODISA", algo = "johnson")) %>% 
-      mutate(chla_nasa = chla(., sensor = "MODISA", algo = "oceancolor")) %>% 
-      dplyr::select(bin_num, chla_johnson, chla_nasa) %>% filter(chla_johnson > 0)
+      filter(.data$bin_num <= maxbin) %>% 
+      mutate(chla_johnson = chla(.data, sensor = "MODISA", algo = "johnson")) %>% 
+      mutate(chla_nasa = chla(.data, sensor = "MODISA", algo = "oceancolor")) %>% 
+      dplyr::select(.data$bin_num, .data$chla_johnson, .data$chla_nasa) %>% 
+      filter(.data$chla_johnson > 0)
     
     ## we accumulate outside of the data frame to ensure speed
     ## the bin_num indexes the vector structure directly since the south pole is bin 1
@@ -49,5 +50,5 @@ chla_compute <- function(days,  maxbin = NULL) {
   }
   
   tibble(bin_num = seq_len(maxbin), count_nasa = count_nasa, cumul_nasa = cumul_nasa, 
-         count_rj = count_rj, cumul_rj = cumul_rj) %>% filter(count_rj > 0)
+         count_rj = count_rj, cumul_rj = cumul_rj) %>% filter(.data$count_rj > 0)
 }

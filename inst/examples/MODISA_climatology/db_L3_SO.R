@@ -33,19 +33,21 @@ maxbin <- init$totbin/2
 
 library(dplyr)
 library(DBI)
-db <- src_sqlite("/mnt/sql/modisa_rj_so_chl_l3.sqlite3")
-
+db <- src_sqlite("/mnt/sql/modisa_rj_so_chl_l3.sqlite3", create = TRUE)
+icount <- 0
 for (ifile in seq_len(nrow(files))) {
   xx <- try(read_L3_file(files$fullname[ifile], compound_vars = c("Rrs_443", "Rrs_488", "Rrs_555")))
   if (inherits(xx, "try-error")) next; 
   d <- xx %>% 
     filter(bin_num <= maxbin) %>% mutate(chl = chla(., sensor = "MODISA", algo = "johnson")) %>% 
     dplyr::select(bin_num, chl) %>% filter(chl > 0) %>% mutate(date = as.integer(as.Date(files$date[ifile])))
+  if (nrow(d) < 1) next; 
+  icount <- icount + 1
+  if (icount == 1) {
+    copy_to(db, d, name = "modisa", indexes = list("date", "bin_num"), temporary = FALSE)
+  } else {
     db_insert_into( con = db$con, table = "modisa", values = d)
+  }
   if (ifile %% 100 == 0) print(ifile)
 }
-
-
-
-
 

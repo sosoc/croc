@@ -1,11 +1,11 @@
 Package: roc
 Type: Package
 Title: Working With Ocean Colour Data
-Version: 0.0.8
-Author: Michael D. Sumner
-Maintainer: Michael D. Sumner<mdsumner@gmail.com>
+Version: 0.0.8.9001
+Authors@R: c(person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com"), 
+             person("Norman", "Kuring", role = "ctb", comment = "Author of L3bin code (NASA)"    ))
 Description: Work with data from NASA's Ocean Colour project, primarily the Level-3 bin files. Access
-  to the HDF4 L3 bin files is via rrshdf4. 
+  to the L3 bin files is via 'rhdf5'. 
 License: GPL-3
 LazyLoad: yes
 Depends: dplyr
@@ -16,10 +16,17 @@ Imports:
     sp,
     raadtools,
     raster,
-    rgdal
+    rlang,
+    rhdf5,
+    rgdal, 
+    tibble
 Suggests:
-    rrshdf4, 
-    testthat
+    testthat,
+    BiocInstaller, 
+    zlibbioc
+biocViews: 
 LinkingTo: Rcpp
 NeedsCompilation: yes
 RoxygenNote: 6.0.1
+URL: https://github.com/mdsumner/roc
+BugReports: https://github.com/mdsumner/roc/issues

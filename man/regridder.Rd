@@ -4,7 +4,7 @@
 \alias{regridder}
 \title{Regrid ocean colour.}
 \usage{
-regridder(tgrid, file, agg = FALSE, fun = mean)
+regridder(tgrid, file, agg = FALSE, fun = mean, NROWS)
 }
 \arguments{
 \item{tgrid}{target grid}
@@ -14,6 +14,8 @@ regridder(tgrid, file, agg = FALSE, fun = mean)
 \item{agg}{aggregate values?}
 
 \item{fun}{function to aggregate by if agg is \code{TRUE}}
+
+\item{NROWS}{number of L3 rows}
 }
 \description{
 Regrid NASA ocean colour RRS values to standard Mapped image with the Johnson chl-a algorithm.

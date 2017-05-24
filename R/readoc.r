@@ -1,12 +1,11 @@
 
 .crossesdateline <- function(x) {
-  if (xmax(x) > 180) TRUE else FALSE
+  if (raster::xmax(x) > 180) TRUE else FALSE
 }
 #' Read and summarize ocean colour variables from specific dates, or between a date range. 
 #' 
 #' Read and summarize ocean colour variables. 
 #'
-#' @param daterange two dates, specifying a start and end day
 #' @param xylim extent specification (in longitude/latitude)
 #' @param varname variable to read, defaults to Johnson 2013 chlorophyll-a
 #' @param grid grid specification to rasterize to (optional)
@@ -18,6 +17,7 @@
 #'
 #' @importFrom raadtools timedateFrom ocfiles
 #' @importFrom sp CRS spTransform
+#' @importFrom dplyr %>% 
 #' @export
 readoc <- function(dates,  
                    xylim = NULL, binsum = TRUE, 
@@ -47,7 +47,9 @@ readoc <- function(dates,
   varmap <- c(CHL = "chlor_a", POC = "poc", KD490 = "Kd_490", PAR = "par")
   listname <- sprintf("%s_sum", varmap[varname])
   for (i in seq(nrow(files))) {
-    x <- readL3(files$fullname[i], check = FALSE)
+    # tentatively now use rhdf5 function MDS 2017-05-25
+    x <- read_L3_file(files$fullname[i])
+    #x <- readL3(files$fullname[i], check = FALSE)
     if (!is.null(xylim)) x <- .subsetL3(x, x$bin_num %in% ibin)
     if (varname == "CHL_RJ") {
       var <- chla(x, sensor = platform, algo = "johnson")
@@ -68,7 +70,8 @@ readoc <- function(dates,
  
     NROWS <- x$NUMROWS
     x$NUMROWS <- NULL
-    x <- x %>% as_data_frame() %>% group_by(bin_num) %>% summarize(chl = mean(sum/n, na.rm = TRUE))
+    x <- x %>% tibble::as_tibble() %>% dplyr::group_by(.data$bin_num) %>% 
+      dplyr::summarize(chl = mean(sum/n, na.rm = TRUE))
     xy <- bin2lonlat(x$bin_num, NROWS)
     x$binlon <- xy[[1]]
     x$binlat <- xy[[2]]
@@ -88,11 +91,12 @@ readoc <- function(dates,
     ll[ll[,1] < 0,1] <- ll[ll[,1] < 0,1] + 360
   }
   }
-  x$cell <- cellFromXY(grid, ll)
+  x$cell <- raster::cellFromXY(grid, ll)
   
   x$NUMROWS <- NULL
-  x <- as_data_frame(x)
-  x <- x %>% filter(!is.na(cell)) %>% group_by(cell) %>% summarize(chl = mean(sum/n, na.rm = TRUE)) 
+  x <- as_tibble(x)
+  x <- x %>% filter(!is.na(.data$cell)) %>% group_by(cell) %>% 
+    dplyr::summarize(chl = mean(.data$sum/.data$n, na.rm = TRUE)) 
   grid[x$cell] <- x$chl
   grid
 }
