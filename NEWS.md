@@ -1,5 +1,7 @@
 # dev
 
+* removed regrid, to be replaced 
+
 * use tibble not data_frame
 
 * roc now imports Bioconductor package `rhdf5` for the L3 bin files

@@ -11,7 +11,7 @@
 }
 
 .L2template <- function() {
-  'HDF4_SDS:%s_L2:"%s":%i'
+  'HDF5:%s_L2:"%s":%i'
 }
 
 #' @importFrom raster stack

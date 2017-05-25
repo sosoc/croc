@@ -6,7 +6,11 @@
 \usage{
 sinu_coords(bin, NUMROWS)
 }
+\arguments{
+\item{bin}{bin L3 bin number}
+
+\item{NUMROWS}{NUMROWS grid spec for these bins}
+}
 \description{
-bin L3 bin number
-NUMROWS grid spec for these bins
+Sinusoidal coordinates from bin number
 }

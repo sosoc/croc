@@ -117,7 +117,7 @@ project_bounds <- function(bb, prj) {
   coords <- do.call(cbind, bb)
   allc <- cbind(as.vector(t(coords[,c(1, 1, 3, 3, 1)])), as.vector(t(coords[,c(2, 4, 4, 2, 2)])))
   
-  project(allc, prj)
+  rgdal::project(allc, prj)
 }
 
 

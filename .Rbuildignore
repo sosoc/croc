@@ -7,3 +7,4 @@ L3work/
 ^CONDUCT\.md$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^inst/examples$
