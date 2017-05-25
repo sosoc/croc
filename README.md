@@ -1,5 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/mdsumner/roc.svg?branch=master)](https://travis-ci.org/mdsumner/roc) \* Turn on travis for your repo at <https://travis-ci.org/mdsumner/roc>
+
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/roc?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/roc)
+
 roc
 ===
 

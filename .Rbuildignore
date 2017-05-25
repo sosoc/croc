@@ -8,3 +8,4 @@ L3work/
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^inst/examples$
+^docs$
