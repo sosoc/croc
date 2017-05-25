@@ -16,15 +16,15 @@
 #' plot(ll, col = raadtools::chl.pal(js), pch = ".")
 #' 
 #' ## setup a polar raster
-#' require(raster)
-#' require(rgdal)
-#' prj <- "+proj=laea +lat_0=-90 +lon_0=147 +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"
-#' p <- project(cbind(ll[[1]], ll[[2]]), prj)
-#' r <- raster(extent(p), crs = prj, res = c(72000, 72000))
-#' sr <- rasterize(p, r, field = sw, fun = mean)
-#' jr <- rasterize(p, r, field = js, fun = mean)
-#' plot(brick(sr, jr), col = pal$cols, breaks = pal$breaks, legend = FALSE)
-#' }
+# #require(raster)
+# #require(rgdal)
+# #prj <- "+proj=laea +lat_0=-90 +lon_0=147 +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"
+# #p <- project(cbind(ll[[1]], ll[[2]]), prj)
+# #r <- raster(extent(p), crs = prj, res = c(72000, 72000))
+# #sr <- rasterize(p, r, field = sw, fun = mean)
+# #jr <- rasterize(p, r, field = js, fun = mean)
+# #plot(brick(sr, jr), col = pal$cols, breaks = pal$breaks, legend = FALSE)
+# }
 #' @param x list object with Remote Sensing Reflectance wavelengths (see Details)
 #' @param sensor which satellite sensor
 #' @param algo algorithm to use, oceancolor or Johnson et al. (2013) 
