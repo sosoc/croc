@@ -25,7 +25,7 @@ read_l3 <- function(date, ..., inputfiles) {
   files <- inputfiles
   
   if (missing(date)) date <- min(files$date)
-  date <- raadtools::timedateFrom(date)
+  date <- as.POSIXct(date, tz = "GMT")
   dt <- files$date - date
   ##if (min(files$date) - date)
   i <- which.min(abs(dt))
