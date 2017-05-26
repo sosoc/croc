@@ -5,7 +5,7 @@
 \title{Read and summarize ocean colour variables from specific dates, or between a date range.}
 \usage{
 readoc(dates, xylim = NULL, binsum = TRUE, varname = "CHL_RJ",
-  grid = NULL, platform = "MODISA", daterange = FALSE, ...)
+  grid = NULL, platform = "MODISA", daterange = FALSE, ..., inputfiles)
 }
 \arguments{
 \item{dates}{specific dates to read and summarize}
@@ -23,6 +23,8 @@ readoc(dates, xylim = NULL, binsum = TRUE, varname = "CHL_RJ",
 \item{daterange}{if TRUE every day between the min and max dates is used}
 
 \item{...}{unused}
+
+\item{inputfiles}{the data frame of available files}
 }
 \description{
 Read and summarize ocean colour variables.

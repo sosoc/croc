@@ -1,5 +1,9 @@
 # dev
 
+* removed dependence on rgdal
+
+* removed dependence on raadtools
+
 * removed regrid, to be replaced 
 
 * use tibble not data_frame

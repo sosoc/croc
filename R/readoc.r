@@ -14,20 +14,21 @@
 #' @param dates specific dates to read and summarize
 #' @param binsum logical, summarize the raw bins (overrides grid)
 #' @param ... unused
-#'
+#' @param inputfiles the data frame of available files 
 #' @importFrom sp CRS spTransform
-#' @importFrom dplyr %>% 
+#' @importFrom dplyr %>% filter
+#' @importFrom rlang .data
 #' @export
 readoc <- function(dates,  
                    xylim = NULL, binsum = TRUE, 
                    varname = "CHL_RJ", grid = NULL, 
-                   platform = "MODISA", daterange = FALSE, ...) {
+                   platform = "MODISA", daterange = FALSE, ..., inputfiles) {
   if (varname == "RRS") {
     stop("RRS not allowed, use CHL_RJ for Johnson chlorophyll or CHL for ocean color chlorophyll")
   }
   if (varname == "CHL_RJ") varname0 <- "RRS" else varname0 <- varname
   dates <- as.POSIXct(dates, tz = "GMT")
-  files <- ocfiles(varname = varname0, product = platform, ext = "main")
+  files <- inputfiles
   if (daterange) {
     dates <- range(daterange)
     start0 <- which.min(abs(files$date - daterange[1]))
