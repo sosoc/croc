@@ -15,7 +15,6 @@
 #' @param binsum logical, summarize the raw bins (overrides grid)
 #' @param ... unused
 #'
-#' @importFrom raadtools timedateFrom ocfiles
 #' @importFrom sp CRS spTransform
 #' @importFrom dplyr %>% 
 #' @export

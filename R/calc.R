@@ -4,16 +4,15 @@
 #' Estimate chlorophyll-a from Remote Sensing Reflectance wavelengths. Use SeaWiFS or MODISA with original or Johnson algorithm
 #' for the Southern Ocean. 
 #' @examples
-#' \dontrun{
-#' f <- "S1998001.L3b_DAY_RRS.main"
-#' x <- readL3(f)
-#' asub <- x$bin_num < initlist()$totbins / 2
-#' ll <- bin2lonlat(x$bin_num[asub])
-#' sw <- swchl(x)[asub]
-#' js <- swchl(x, johnson = TRUE)[asub]
-#' par(mfrow = c(2,1))
-#' plot(ll, col = raadtools::chl.pal(sw), pch = ".")
-#' plot(ll, col = raadtools::chl.pal(js), pch = ".")
+#' #f <- "S1998001.L3b_DAY_RRS.main"
+#' #x <- readL3(f)
+#' #asub <- x$bin_num < initlist()$totbins / 2
+#' #ll <- bin2lonlat(x$bin_num[asub])
+#' #sw <- swchl(x)[asub]
+#' #js <- swchl(x, johnson = TRUE)[asub]
+#' #par(mfrow = c(2,1))
+#' #plot(ll, col = palr::chlPal(sw), pch = ".")
+#' #plot(ll, col = palr::chlPal(js), pch = ".")
 #' 
 #' ## setup a polar raster
 # #require(raster)
@@ -24,7 +23,6 @@
 # #sr <- rasterize(p, r, field = sw, fun = mean)
 # #jr <- rasterize(p, r, field = js, fun = mean)
 # #plot(brick(sr, jr), col = pal$cols, breaks = pal$breaks, legend = FALSE)
-# }
 #' @param x list object with Remote Sensing Reflectance wavelengths (see Details)
 #' @param sensor which satellite sensor
 #' @param algo algorithm to use, oceancolor or Johnson et al. (2013) 

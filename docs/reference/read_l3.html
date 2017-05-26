@@ -108,34 +108,14 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>root</span> <span class='kw'>&lt;-</span> <span class='st'>"data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN"</span>
-<span class='no'>data_dir</span> <span class='kw'>&lt;-</span> <span class='fu'>getOption</span>(<span class='st'>"default.datadir"</span>)  <span class='co'>## raadtools </span>
-<span class='no'>files</span> <span class='kw'>&lt;-</span> <span class='fu'>structure</span>(<span class='fu'>list</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>file.path</span>(<span class='no'>root</span>, <span class='st'>"1997/247/S1997247.L3b_DAY_RRS.nc"</span>),
-<span class='kw'>fullname</span> <span class='kw'>=</span> <span class='fu'>file.path</span>(<span class='no'>data_dir</span>, <span class='fu'>file.path</span>(<span class='no'>root</span>, <span class='st'>"1997/247/S1997247.L3b_DAY_RRS.nc"</span>)),
-<span class='kw'>date</span> <span class='kw'>=</span> <span class='fu'>structure</span>(<span class='fl'>873331200</span>, <span class='kw'>class</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"POSIXct"</span>, <span class='st'>"POSIXt"</span>
-), <span class='kw'>tzone</span> <span class='kw'>=</span> <span class='st'>"GMT"</span>)), <span class='kw'>.Names</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"file"</span>, <span class='st'>"fullname"</span>, <span class='st'>"date"</span>
-), <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"data.frame"</span>)
-<span class='fu'>read_l3</span>(<span class='kw'>inputfiles</span> <span class='kw'>=</span> <span class='no'>files</span>)</div><div class='output co'>#&gt; # A tibble: 6,403 x 26
-#&gt;    bin_num  nobs nscenes  weights   time_rec BinList_bin_num BinList_nobs
-#&gt;      &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;           &lt;int&gt;        &lt;int&gt;
-#&gt;  1 4257988     4       2 2.828427  590176384         4257988            4
-#&gt;  2 4257989     4       2 2.828427  590176384         4257989            4
-#&gt;  3 4261876     2       2 2.000000  295088192         4261876            2
-#&gt;  4 4261877     2       2 2.000000  295088192         4261877            2
-#&gt;  5 4261878     6       2 3.464102  885264512         4261878            6
-#&gt;  6 4261879     4       2 2.828427  590176384         4261879            4
-#&gt;  7 4261880     8       2 4.000000 1180352640         4261880            8
-#&gt;  8 4261881     8       2 4.000000 1180352640         4261881            8
-#&gt;  9 4261882     6       2 3.464102  885264512         4261882            6
-#&gt; 10 4261889     2       2 2.000000  295088192         4261889            2
-#&gt; # ... with 6,393 more rows, and 19 more variables: BinList_nscenes &lt;int&gt;,
-#&gt; #   BinList_weights &lt;dbl&gt;, BinList_time_rec &lt;dbl&gt;, Rrs_412_sum &lt;dbl&gt;,
-#&gt; #   Rrs_412_sum_squared &lt;dbl&gt;, Rrs_443_sum &lt;dbl&gt;, Rrs_443_sum_squared &lt;dbl&gt;,
-#&gt; #   Rrs_490_sum &lt;dbl&gt;, Rrs_490_sum_squared &lt;dbl&gt;, Rrs_510_sum &lt;dbl&gt;,
-#&gt; #   Rrs_510_sum_squared &lt;dbl&gt;, Rrs_555_sum &lt;dbl&gt;, Rrs_555_sum_squared &lt;dbl&gt;,
-#&gt; #   Rrs_670_sum &lt;dbl&gt;, Rrs_670_sum_squared &lt;dbl&gt;, angstrom_sum &lt;dbl&gt;,
-#&gt; #   angstrom_sum_squared &lt;dbl&gt;, aot_865_sum &lt;dbl&gt;, aot_865_sum_squared &lt;dbl&gt;</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='co'>#root &lt;- "data/oceandata.sci.gsfc.nasa.gov/SeaWiFS/L3BIN"</span>
+<span class='co'>#data_dir &lt;- getOption("default.datadir")  </span>
+<span class='co'>#files &lt;- structure(list(file = file.path(root, "1997/247/S1997247.L3b_DAY_RRS.nc"), </span>
+<span class='co'>#fullname = file.path(data_dir, file.path(root, "1997/247/S1997247.L3b_DAY_RRS.nc")), </span>
+<span class='co'>#date = structure(873331200, class = c("POSIXct", "POSIXt"</span>
+<span class='co'>#), tzone = "GMT")), .Names = c("file", "fullname", "date"</span>
+<span class='co'>#), row.names = 1L, class = "data.frame")</span>
+<span class='co'>#read_l3(inputfiles = files)</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
