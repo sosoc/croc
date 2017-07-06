@@ -32,3 +32,22 @@ x <- purrr::map(files$fullname,
  ## group by bin_number and month                                  
     group_by(bin_num, month) %>% 
   summarize_if(purrr::is_bare_numeric, funs)
+
+
+
+## statistical functions to summarize, so we can later
+## compute variance (not just mean/n)
+funs <- list(sum = sum, ssq = function(x) sum(x^2), n = length)
+
+# %>% 
+#  mutate(month = format(date, "%B")) %>% 
+ ## group by bin_number and month                                  
+#    group_by(bin_num, month) %>% 
+#  summarize_if(purrr::is_bare_numeric, funs)
+
+
+library(ggplot2)
+x[c("x", "y")] <- bin2lonlat(x$bin_num, NROWS)
+ggplot(x, aes(x, y, colour = chla_johnson_sum/chla_johnson_n)) + 
+  geom_point(pch = ".") + facet_wrap(~month)
+
