@@ -2,23 +2,39 @@
 % Please edit documentation in R/read_L3_file_hdf5.R
 \name{read_L3_file}
 \alias{read_L3_file}
-\title{Read variables from `oceancolor` L3 bin files.}
+\alias{read_binlist}
+\alias{read_L3_file}
+\alias{read_compound}
+\alias{read_L3_file}
+\title{Read Level-3 ocean colour.}
 \usage{
+read_binlist(file)
+
+read_compound(file, compound_vars = NULL)
+
 read_L3_file(file, compound_vars = NULL)
 }
 \arguments{
-\item{file}{file name}
+\item{file}{}
 
 \item{compound_vars}{the variables to read}
+
+\item{file}{file name}
 }
 \value{
 a tibble of the compound variables and bin details
 }
 \description{
+Read the compound types (a.k.a. "tables") from ocean colour L3 NetCDF files.
+
 Compound vars we would usually want are "BinList" and `c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")` since
 these are used for calculating chlorophyll-a. This function is not very general yet, you'll always get the BinList.
 }
 \details{
+`read_binlist` for just the 'BinList'
+`read_compound` for just the compound data
+`read_L3_file` for everything at once
+
 This function is specific to files in this form, for any of the platforms (MODISA here): https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/L3BIN
 }
 \examples{

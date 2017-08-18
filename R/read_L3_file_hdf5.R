@@ -1,6 +1,49 @@
+#' Read Level-3 ocean colour.
+#'
+#' Read the compound types (i.e. tables of variables) from ocean colour L3 NetCDF files.
+#'
+#' `read_binlist` for just the 'BinList'
+#' `read_compound` for just the compound data
+#' `read_L3_file` for everything at once
+#' @param file
+#'
+#' @return data frame of bin numbers, number of observations and scenes, weights and time record
+#' @export
+#' @name read_L3_file
+#' @examples
+#' f <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_CHL.nc", package = "roc")
+#' bins <- read_binlist(f)
+#' bin2lonlat(bins$bin_num, 2160)
+#' bin2bounds(bins$bin_num, 2160)
+#' 
+#' 
+read_binlist <- function(file) {
+  tibble::as_tibble(rhdf5::h5read(file, name = file.path("/level-3_binned_data", "BinList")))
+}
+#' @export
+#' @name read_L3_file
+read_compound <- function(file, compound_vars = NULL) {
+  info <- rhdf5::h5ls(file)
+  tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])
+  ## get all vars, or just the ones the users wants
+  if (is.null(compound_vars))  {
+    compound <- setdiff(info$name[info$dim == test], "BinList")
+  } else {
+    compound <- compound_vars
+  }
+  compoundpath <- file.path("/level-3_binned_data", compound)
+  l <- lapply(compoundpath, function(aname) tibble::as_tibble(rhdf5::h5read(file, name = aname)))
+  dplyr::bind_cols(lapply(seq_along(compound), function(i) setNames(l[[i]], sprintf("%s_%s", compound[i], names(l[[i]])))))
+}
+
+
+
+
+
+
 #' Read variables from `oceancolor` L3 bin files. 
 #' 
-#' Compound vars we would usually want are "BinList" and `c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")` since
+#' Compound vars we would usually want for MODISA are "BinList" and `c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")` since
 #' these are used for calculating chlorophyll-a. This function is not very general yet, you'll always get the BinList. 
 #' 
 #' This function is specific to files in this form, for any of the platforms (MODISA here): https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/L3BIN
