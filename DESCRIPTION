@@ -26,5 +26,5 @@ biocViews:
 LinkingTo: Rcpp
 NeedsCompilation: yes
 RoxygenNote: 6.0.1
-URL: https://github.com/mdsumner/roc
-BugReports: https://github.com/mdsumner/roc/issues
+URL: https://github.com/sosoc/roc
+BugReports: https://github.com/sosoc/roc/issues

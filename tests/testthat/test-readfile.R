@@ -5,10 +5,12 @@
 
 test_that("can read HDF5", {
   #skip_if_not(file.exists(file.path(getOption("default.datadir"), "data", "oceandata.sci.gsfc.nasa.gov")))
-  skip_if_not(Sys.info()["nodename"] == "thirtyonetwentyone")
+  skip_if_not(we_are_raady())
   library(raadtools)
   f <- ocfiles(time.resolution = "daily", product = "MODISA", varname = "RRS", type = "L3b", ext = "nc")
-  roc:::read_l3("2015-07-01", inputfiles = f) %>% expect_s3_class("tbl_df")
+  ## this is meant to be the date-function read, but that belongs in 
+  ## raad family
+  ##roc:::read_l3("2015-07-01", inputfiles = f) %>% expect_s3_class("tbl_df")
   
 }
           
