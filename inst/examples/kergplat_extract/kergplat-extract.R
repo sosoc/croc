@@ -64,6 +64,23 @@ bin_chl2 <- function(bins, value, ex = NULL) {
   trim(gridmap)
 }
 
+xlim <- c(61.05, 84.05)
+ylim <- c(-55.95, -44.45 )
+NROWS <- 2160
+domain_raster <- raster(extent(xlim, ylim), crs = "+init=epsg:4326" )
+init <- initbin(NUMROWS = NROWS)
+rowbins <- seq(init$basebin[findInterval(ylim[1], init$latbin)], 
+               init$basebin[findInterval(ylim[2], init$latbin) + 1])
+xybin <- as_tibble(bin2lonlat(rowbins,
+                              nrows = NROWS)) %>%
+  dplyr::mutate(bin_num = rowbins) %>% 
+  dplyr::filter(x >= xlim[1], x <= xlim[2])
+
+bins0 <- dplyr::select(xybin, "bin_num")
+
+
+read1 <- function(ifile) {readRDS(ifile) %>% inner_join(bins0, "bin_num")}
+
 YEAR <- "2002"
 files <- chla_johnsonfiles(product = "SeaWiFS") %>% dplyr::filter(format(date, "%Y") %in% YEAR)
 print(range(files$date))
