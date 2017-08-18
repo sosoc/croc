@@ -8,6 +8,6 @@
 #' @param nrows number of rows in this grid
 #' @export
 bin2lonlat <- function(bins, nrows) {
-    .Call('roc_bin2lonlat', PACKAGE = 'roc', bins, nrows)
+    .Call('_roc_bin2lonlat', PACKAGE = 'roc', bins, nrows)
 }
 

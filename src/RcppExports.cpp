@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // bin2lonlat
 List bin2lonlat(IntegerVector bins, IntegerVector nrows);
-RcppExport SEXP roc_bin2lonlat(SEXP binsSEXP, SEXP nrowsSEXP) {
+RcppExport SEXP _roc_bin2lonlat(SEXP binsSEXP, SEXP nrowsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"roc_bin2lonlat", (DL_FUNC) &roc_bin2lonlat, 2},
+    {"_roc_bin2lonlat", (DL_FUNC) &_roc_bin2lonlat, 2},
     {NULL, NULL, 0}
 };
 
