@@ -60,7 +60,7 @@ crop_init <- function(x, ext) {
 #' @param longlat use longlat on the ellipsoid for distance?
 #' @importFrom geosphere gcIntermediate
 #' @importFrom sp spDistsN1
-#' @export
+#' @noRd
 densify <- function(x, maxdist, longlat = longlat) {
   if (missing(maxdist)) {
     warning("No minimum distance specified, no densifying done")
