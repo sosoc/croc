@@ -12,7 +12,7 @@
 #'
 #' @param file file path
 #' @param compound_vars the variables to read
-#' @param select_vars defaults to "sum" and "sum_squared"
+#' @param select_stat defaults to "sum" and "sum_squared"
 #' @return data frame of bin numbers, number of observations and scenes, weights and time record, 
 #' a data frame of the compound variables and bin details
 #' @export
