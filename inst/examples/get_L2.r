@@ -8,7 +8,7 @@ library(raster)
 files <- files %>% mutate(ncell = NA_integer_, ncount = NA_integer_, xmin = NA_integer_, xmax = NA_integer_, ymin = NA_integer_, ymax = NA_integer_)
 for (i in seq_len(nrow(files))) {
   b <- brick(files$fullname[i], varname = "geophysical_data/Rrs_443")
-  files$ncell[i] <- ncell(b)
+  files$ncell[i] <- raster::ncell(b)
   files$ncount[i] <- sum(!is.na(values(b[[1]])))
   lonlat <- brick(lapply(c("navigation_data/longitude", "navigation_data/latitude"), function(x) brick(files$fullname[i], varname = x)))
   lonrange <- range(values(lonlat[[1]]), na.rm = TRUE)

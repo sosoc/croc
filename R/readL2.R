@@ -14,6 +14,7 @@
   'HDF5:%s_L2:"%s":%i'
 }
 
+#' @importFrom tibble as_tibble
 #' @importFrom raster stack
 readL2 <- function(file, vartype = c("swath", "meta"), data.frame = TRUE) {
   vartype <- match.arg(vartype)

@@ -15,7 +15,7 @@
 #' @importFrom raster brick projection "extent<-" "projection<-" 
 #' @importFrom utils download.file
 #' @export
-readL3img <- function(date, platform = c(A = "MODISA", S = "SeaWiFS"), 
+read_smi_image <- function(date, platform = c(A = "MODISA", S = "SeaWiFS"), 
                       tres = c("DAY" = "", "8D" = "8 days", "MO" = "1 month", "YR" = "1 year"), 
                                varname = c(CHL = "chlor_a")) {
   if (length(date) > 1L) warning("only the first input date will be used")
@@ -59,7 +59,4 @@ if (!file.exists(tfile)) download.file(qurl, tfile, mode = "wb")
 b
  }
 
-
-##readL3img("2009-03-01")
-##b <- readL3img("2007-01-01", tres = "1 year")
 

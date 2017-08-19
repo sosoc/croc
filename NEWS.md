@@ -1,5 +1,8 @@
 # dev
 
+* new functions `read_binlist` and `read_compound` to provide support for
+ L3 bin readers
+ 
 * removed dependence on rgdal
 
 * removed dependence on raadtools

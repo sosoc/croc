@@ -5,39 +5,42 @@
 \alias{read_binlist}
 \alias{read_L3_file}
 \alias{read_compound}
-\alias{read_L3_file}
 \title{Read Level-3 ocean colour.}
 \usage{
 read_binlist(file)
 
-read_compound(file, compound_vars = NULL)
-
-read_L3_file(file, compound_vars = NULL)
+read_compound(file, compound_vars = NULL, select_stat = c("sum",
+  "sum_squared"))
 }
 \arguments{
-\item{file}{}
+\item{file}{file path}
 
 \item{compound_vars}{the variables to read}
 
-\item{file}{file name}
+\item{select_vars}{defaults to "sum" and "sum_squared"}
 }
 \value{
-a tibble of the compound variables and bin details
+data frame of bin numbers, number of observations and scenes, weights and time record, 
+a data frame of the compound variables and bin details
 }
 \description{
-Read the compound types (a.k.a. "tables") from ocean colour L3 NetCDF files.
-
-Compound vars we would usually want are "BinList" and `c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")` since
-these are used for calculating chlorophyll-a. This function is not very general yet, you'll always get the BinList.
+Read the compound types (i.e. tables of variables) from ocean colour L3 NetCDF files.
 }
 \details{
 `read_binlist` for just the 'BinList'
 `read_compound` for just the compound data
-`read_L3_file` for everything at once
+(not implemented) read_L3_file for everything at once
 
+Compound vars we would usually want for MODISA are "BinList" and `c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")` since
+these are used for calculating chlorophyll-a. This function is not very general yet, you'll always get the BinList. 
 This function is specific to files in this form, for any of the platforms (MODISA here): https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/L3BIN
 }
 \examples{
+f <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_CHL.nc", package = "roc")
+bins <- read_binlist(f)
+bin2lonlat(bins$bin_num, 2160)
+bin2bounds(bins$bin_num, 2160)
+
 
 read_L3_file(system.file("extdata/ocfiles/S2008001.L3b_DAY_RRS.nc", package = "roc"))
 }

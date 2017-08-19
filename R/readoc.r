@@ -18,7 +18,7 @@
 #' @importFrom sp CRS spTransform
 #' @importFrom dplyr %>% filter
 #' @importFrom rlang .data
-#' @export
+#' @noRd
 readoc <- function(dates,  
                    xylim = NULL, binsum = TRUE, 
                    varname = "CHL_RJ", grid = NULL, 
