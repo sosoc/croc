@@ -49,11 +49,10 @@ read_compound <- function(file, compound_vars = NULL, select_stat = c("sum", "su
 
 
 
-
-
+#' @export
 #' @importFrom stats setNames
 read_L3_file <- function(file, compound_vars = NULL, ...) {
-  stop("not implemented ")
+  #stop("not implemented ")
   ## we need to implement from the binlist/compound reads above
   info <- rhdf5::h5ls(file)
   tab <- table(info$dim); wm <- which.max(tab); test <- names(tab[wm])

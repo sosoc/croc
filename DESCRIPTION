@@ -1,11 +1,13 @@
 Package: roc
 Type: Package
 Title: Working With Ocean Colour Data
-Version: 0.0.8.9001
+Version: 0.0.9
 Authors@R: c(person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com"), 
-             person("Norman", "Kuring", role = "ctb", comment = "Author of L3bin code (NASA)"    ))
-Description: Work with data from NASA's Ocean Colour project, primarily the Level-3 bin files. Access
-  to the L3 bin files is via 'rhdf5'. 
+             person("Norman", "Kuring", role = "ctb", comment = "Author of L3bin code (NASA)"), 
+             person("Robert Johnson", role = "ctb", comment = "Developed southern ocean algorithm for chlorophyll"))
+Description: Work with data from NASA's ocean colour data, primarily the 'Level-3 bin' 
+  files. There are functions to read from these files, deal with the ragged array 'L3 bins'
+  mesh and calculate biophysical properties from radiance values. 
 License: GPL-3
 LazyLoad: yes
 Depends: dplyr
