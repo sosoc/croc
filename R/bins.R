@@ -8,8 +8,8 @@ bin2lonlat <- function(bins, nrows) {
   row <- seq_len(nrows) - 1
   latbin = ((row + 0.5)*180.0/nrows) - 90.0;
   numbin <- as.integer((2*nrows*cos(latbin*pi/180.0) + 0.5))
-  basebin <- c(1L, head(cumsum(numbin) + 1L, -1L))
-  totbins <- tail(basebin, 1) + tail(numbin, 1) - 1
+  basebin <- c(1L, utils::head(cumsum(numbin) + 1L, -1L))
+  totbins <- utils::tail(basebin, 1) + utils::tail(numbin, 1) - 1
   index <- findInterval(bins, basebin)
   lat <- latbin[index]
   lon <- 360.0*(bins - basebin[index] + 0.5)/numbin[index] - 180.0;
