@@ -2,7 +2,6 @@
 # Copyright Michael D. Sumner
 #
 
-#' @useDynLib roc
 
 #' @name roc-package
 #' @aliases roc-package, roc
@@ -18,11 +17,9 @@
 #' Date: \tab 2014-08-28\cr
 #' License: \tab GPL-3 \cr
 #' }
-#' Access to HDF4 ocean color data sources is accomplished with HDF4 library. 
 #' @author
 #' Michael D. Sumner \cr \url{http://staff.acecrc.org.au/~mdsumner} \cr \cr
 #' Maintainer: Michael D. Sumner \email{mdsumner@@gmail.com} \cr
 #' @references \url{https://github.com/mdsumner}, \url{http://www.hdfgroup.org/}, \url{http://oceandata.sci.gsfc.nasa.gov/}
 #' @keywords package
-#' @import Rcpp
 NULL

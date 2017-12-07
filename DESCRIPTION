@@ -12,7 +12,6 @@ Depends: dplyr
 Imports:
     geosphere,
     progress,
-    Rcpp (>= 0.11.2),
     sp,
     raster,
     rlang,
@@ -23,8 +22,7 @@ Suggests:
     BiocInstaller, 
     zlibbioc
 biocViews: 
-LinkingTo: Rcpp
-NeedsCompilation: yes
+NeedsCompilation: no
 RoxygenNote: 6.0.1
 URL: https://github.com/sosoc/roc
 BugReports: https://github.com/sosoc/roc/issues

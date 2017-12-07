@@ -1,5 +1,7 @@
 # dev
 
+* remove Rcpp function bin2lonlat in favour of R vectorized version
+
 * new functions `read_binlist` and `read_compound` to provide support for
  L3 bin readers
  

@@ -17,7 +17,7 @@ read_compound(file, compound_vars = NULL, select_stat = c("sum",
 
 \item{compound_vars}{the variables to read}
 
-\item{select_vars}{defaults to "sum" and "sum_squared"}
+\item{select_stat}{defaults to "sum" and "sum_squared"}
 }
 \value{
 data frame of bin numbers, number of observations and scenes, weights and time record, 

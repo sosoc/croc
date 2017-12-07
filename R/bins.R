@@ -1,3 +1,21 @@
+#' Longitude and latitude from bin number.  
+#'
+#' Generate longitude and latitude coordinates from bin number. 
+#' @param bins bin number
+#' @param nrows number of rows in this grid
+#' @export
+bin2lonlat <- function(bins, nrows) {
+  row <- seq_len(nrows) - 1
+  latbin = ((row + 0.5)*180.0/nrows) - 90.0;
+  numbin <- as.integer((2*nrows*cos(latbin*pi/180.0) + 0.5))
+  basebin <- c(1L, head(cumsum(numbin) + 1L, -1L))
+  totbins <- tail(basebin, 1) + tail(numbin, 1) - 1
+  index <- findInterval(bins, basebin)
+  lat <- latbin[index]
+  lon <- 360.0*(bins - basebin[index] + 0.5)/numbin[index] - 180.0;
+  cbind(lon, lat)
+}
+
 .lat2row <- function(lat, NUMROWS) {
   row <- as.integer((90 + lat) * NUMROWS/180.0)
   row[row >= NUMROWS] <- NUMROWS - 1;

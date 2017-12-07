@@ -17,7 +17,6 @@ Version: \tab 0.0-1\cr
 Date: \tab 2014-08-28\cr
 License: \tab GPL-3 \cr
 }
-Access to HDF4 ocean color data sources is accomplished with HDF4 library.
 }
 \references{
 \url{https://github.com/mdsumner}, \url{http://www.hdfgroup.org/}, \url{http://oceandata.sci.gsfc.nasa.gov/}
