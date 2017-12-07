@@ -1,15 +1,15 @@
 context("L3-bin")
 
-rrsfiles <- raadtools::ocfiles(product = "SeaWiFS")
-afile <- rrsfiles$fullname[200]
+
+afile <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_RRS.nc", package = "roc")
 test_that("read L3 binlist works", {
   bins <- read_binlist(afile)
   bins %>% 
     expect_s3_class("tbl_df") %>% 
     expect_length(5L) %>% 
     expect_named(c("bin_num", "nobs", "nscenes", "weights", "time_rec"))
-  expect_equal(nrow(bins), 411228L)
-  expect_equal(sum(bins$nscenes),  412859L)
+  expect_equal(nrow(bins), 2L)
+  expect_equal(sum(bins$nscenes),  2)
   
 })
 
@@ -25,6 +25,6 @@ test_that("read L3bin data works", {
   bindat %>% expect_s3_class("tbl_df") %>% 
     expect_length(16L) %>% 
     expect_named(compound_names)
-  expect_equal(nrow(bindat), 411228L)
-  expect_equivalent(sum(bindat$aot_865_sum_squared),  5543.34158)
+  expect_equal(nrow(bindat),2)
+  expect_equivalent(sum(bindat$aot_865_sum_squared),  0.03092645)
 })
