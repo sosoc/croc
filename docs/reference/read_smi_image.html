@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • croc</title>
+<title>Read NASA ocean colour browser images (PNG format) — read_smi_image • croc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -81,49 +81,51 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+    <h1>Read NASA ocean colour browser images (PNG format)</h1>
     </div>
 
-    <div class="contents">
-    <div id="croc-0-0-9" class="section level1">
-<h1 class="hasAnchor">
-<a href="#croc-0-0-9" class="anchor"></a>croc 0.0.9</h1>
-<ul>
-<li><p>updated web links for ocean colour site to https</p></li>
-<li><p>added a c (renamed package) to avoid BioConductor/CRAN clash</p></li>
-<li><p>remove some C (Rcpp function bin2lonlat) in favour of R vectorized version</p></li>
-<li><p>new functions <code>read_binlist</code> and <code>read_compound</code> to provide support for L3 bin readers</p></li>
-<li><p>removed dependence on rgdal</p></li>
-<li><p>removed dependence on raadtools</p></li>
-<li><p>removed regrid, to be replaced</p></li>
-<li><p>use tibble not data_frame</p></li>
-<li><p>roc now imports Bioconductor package <code>rhdf5</code> for the L3 bin files</p></li>
-<li><p>removed dependency on <code>rrshdf4</code></p></li>
-</ul>
-</div>
-    <div id="roc-0-0-8" class="section level1">
-<h1 class="hasAnchor">
-<a href="#roc-0-0-8" class="anchor"></a>roc 0.0.8</h1>
-<ul>
-<li>roc is now standalone from the HDF4 library, those read functions are in rrshdf4</li>
-</ul>
-</div>
-    </div>
+    
+    <p>Read ocean colour imagery from the NASA site, files will be downloaded and read in with
+<code>brick</code>. If a file with an identical name is already present in the current working directory the download
+is skipped.</p>
+    
+
+    <pre class="usage"><span class='fu'>read_smi_image</span>(<span class='no'>date</span>, <span class='kw'>platform</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>A</span> <span class='kw'>=</span> <span class='st'>"MODISA"</span>, <span class='kw'>S</span> <span class='kw'>=</span> <span class='st'>"SeaWiFS"</span>), <span class='kw'>tres</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>DAY</span>
+  <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>`8D`</span> <span class='kw'>=</span> <span class='st'>"8 days"</span>, <span class='kw'>MO</span> <span class='kw'>=</span> <span class='st'>"1 month"</span>, <span class='kw'>YR</span> <span class='kw'>=</span> <span class='st'>"1 year"</span>), <span class='kw'>varname</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>CHL</span> <span class='kw'>=</span>
+  <span class='st'>"chlor_a"</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>date</th>
+      <td><p>date of image to find</p></td>
+    </tr>
+    <tr>
+      <th>platform</th>
+      <td><p>which satellite platform (currently MODISA and SeaWiFS)</p></td>
+    </tr>
+    <tr>
+      <th>tres</th>
+      <td><p>temporal resolution to read</p></td>
+    </tr>
+    <tr>
+      <th>varname</th>
+      <td><p>name of variable (currently chlorophyll-a)</p></td>
+    </tr>
+    </table>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#croc-0-0-9">0.0.9</a></li>
-        <li><a href="#roc-0-0-8">0.0.8</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
+  </div>
 </div>
 
       <footer>

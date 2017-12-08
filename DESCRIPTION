@@ -1,13 +1,13 @@
-Package: roc
+Package: croc
 Type: Package
-Title: Working With Ocean Colour Data
+Title: Tools for Ocean Colour
 Version: 0.0.9
 Authors@R: c(person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com"), 
              person("Norman", "Kuring", role = "ctb", comment = "Author of L3bin code (NASA)"), 
              person("Robert Johnson", role = "ctb", comment = "Developed southern ocean algorithm for chlorophyll"))
 Description: Work with data from NASA's ocean colour data, primarily the 'Level-3 bin' 
-  files. There are functions to read from these files, deal with the ragged array 'L3 bins'
-  mesh and calculate biophysical properties from radiance values. 
+  files. There are functions to read and work with the ragged array 'L3 bins'
+  mesh and calculate biophysical properties from remote sensing reflectance data. 
 License: GPL-3
 LazyLoad: yes
 Depends: dplyr
@@ -26,5 +26,5 @@ Suggests:
 biocViews: 
 NeedsCompilation: no
 RoxygenNote: 6.0.1
-URL: https://github.com/sosoc/roc
-BugReports: https://github.com/sosoc/roc/issues
+URL: https://github.com/sosoc/croc
+BugReports: https://github.com/sosoc/croc/issues

@@ -1,7 +1,7 @@
 context("L3-bin")
 
 
-afile <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_RRS.nc", package = "roc")
+afile <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_RRS.nc", package = "croc")
 test_that("read L3 binlist works", {
   bins <- read_binlist(afile)
   bins %>% 

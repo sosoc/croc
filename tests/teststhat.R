@@ -1,2 +1,2 @@
 library(testthat)
-test_check("roc")
+test_check("croc")

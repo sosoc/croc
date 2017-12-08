@@ -61,7 +61,7 @@ we_are_raady <- function() {
 # 
 # l <- vector("list", length(afiles))
 # for (i in seq_along(afiles)) {
-#   l[[i]] <- names(roc:::vdatainfo(afiles[i]))
+#   l[[i]] <- names(croc:::vdatainfo(afiles[i]))
 # }
 # 
 # ## um, they are all the same: 

@@ -1,8 +1,8 @@
  context("Basic read - no tests")
 
 
-# ftest1 <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_CHL.main", package = "roc")
-# ftest2 <- system.file("extdata", "ocfiles", "S2010006.L3b_DAY_RRS.main", package = "roc")
+# ftest1 <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_CHL.main", package = "croc")
+# ftest2 <- system.file("extdata", "ocfiles", "S2010006.L3b_DAY_RRS.main", package = "croc")
 # ss <- c(2L, 17L, 22L, 28L, 35L, 37L, 57L, 60L, 65L, 84L, 90L, 94L, 
 #         97L, 123L, 124L, 127L, 144L, 186L, 199L, 209L)
 # srj.vals <- c(2.77291652661871, 0.936526525863455, 4.05376445711522, 0.293754891732076, 
@@ -32,7 +32,7 @@
 #   expect_that(max(abs(soc[ss] - soc.vals)) < sqrt(.Machine$double.eps), is_true())
 # })
 #  
-# load(system.file(package = "roc", "extdata", "A2002218.L3b_DAY_RRS.sub100.Rdata"))
+# load(system.file(package = "croc", "extdata", "A2002218.L3b_DAY_RRS.sub100.Rdata"))
 # arj.vals <- c(0.222394638156379, 0.220222571893624, 0.208328815546689, 0.216354240496008, 
 #               0.239055795393761, 0.205286077599231, 0.200468991373106, 0.195268554818653, 
 #               0.211016521802958, 0.242049472103708, 0.232730862337822, 0.23411359079671, 

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Working With Ocean Colour Data • roc</title>
+<title>Tools for Ocean Colour • croc</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -24,10 +24,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">roc</a>
+      <a class="navbar-brand" href="index.html">croc</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -37,7 +43,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mdsumner/roc">
+  <a href="https://github.com/sosoc/croc">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -60,16 +66,16 @@
 <div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<div id="roc" class="section level1">
+<div id="croc" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#roc" class="anchor"></a>roc</h1></div>
-<p>The goal of roc is to allow R users to easily work with ocean colour data.</p>
+<a href="#croc" class="anchor"></a>croc</h1></div>
+<p>The goal of croc is to allow R users to easily work with ocean colour data.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install roc from github with:</p>
+<p>You can install croc from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools::<span class="kw">install_github</span>(<span class="st">"mdsumner/roc"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"sosoc/croc"</span>)</code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -77,8 +83,8 @@ devtools::<span class="kw">install_github</span>(<span class="st">"mdsumner/roc"
 <p>This is a basic example to read a L3bin file and map it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## basic example code</code></pre></div>
 <p>There are helper functions to generate longitude / latitude coordinates for the bins (centre or corners). These bins are a sparse, non-rectangular, grid on a Sinusoidal projection, see</p>
-<p><a href="http://oceandata.sci.gsfc.nasa.gov/" class="uri">http://oceandata.sci.gsfc.nasa.gov/</a></p>
-<p><a href="http://oceancolor.gsfc.nasa.gov/SeaWiFS/TECH_REPORTS/PreLPDF/PreLVol32.pdf" class="uri">http://oceancolor.gsfc.nasa.gov/SeaWiFS/TECH_REPORTS/PreLPDF/PreLVol32.pdf</a></p>
+<p><a href="https://oceandata.sci.gsfc.nasa.gov/" class="uri">https://oceandata.sci.gsfc.nasa.gov/</a></p>
+<p><a href="https://oceancolor.gsfc.nasa.gov/SeaWiFS/TECH_REPORTS/PreLPDF/PreLVol32.pdf" class="uri">https://oceancolor.gsfc.nasa.gov/SeaWiFS/TECH_REPORTS/PreLPDF/PreLVol32.pdf</a></p>
 <p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
@@ -91,11 +97,12 @@ devtools::<span class="kw">install_github</span>(<span class="st">"mdsumner/roc"
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Links</h2>
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/mdsumner/roc">https://​github.com/​mdsumner/​roc</a>
+<li>Browse source code at <br><a href="https://github.com/sosoc/croc">https://​github.com/​sosoc/​croc</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/mdsumner/roc/issues">https://​github.com/​mdsumner/​roc/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/sosoc/croc/issues">https://​github.com/​sosoc/​croc/​issues</a>
 </li>
 </ul>
 <h2>License</h2>
@@ -107,8 +114,8 @@ devtools::<span class="kw">install_github</span>(<span class="st">"mdsumner/roc"
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/mdsumner/roc"><img src="https://travis-ci.org/mdsumner/roc.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/mdsumner/roc"><img src="https://ci.appveyor.com/api/projects/status/github/mdsumner/roc?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://travis-ci.org/sosoc/croc"><img src="https://travis-ci.org/sosoc/croc.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/sosoc/croc"><img src="https://ci.appveyor.com/api/projects/status/github/sosoc/croc?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 </ul>
 </div>
 

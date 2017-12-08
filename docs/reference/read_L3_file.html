@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read variables from `oceancolor` L3 bin files. — read_L3_file • roc</title>
+<title>Read Level-3 ocean colour. — read_L3_file • croc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -46,11 +47,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">roc</a>
+      <a class="navbar-brand" href="../index.html">croc</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -60,7 +67,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/mdsumner/roc">
+  <a href="https://github.com/sosoc/croc">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -76,41 +83,69 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read variables from `oceancolor` L3 bin files.</h1>
+    <h1>Read Level-3 ocean colour.</h1>
     </div>
 
     
-    <p>Compound vars we would usually want are "BinList" and `c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")` since
-these are used for calculating chlorophyll-a. This function is not very general yet, you'll always get the BinList.</p>
+    <p>Read the compound types (i.e. tables of variables) from ocean colour L3 NetCDF files.</p>
     
 
-    <pre class="usage"><span class='fu'>read_L3_file</span>(<span class='no'>file</span>, <span class='kw'>compound_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>read_binlist</span>(<span class='no'>file</span>)
+
+<span class='fu'>read_compound</span>(<span class='no'>file</span>, <span class='kw'>compound_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>select_stat</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"sum"</span>,
+  <span class='st'>"sum_squared"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>file name</p></td>
+      <td><p>file path</p></td>
     </tr>
     <tr>
       <th>compound_vars</th>
       <td><p>the variables to read</p></td>
     </tr>
+    <tr>
+      <th>select_stat</th>
+      <td><p>defaults to "sum" and "sum_squared"</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble of the compound variables and bin details</p>
+    <p>data frame of bin numbers, number of observations and scenes, weights and time record, 
+a data frame of the compound variables and bin details</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is specific to files in this form, for any of the platforms (MODISA here): https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/L3BIN</p>
+    <p>`read_binlist` for just the 'BinList'
+`read_compound` for just the compound data
+(not implemented) read_L3_file for everything at once</p>
+<p>Compound vars we would usually want for MODISA are "BinList" and `c("Rrs_443", "Rrs_488", "Rrs_555", "Rrs_547")` since
+these are used for calculating chlorophyll-a. This function is not very general yet, you'll always get the BinList. 
+This function is specific to files in this form, for any of the platforms (MODISA here): https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/L3BIN</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>read_L3_file</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ocfiles/S2008001.L3b_DAY_RRS.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"roc"</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 26
+    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"ocfiles"</span>, <span class='st'>"S2008001.L3b_DAY_CHL.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"croc"</span>)
+<span class='no'>bins</span> <span class='kw'>&lt;-</span> <span class='fu'>read_binlist</span>(<span class='no'>f</span>)
+<span class='fu'><a href='bin2lonlat.html'>bin2lonlat</a></span>(<span class='no'>bins</span>$<span class='no'>bin_num</span>, <span class='fl'>2160</span>)</div><div class='output co'>#&gt;           lon       lat
+#&gt; [1,] 165.3178 -77.37500
+#&gt; [2,] 170.5534 -75.95833</div><div class='input'><span class='fu'><a href='bin2bounds.html'>bin2bounds</a></span>(<span class='no'>bins</span>$<span class='no'>bin_num</span>, <span class='fl'>2160</span>)</div><div class='output co'>#&gt; $east
+#&gt; [1] 165.5085 170.7252
+#&gt; 
+#&gt; $south
+#&gt; [1] -77.41667 -76.00000
+#&gt; 
+#&gt; $west
+#&gt; [1] 165.1271 170.3817
+#&gt; 
+#&gt; $north
+#&gt; [1] -77.33333 -75.91667
+#&gt; </div><div class='input'>
+
+<span class='fu'>read_L3_file</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata/ocfiles/S2008001.L3b_DAY_RRS.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"croc"</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 26
 #&gt;   bin_num  nobs nscenes weights  time_rec BinList_bin_num BinList_nobs
 #&gt;     &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;           &lt;int&gt;        &lt;int&gt;
 #&gt; 1   72251     1       1       1 473283776           72251            1

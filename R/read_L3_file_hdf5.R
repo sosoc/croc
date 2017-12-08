@@ -18,13 +18,13 @@
 #' @export
 #' @name read_L3_file
 #' @examples
-#' f <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_CHL.nc", package = "roc")
+#' f <- system.file("extdata", "ocfiles", "S2008001.L3b_DAY_CHL.nc", package = "croc")
 #' bins <- read_binlist(f)
 #' bin2lonlat(bins$bin_num, 2160)
 #' bin2bounds(bins$bin_num, 2160)
 #' 
 #' 
-#' read_L3_file(system.file("extdata/ocfiles/S2008001.L3b_DAY_RRS.nc", package = "roc"))
+#' read_L3_file(system.file("extdata/ocfiles/S2008001.L3b_DAY_RRS.nc", package = "croc"))
 read_binlist <- function(file) {
   tibble::as_tibble(rhdf5::h5read(file, name = file.path("/level-3_binned_data", "BinList")))
 }
