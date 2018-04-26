@@ -1,5 +1,7 @@
 # croc 0.0.9
 
+* Add Behrenfeld-Falkowski production calculation. 
+
 * updated web links for ocean colour site to https
 
 * added a c (renamed package) to avoid BioConductor/CRAN clash

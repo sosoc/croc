@@ -22,7 +22,7 @@ License: \tab GPL-3 \cr
 \url{https://github.com/mdsumner}, \url{http://www.hdfgroup.org/}, \url{http://oceandata.sci.gsfc.nasa.gov/}
 }
 \author{
-Michael D. Sumner \cr \url{http://staff.acecrc.org.au/~mdsumner} \cr \cr
+Michael D. Sumner \cr \url{https://github.com/mdsumner} \cr \cr
 Maintainer: Michael D. Sumner \email{mdsumner@gmail.com} \cr
 }
 \keyword{package}
