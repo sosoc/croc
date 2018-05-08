@@ -4,6 +4,8 @@
 using namespace Rcpp;
 
 
+
+
 // copied 2018-04-26 http://www.science.oregonstate.edu/ocean.productivity/vgpm.code.php
 double opp_befa( double chl,
                  double irr,
